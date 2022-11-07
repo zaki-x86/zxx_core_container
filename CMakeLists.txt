@@ -4,6 +4,8 @@
 
 cmake_minimum_required(VERSION 3.10)
 
+set(CMAKE_CXX_STANDARD 14)
+
 ############################################################################
 ############################################################################
 ## 
@@ -33,6 +35,25 @@ set(EXEC_SRCS
 set(HEADERS
     include/structs/structures.h
 )
+
+set(TEST_SRCS
+    src/test_runner.cpp
+    test_structs/DynamicArrayTest.cpp
+)
+############################################################################
+############################################################################
+##
+# Get external packages
+##
+
+include(FetchContent)
+FetchContent_Declare(
+  googletest
+  URL https://github.com/google/googletest/archive/03597a01ee50ed33e9dfd640b249b4be3799d395.zip
+)
+# For Windows: Prevent overriding the parent project's compiler/linker settings
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+FetchContent_MakeAvailable(googletest)
 
 ############################################################################
 ############################################################################
@@ -82,3 +103,21 @@ target_include_directories(Structs
 ## 
 # Tests 
 ##
+enable_testing()
+
+add_executable(StructsTest
+  src/test_runner.cpp
+)
+target_link_libraries(
+    StructsTest
+    GTest::gtest_main
+)
+
+target_include_directories(StructsTest
+    PUBLIC ${PROJECT_SOURCE_DIR}/tests
+    PRIVATE ${PROJECT_SOURCE_DIR}/include
+)
+
+include(GoogleTest)
+gtest_discover_tests(StructsTest)
+
