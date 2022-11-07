@@ -1,21 +1,6 @@
 # Structs #
 
-- [Structs](#structs)
-  - [About](#about)
-    - [Description](#description)
-    - [Design](#design)
-    - [Test](#test)
-  - [Getting Started](#getting-started)
-    - [Requirements](#requirements)
-    - [Installation](#installation)
-    - [Usage](#usage)
-  - [Roadmap](#roadmap)
-  - [Authors](#authors)
-  - [License](#license)
-  - [References](#references)
-    - [Books](#books)
-    - [Websites](#websites)
-    - [Other Resources](#other-resources)
+[TOC]
 
 ## About ##
 
@@ -25,15 +10,15 @@ This project introduces basic data structures and algorithms that are used very 
 
 The basic represented data structures are:
 
-- Dynamic Arrays
-- Linked Lists
-- Stacks
-- Queues
-- Binary Trees
-- Hash Tables
-- Binary Search Trees
-- Red Black Trees
-- Graphs
+- [Dynamic Array](/home/zaki/Projects/2023/Structs/data/DynamicArray.md)
+- [Linked List](/home/zaki/Projects/2023/Structs/data/LinkedList.md)
+- [Stack](/home/zaki/Projects/2023/Structs/data/Stack.md)
+- [Queue](/home/zaki/Projects/2023/Structs/data/Queue.md)
+- [Binary Tree](/home/zaki/Projects/2023/Structs/data/BinaryTree.md)
+- [Hash Table](/home/zaki/Projects/2023/Structs/data/HashTable.md)
+- [Binary Search Tree](/home/zaki/Projects/2023/Structs/data/BinarySearchTree.md)
+- [Red Black Tree](/home/zaki/Projects/2023/Structs/data/RedBlackTree.md)
+- [Graph](/home/zaki/Projects/2023/Structs/data/Graph.md)
 
 ### Design ###
 
@@ -87,3 +72,4 @@ TODO
 - [GitHub | CMake Examples](https://github.com/ttroy50/cmake-examples/tree/master/01-basic)
 - [GitHub | Modern Cpp Template](https://github.com/filipdutescu/modern-cpp-template)
 - [Alex Ott | Test Driven Development](https://alexott.net/en/cpp/CppTestingIntro.html)
+- [Doxygen Awesome | Change Doxygen docs theme](https://jothepro.github.io/doxygen-awesome-css/index.html)
