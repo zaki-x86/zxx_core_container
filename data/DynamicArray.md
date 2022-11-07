@@ -1,0 +1,5 @@
+# Dynamic Arrays #
+
+A dynamic array, growable array, resizable array, dynamic table, mutable array, or array list is a random access, variable-size list data structure that allows elements to be added or removed. It is supplied with standard libraries in many modern mainstream programming languages. Dynamic arrays overcome a limit of static arrays, which have a fixed capacity that needs to be specified at allocation.
+
+A dynamic array is not the same thing as a dynamically allocated array or variable-length array, either of which is an array whose size is fixed when the array is allocated, although a dynamic array may use such a fixed-size array as a back end.
