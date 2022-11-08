@@ -25,7 +25,7 @@ project(Structs
 ##
 
 set(SRCS
-    src/structs/structures.cpp
+    src/main.cpp
 )
 
 set(EXEC_SRCS
@@ -37,8 +37,8 @@ set(HEADERS
 )
 
 set(TEST_SRCS
-    src/test_runner.cpp
-    test_structs/DynamicArrayTest.cpp
+    tests/test_runner.cpp
+    tests/TestCases/DynamicArrayTest.cpp
 )
 ############################################################################
 ############################################################################
@@ -106,7 +106,7 @@ target_include_directories(Structs
 enable_testing()
 
 add_executable(StructsTest
-  src/test_runner.cpp
+  tests/test_runner.cpp
 )
 target_link_libraries(
     StructsTest
