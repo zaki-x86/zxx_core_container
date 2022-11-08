@@ -23,6 +23,10 @@ namespace structs
         class DynamicArrayTest : public ::testing::Test
         {
         protected:
+            DynamicArray<int> a0;
+            DynamicArray<int> a1;
+            DynamicArray<int> a2;
+
             /**
              * @brief Construct a new Dynamic Array Test object
              * 
@@ -47,3 +51,9 @@ namespace structs
     
 } // namespace structs
 
+typedef structs::tests::DynamicArrayTest DynamicArrayTest;
+
+DynamicArrayTest::DynamicArrayTest()
+{
+
+}
