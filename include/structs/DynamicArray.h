@@ -16,6 +16,10 @@
 
 namespace structs
 {
+
+#define GROWTH_FACTOR 2
+#define INITIAL_SIZE 10
+
 template <typename T>
 class DynamicArray
 {
@@ -45,89 +49,92 @@ public:
     void read();
 };
 
+}// namespace structs
 
 template<typename T>
-DynamicArray<T>::DynamicArray()
+structs::DynamicArray<T>::DynamicArray()
+{
+    m_capacity = INITIAL_SIZE;
+    m_data = new T[m_capacity];
+    if (m_data == nullptr)
+        throw std::bad_alloc();
+    m_size = 0;
+}
+
+template<typename T>
+structs::DynamicArray<T>::DynamicArray( T value )
 {
 
 }
 
 template<typename T>
-DynamicArray<T>::DynamicArray( T value )
+structs::DynamicArray<T>::DynamicArray( T* values, size_t size )
 {
 
 }
 
 template<typename T>
-DynamicArray<T>::DynamicArray( T* values, size_t size )
+structs::DynamicArray<T>::~DynamicArray()
 {
 
 }
 
 template<typename T>
-DynamicArray<T>::~DynamicArray()
+void structs::DynamicArray<T>::push_back( T value )
 {
 
 }
 
 template<typename T>
-void DynamicArray<T>::push_back( T value )
+void structs::DynamicArray<T>::set( size_t index, T value )
 {
 
 }
 
 template<typename T>
-void DynamicArray<T>::set( size_t index, T value )
+void structs::DynamicArray<T>::add( size_t index, T value )
 {
 
 }
 
 template<typename T>
-void DynamicArray<T>::add( size_t index, T value )
+T structs::DynamicArray<T>::get( size_t index )
 {
 
 }
 
 template<typename T>
-T DynamicArray<T>::get( size_t index )
+T structs::DynamicArray<T>::pop()
 {
 
 }
 
 template<typename T>
-T DynamicArray<T>::pop()
+T structs::DynamicArray<T>::remove( size_t index )
 {
 
 }
 
 template<typename T>
-T DynamicArray<T>::remove( size_t index )
+size_t structs::DynamicArray<T>::size()
 {
-
+    return this->m_size;
 }
 
 template<typename T>
-size_t DynamicArray<T>::size()
+size_t structs::DynamicArray<T>::capacity()
 {
-
+    
 }
 
 template<typename T>
-size_t DynamicArray<T>::capacity()
+bool structs::DynamicArray<T>::is_empty()
 {
     
 }
 
 template<typename T>
-bool DynamicArray<T>::is_empty()
+void structs::DynamicArray<T>::read()
 {
     
-}
-
-template<typename T>
-void DynamicArray<T>::read()
-{
-    
-}
-
 }
