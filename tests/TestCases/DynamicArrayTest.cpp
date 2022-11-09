@@ -51,3 +51,22 @@ TEST_F(DynamicArrayTest, InitializedWithArrayTest)
     // initialized with an (any non-primitive) array
 
 }
+
+TEST_F(DynamicArrayTest, PushingElementsToDynamicArray)
+{
+    // Pushing to empty list
+    EXPECT_EQ(a1.size(), 1);
+    EXPECT_EQ(a1.get(0), -1);
+
+    // Pushing to non empty list
+    EXPECT_EQ(a2.size(), 2);
+    EXPECT_EQ(a2.get(0), 1);
+    EXPECT_EQ(a2.get(0), 2);
+
+    // Pushing in a loop until full capacity of initial size is reached
+    EXPECT_EQ(a3.size(), INITIAL_SIZE);
+    EXPECT_EQ(a3.get(0), 1);
+    EXPECT_EQ(a3.get(5), 5);
+    EXPECT_EQ(a3.get(6), 6);
+    EXPECT_EQ(a3.get(9), 9);
+}

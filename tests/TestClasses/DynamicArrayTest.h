@@ -28,6 +28,7 @@ namespace structs
             structs::DynamicArray<int> a0;
             structs::DynamicArray<int> a1;
             structs::DynamicArray<int> a2;
+            structs::DynamicArray<int> a3;
             structs::DynamicArray<int> b0{100};
             int arr[5] = {0, 1, 2, 3, 4};
             structs::DynamicArray<int> ba0{ arr, 5 };
@@ -63,7 +64,12 @@ DynamicArrayTest::DynamicArrayTest()
     a1.push_back(-1);
     a2.push_back(1);
     a2.push_back(2);
-
+    
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+    {
+        a3.push_back(i);
+    }
+    
 }
 
 DynamicArrayTest::~DynamicArrayTest()
