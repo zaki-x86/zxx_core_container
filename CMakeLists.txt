@@ -37,8 +37,8 @@ set(HEADERS
 )
 
 set(TEST_SRCS
+    tests/TestCases/DynamicArrayTest/IsEmptyInitiallyTest.cpp
     tests/test_runner.cpp
-    tests/TestCases/DynamicArrayTest.cpp
 )
 ############################################################################
 ############################################################################
@@ -106,7 +106,7 @@ target_include_directories(Structs
 enable_testing()
 
 add_executable(StructsTest
-  tests/test_runner.cpp
+  ${TEST_SRCS}
 )
 target_link_libraries(
     StructsTest
