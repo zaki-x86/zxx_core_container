@@ -37,7 +37,7 @@ set(HEADERS
 )
 
 set(TEST_SRCS
-    tests/TestCases/DynamicArrayTest/IsEmptyInitiallyTest.cpp
+    tests/TestCases/DynamicArrayTest.cpp
     tests/test_runner.cpp
 )
 ############################################################################
