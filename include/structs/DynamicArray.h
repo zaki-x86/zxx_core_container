@@ -32,7 +32,8 @@ private:
 public:
     // constructors & destructors
     DynamicArray();
-    DynamicArray(T);
+    DynamicArray(T&);
+    DynamicArray(T&&);
     DynamicArray(T*, size_t);
     ~DynamicArray();
 
@@ -53,18 +54,38 @@ public:
 
 template<typename T>
 structs::DynamicArray<T>::DynamicArray()
+:m_capacity(INITIAL_SIZE),
+m_data(new T[m_capacity]),
+m_size(0)
 {
-    m_capacity = INITIAL_SIZE;
-    m_data = new T[m_capacity];
     if (m_data == nullptr)
         throw std::bad_alloc();
+
     m_size = 0;
 }
 
 template<typename T>
-structs::DynamicArray<T>::DynamicArray( T value )
-{
+structs::DynamicArray<T>::DynamicArray( T& value )
+:m_capacity(INITIAL_SIZE),
+m_data(new T[m_capacity])
+{    
+    if (m_data == nullptr)
+        throw std::bad_alloc();
+    
+    *m_data = value;
+    m_size ++;
+}
 
+template<typename T>
+structs::DynamicArray<T>::DynamicArray( T&& value )
+:m_capacity(INITIAL_SIZE),
+m_data(new T[m_capacity])
+{
+    if (m_data == nullptr)
+        throw std::bad_alloc();
+
+    *m_data = value;
+    m_size ++;
 }
 
 template<typename T>
