@@ -10,10 +10,8 @@
  */
 
 #include <iostream>
-
-#include <structs/structures.h>
-
 #include "gtest/gtest.h"
+#include <structs/structures.h>
 
 int main(int argc, char *argv[])
 {
