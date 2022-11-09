@@ -90,8 +90,18 @@ m_data(new T[m_capacity])
 
 template<typename T>
 structs::DynamicArray<T>::DynamicArray( T* values, size_t size )
+:m_capacity(INITIAL_SIZE),
+m_data(new T[m_capacity])
 {
+    if (m_data == nullptr)
+        throw std::bad_alloc();
 
+    for (size_t i = 0; i < size; i++)
+    {
+        *(m_data + i) = *(values + i);
+    }
+
+    m_size = size;
 }
 
 template<typename T>
@@ -121,7 +131,7 @@ void structs::DynamicArray<T>::add( size_t index, T value )
 template<typename T>
 T structs::DynamicArray<T>::get( size_t index )
 {
-
+    return this->m_data[index];
 }
 
 template<typename T>
