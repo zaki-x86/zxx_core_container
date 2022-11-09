@@ -26,9 +26,11 @@ namespace structs
         {
         protected:
             structs::DynamicArray<int> a0;
-            structs::DynamicArray<int> b0{100};
             structs::DynamicArray<int> a1;
             structs::DynamicArray<int> a2;
+            structs::DynamicArray<int> b0{100};
+            int arr[5] = {0, 1, 2, 3, 4};
+            structs::DynamicArray<int> ba0{ arr, 5 };
 
             /**
              * @brief Construct a new Dynamic Array Test object
