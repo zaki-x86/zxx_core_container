@@ -26,6 +26,7 @@ namespace structs
         {
         protected:
             structs::DynamicArray<int> a0;
+            structs::DynamicArray<int> b0{100};
             structs::DynamicArray<int> a1;
             structs::DynamicArray<int> a2;
 
