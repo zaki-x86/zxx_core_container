@@ -61,11 +61,17 @@ TEST_F(DynamicArrayTest, PushingElementsToDynamicArray)
     // Pushing to non empty list
     EXPECT_EQ(a2.size(), 2);
     EXPECT_EQ(a2.get(0), 1);
-    EXPECT_EQ(a2.get(0), 2);
+    EXPECT_EQ(a2.get(1), 2);
+
+    // Pushing to a non empty list that was previously initialized by a constructor
+    EXPECT_EQ(x0.size(), 3);
+    EXPECT_EQ(x0.get(0), 1000);
+    EXPECT_EQ(x0.get(1), 2000);
+    EXPECT_EQ(x0.get(2), 3000);
 
     // Pushing in a loop until full capacity of initial size is reached
     EXPECT_EQ(a3.size(), INITIAL_SIZE);
-    EXPECT_EQ(a3.get(0), 1);
+    EXPECT_EQ(a3.get(0), 0);
     EXPECT_EQ(a3.get(5), 5);
     EXPECT_EQ(a3.get(6), 6);
     EXPECT_EQ(a3.get(9), 9);

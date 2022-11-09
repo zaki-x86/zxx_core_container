@@ -107,13 +107,17 @@ m_data(new T[m_capacity])
 template<typename T>
 structs::DynamicArray<T>::~DynamicArray()
 {
-
+    delete m_data;
 }
 
 template<typename T>
 void structs::DynamicArray<T>::push_back( T value )
 {
-
+    if (m_size >= m_capacity)
+        resize();
+    
+    *(m_data + m_size) = value;
+    m_size ++;
 }
 
 template<typename T>
@@ -168,4 +172,9 @@ template<typename T>
 void structs::DynamicArray<T>::read()
 {
     
+}
+template<typename T>
+void structs::DynamicArray<T>::resize()
+{
+
 }
