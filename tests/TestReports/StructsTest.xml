@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<testsuites tests="3" name="AllTests">
-  <testsuite name="DynamicArrayTest" tests="3">
-    <testcase name="IsEmptyInitially" file="/home/zaki/Projects/2023/Structs/tests/TestCases/DynamicArrayTest.cpp" line="5" />
-    <testcase name="InitializedWithSingleElementTest" file="/home/zaki/Projects/2023/Structs/tests/TestCases/DynamicArrayTest.cpp" line="10" />
-    <testcase name="InitializedWithArrayTest" file="/home/zaki/Projects/2023/Structs/tests/TestCases/DynamicArrayTest.cpp" line="30" />
-  </testsuite>
-</testsuites>
