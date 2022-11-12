@@ -140,6 +140,7 @@ void DynamicArrayTest<std::string>::SetUp()
 template <typename T>
 void DynamicArrayTest<T>::TearDown()
 {
+    a1_.reset();
 }
 
 template <>

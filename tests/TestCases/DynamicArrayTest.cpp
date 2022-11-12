@@ -80,6 +80,19 @@ TYPED_TEST_P(DynamicArrayTest, SetAtIndexLessThanZeroTest)
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, AddMethodTest)
 {
+    //structs::DynamicArray<TypeParam> initial_a1 = this->a1_;
+    size_t random_index = generate_numeric(0, INITIAL_SIZE - 2);
+    size_t initial_size = this->a1_.size();
+
+    this->a1_.add(random_index, this->value_);
+
+    std::cout << "[----------] " << "set at index: " << random_index 
+    << ", this value: " << this->value_ << "\n";
+
+    // Value is added at correct index
+    EXPECT_EQ(this->a1_.get(random_index), this->value_);
+    // size is updated
+    EXPECT_EQ(this->a1_.size(), initial_size + 1);
     
 }
 // #######################################################
