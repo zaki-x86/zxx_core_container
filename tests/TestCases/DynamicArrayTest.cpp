@@ -2,6 +2,7 @@
 #include "gtest/gtest.h"
 #include "structs/structures.h"
 #include "TestClasses/DynamicArrayTest.h"
+#include "TestHelpers/generators.h"
 
 #include <iostream>
 #include <type_traits>
@@ -47,6 +48,33 @@ TYPED_TEST_P(DynamicArrayTest, PushBackMethodTest)
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, SetMethodTest)
 {
+    size_t random_index = generate_numeric(0, INITIAL_SIZE - 1);
+    size_t initial_size = this->a1_.size();
+
+    this->a1_.set(random_index, this->value_);
+
+    std::cout << "[----------] " << "set at index: " << random_index 
+    << ", this value: " << this->value_ << "\n";
+
+    // Value is properly set
+    EXPECT_EQ(this->a1_.get(random_index), this->value_);
+    // size didn't change
+    EXPECT_EQ(this->a1_.size(), initial_size);
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, SetAtIndexLessThanZeroTest)
+{
+    /**
+     * @brief This test will always fail!
+     * Since get() method accepts unsigned long params, the negative will be converted to unsigned integer value. This test will be skipped
+     */
+    size_t random_index = -5;
+
+    std::cout << "[----------] " << "set at index: " << random_index 
+    << ", this value: " << this->value_ << "\n";
+
+    GTEST_SKIP();
+    EXPECT_ANY_THROW(this->a1_.set(random_index, this->value_));
 
 }
 // #######################################################
@@ -103,6 +131,7 @@ REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest,
     InitializeWithArrayTest,
     PushBackMethodTest,
     SetMethodTest,
+    SetAtIndexLessThanZeroTest,
     AddMethodTest,
     GetMethodTest,
     PopMethodTest,
