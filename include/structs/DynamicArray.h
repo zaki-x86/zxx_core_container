@@ -141,6 +141,8 @@ void structs::DynamicArray<T>::push_back( T value )
 template<typename T>
 void structs::DynamicArray<T>::set( size_t index, T value )
 {
+    if ( index < INITIAL_SIZE )
+        *(m_data + index) = value;
     
 }
 
@@ -148,6 +150,7 @@ template<typename T>
 void structs::DynamicArray<T>::add( size_t index, T value )
 {
 
+    
 }
 
 template<typename T>
