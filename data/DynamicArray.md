@@ -15,7 +15,7 @@ The choice of how resizing works is the key factory to determine the efficiency 
 
 Usage example:
 
-```
+```.cpp
 DynamicArray<int> arr([5, 10, 20, 30], 4);
 arr.insert(55);
 arr.insert(44);
