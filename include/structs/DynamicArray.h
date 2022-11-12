@@ -170,13 +170,17 @@ T structs::DynamicArray<T>::get( size_t index )
     if ( index >= m_size )
         throw std::out_of_range("Invalid: index is out of range\n");
     
-    return this->m_data[index];
+    return m_data[index];
 }
 
 template<typename T>
 T structs::DynamicArray<T>::pop()
 {
-
+    if (m_size == 0)
+        throw std::logic_error("Can't pop an empty array");
+    m_size--;
+    return m_data[m_size]; 
+    
 }
 
 template<typename T>
