@@ -37,13 +37,9 @@ TYPED_TEST_P(DynamicArrayTest, InitializeWithArrayTest)
 TYPED_TEST_P(DynamicArrayTest, PushBackMethodTest) 
 {
     for (size_t i = 0; i < this->sample_values_.size(); i++)
-    {
         this->a0_.push_back(this->sample_values_[i]);
-    }
-    
     
     EXPECT_EQ(this->a0_.size(), this->sample_values_.size());
-
 
     for (size_t i = 0; i < INITIAL_SIZE; i++)
         EXPECT_EQ(this->a0_.get(i), this->sample_values_[i]);
@@ -84,6 +80,23 @@ TYPED_TEST_P(DynamicArrayTest, IsEmptyMethodTest)
     
 }
 // #######################################################
+TYPED_TEST_P(DynamicArrayTest, ResetMethodTest)
+{
+    // test started empty
+    EXPECT_EQ(this->a0_.size(), 0);
+
+    // fill out with values
+    for (size_t i = 0; i < this->sample_values_.size(); i++)
+        this->a0_.push_back(this->sample_values_[i]);
+    
+    // test size
+    EXPECT_EQ(this->a0_.size(), this->sample_values_.size());
+
+    // call reset() and test size
+    this->a0_.reset();
+    EXPECT_EQ(this->a0_.size(), 0);
+}
+// #######################################################
 REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest, 
     IsEmptyInitially,
     InitializeWithSingleElement,
@@ -95,6 +108,7 @@ REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest,
     PopMethodTest,
     RemoveMethodTest,
     ResizeMethodTest,
+    ResetMethodTest,
     IsEmptyMethodTest
     );
 
