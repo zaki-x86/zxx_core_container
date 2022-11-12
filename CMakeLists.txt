@@ -24,6 +24,10 @@ project(Structs
 # Variables 
 ##
 
+## Compile flags
+SET(GCC_DEBUGGING_COMPILE_FLAGS "-Wall -ggdb3")
+SET(CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} ${GCC_DEBUGGING_COMPILE_FLAGS}")
+
 set(SRCS
     src/main.cpp
 )
@@ -38,6 +42,7 @@ set(HEADERS
 
 set(TEST_SRCS
     tests/TestCases/DynamicArrayTest.cpp
+    tests/TestCases/DynamicArrayTestTyped.cpp
     tests/test_runner.cpp
 )
 ############################################################################
@@ -108,6 +113,8 @@ enable_testing()
 add_executable(StructsTest
   ${TEST_SRCS}
 )
+target_compile_options(StructsTest PRIVATE -ggdb3)
+
 target_link_libraries(
     StructsTest
     GTest::gtest_main
