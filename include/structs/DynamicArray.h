@@ -32,6 +32,7 @@ private:
 public:
     // constructors & destructors
     DynamicArray();
+    DynamicArray(const DynamicArray&);
     DynamicArray(T&);
     DynamicArray(T&&);
     DynamicArray(T*, size_t);
@@ -48,6 +49,23 @@ public:
     size_t capacity();
     bool is_empty();
     void read();
+    void reset();
+
+/*     DynamicArray<T>& operator= (const DynamicArray<T> && other)
+    {
+        delete[] m_data;
+        m_data = nullptr;
+        m_size = 0;
+        m_capacity = INITIAL_SIZE;
+
+        m_data = new T[m_capacity];
+        m_size = other.size();
+
+        for (size_t i = 0; i < other.size(); i++)
+            push_back(other.get(i));
+        
+        return *this;
+    } */
 };
 
 }// namespace structs
@@ -65,49 +83,49 @@ m_size(0)
 }
 
 template<typename T>
+structs::DynamicArray<T>::DynamicArray(const DynamicArray& other)
+{
+    delete[] m_data;
+    m_data = nullptr;
+    m_size = 0;
+    m_capacity = INITIAL_SIZE;
+
+    m_data = new T[m_capacity];
+    m_size = other.size();
+
+    for (size_t i = 0; i < other.size(); i++)
+        push_back(other.get(i));
+}
+
+template<typename T>
 structs::DynamicArray<T>::DynamicArray( T& value )
-:m_capacity(INITIAL_SIZE),
-m_data(new T[m_capacity])
+: DynamicArray()
 {    
-    if (m_data == nullptr)
-        throw std::bad_alloc();
-    
-    *m_data = value;
-    m_size ++;
+    this->push_back(value);
 }
 
 template<typename T>
 structs::DynamicArray<T>::DynamicArray( T&& value )
-:m_capacity(INITIAL_SIZE),
-m_data(new T[m_capacity])
+: DynamicArray()
 {
-    if (m_data == nullptr)
-        throw std::bad_alloc();
-
-    *m_data = value;
-    m_size ++;
+    this->push_back(value);
 }
 
 template<typename T>
 structs::DynamicArray<T>::DynamicArray( T* values, size_t size )
-:m_capacity(INITIAL_SIZE),
-m_data(new T[m_capacity])
+: DynamicArray()
 {
-    if (m_data == nullptr)
-        throw std::bad_alloc();
-
     for (size_t i = 0; i < size; i++)
     {
-        *(m_data + i) = *(values + i);
+        this->push_back(*values);
+        values++;
     }
-
-    m_size = size;
 }
 
 template<typename T>
 structs::DynamicArray<T>::~DynamicArray()
 {
-    delete m_data;
+    delete[] m_data;
 }
 
 template<typename T>
@@ -123,7 +141,7 @@ void structs::DynamicArray<T>::push_back( T value )
 template<typename T>
 void structs::DynamicArray<T>::set( size_t index, T value )
 {
-
+    
 }
 
 template<typename T>
@@ -173,8 +191,25 @@ void structs::DynamicArray<T>::read()
 {
     
 }
+
 template<typename T>
 void structs::DynamicArray<T>::resize()
 {
 
 }
+
+template<typename T>
+void structs::DynamicArray<T>::reset()
+{
+    if (m_size == 0)
+        return;
+    
+    delete m_data;
+    this->m_capacity = INITIAL_SIZE;
+    this->m_size = 0;
+    this->m_data = new T[m_capacity];
+
+    if (m_data == nullptr)
+        throw std::bad_alloc();
+}
+
