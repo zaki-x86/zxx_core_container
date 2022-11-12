@@ -204,7 +204,7 @@ void structs::DynamicArray<T>::reset()
     if (m_size == 0)
         return;
     
-    delete m_data;
+    delete[] m_data;
     this->m_capacity = INITIAL_SIZE;
     this->m_size = 0;
     this->m_data = new T[m_capacity];
