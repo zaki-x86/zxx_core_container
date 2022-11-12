@@ -96,9 +96,19 @@ TYPED_TEST_P(DynamicArrayTest, GetIndexOutOfRangeTest)
     EXPECT_ANY_THROW(this->a1_.get(100));
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, PopMethodTest)
+TYPED_TEST_P(DynamicArrayTest, PopEmptyArrayTest)
 {
+    EXPECT_ANY_THROW(this->a0_.pop());
     
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, PopArrayWithSingleElementTest)
+{
+    this->a0_.push_back(this->value_);
+    TypeParam popped = this->a0_.pop();
+
+    EXPECT_EQ(popped, this->value_);
+    EXPECT_EQ(this->a0_.size(), 0);
 }
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, RemoveMethodTest)
@@ -142,7 +152,8 @@ REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest,
     SetAtIndexLessThanZeroTest,
     AddMethodTest,
     GetIndexOutOfRangeTest,
-    PopMethodTest,
+    PopEmptyArrayTest,
+    PopArrayWithSingleElementTest,
     RemoveMethodTest,
     ResizeMethodTest,
     ResetMethodTest,
