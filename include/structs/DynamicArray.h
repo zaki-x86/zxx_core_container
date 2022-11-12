@@ -13,6 +13,7 @@
 #pragma once
 
 #include <iostream>
+#include <algorithm>
 
 namespace structs
 {
@@ -149,13 +150,26 @@ void structs::DynamicArray<T>::set( size_t index, T value )
 template<typename T>
 void structs::DynamicArray<T>::add( size_t index, T value )
 {
-
+    if (index > m_size)
+        throw std::out_of_range("Invalid: Exceeds range, use set(size_t, T) instead");
+    
+    if ( m_size == m_capacity )
+        resize();
+    
+    for (long i = m_size - 1; i >= index; i--)
+        m_data[i+1] = m_data[i];  
+    
+    m_data[index] = value;
+    m_size ++;
     
 }
 
 template<typename T>
 T structs::DynamicArray<T>::get( size_t index )
 {
+    if ( index >= m_size )
+        throw std::out_of_range("Invalid: index is out of range\n");
+    
     return this->m_data[index];
 }
 
