@@ -42,7 +42,6 @@ set(HEADERS
 
 set(TEST_SRCS
     tests/TestCases/DynamicArrayTest.cpp
-    tests/TestCases/DynamicArrayTestTyped.cpp
     tests/test_runner.cpp
 )
 ############################################################################

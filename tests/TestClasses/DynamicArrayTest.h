@@ -11,72 +11,110 @@
 
 #pragma once
 
+#include <iostream>
+#include <random>
+#include <cstdlib>
+#include <ctime>
+
 #include "structs/structures.h"
 #include "gtest/gtest.h"
+#include "TestHelpers/generators.h"
 
 namespace structs
 {
-    namespace tests
+    namespace test
     {
         /**
-         * @brief Test class for DynamicArray class.
+         * @brief paramatrized test class
+         * @tparam std::tuple<int, int*> a list of parameters that will be passed to the test suite.
+         * @tparam size_t size of the array
+         * @tparam std::vector<int> vector containing expected dynamic array content 
          * 
          */
+
+        template<typename T>
         class DynamicArrayTest : public ::testing::Test
         {
         protected:
-            structs::DynamicArray<int> a0;
-            structs::DynamicArray<int> a1;
-            structs::DynamicArray<int> a2;
-            structs::DynamicArray<int> a3;
-            structs::DynamicArray<int> b0{100};
-            int arr[5] = {0, 1, 2, 3, 4};
-            structs::DynamicArray<int> ba0{ arr, 5 };
-            structs::DynamicArray<int> x0{1000};
+            void SetUp() override;
+            void TearDown() override;
 
-            /**
-             * @brief Construct a new Dynamic Array Test object
-             * 
-             */
-            DynamicArrayTest();
-            /**
-             * @brief Destroy the Dynamic Array Test object
-             * 
-             */
-            ~DynamicArrayTest() override;
-            
-            /**
-             * @brief Class members declared here can be used by all tests in the test suite
-             * 
-             */
-            void method_placeholder();
+        public:
+            structs::DynamicArray<T> a0_;
+            T value_;
+            T array_[INITIAL_SIZE];
+            std::vector<T> sample_values_;
         };
-
-
-    } // namespace tests
-    
-    
+    } // namespace test
 } // namespace structs
 
-typedef structs::tests::DynamicArrayTest DynamicArrayTest;
+using namespace structs::test;
 
-DynamicArrayTest::DynamicArrayTest()
+template <>
+void DynamicArrayTest<int>::SetUp()
 {
-    a1.push_back(-1);
-    a2.push_back(1);
-    a2.push_back(2);
+    const int range_from  = INT32_MIN;
+    const int range_to    = INT32_MAX;
+    value_ = generate_numeric(range_from, range_to);
+    
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        array_[i] = generate_numeric(range_from, range_to);
 
-    x0.push_back(2000);
-    x0.push_back(3000);
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        sample_values_.push_back(generate_numeric(range_from, range_to));
+}
+
+template <>
+void DynamicArrayTest<char>::SetUp()
+{
+    value_ = generate_char();
+
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        array_[i] = generate_char();
+
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        sample_values_.push_back(generate_char());
+}
+
+template <>
+void DynamicArrayTest<char*>::SetUp()
+{
+    value_ = strdup(generate_string(generate_numeric(0, 20)).c_str());
+
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        array_[i] = strdup(generate_string(generate_numeric(0, 20)).c_str());
+
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        sample_values_.push_back(strdup(generate_string(generate_numeric(0, 20)).c_str()));
+}
+
+template <>
+void DynamicArrayTest<int*>::SetUp()
+{
+    value_ = new int(generate_numeric(INT32_MIN, INT32_MAX));
+    sample_values_.reserve(INITIAL_SIZE);
+
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        array_[i] = new int(generate_numeric(INT32_MIN, INT32_MAX));
+
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        sample_values_.push_back(new int(generate_numeric(INT32_MIN, INT32_MAX)));
+}
+
+
+template <typename T>
+void DynamicArrayTest<T>::TearDown()
+{
+}
+
+template <>
+void DynamicArrayTest<int*>::TearDown()
+{
+    delete value_;
 
     for (size_t i = 0; i < INITIAL_SIZE; i++)
     {
-        a3.push_back(i);
+        delete array_[i];
+        delete sample_values_[i];
     }
-    
-}
-
-DynamicArrayTest::~DynamicArrayTest()
-{
-
 }

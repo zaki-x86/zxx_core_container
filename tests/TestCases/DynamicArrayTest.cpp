@@ -1,78 +1,106 @@
+
 #include "gtest/gtest.h"
 #include "structs/structures.h"
 #include "TestClasses/DynamicArrayTest.h"
 
-TEST_F(DynamicArrayTest, IsEmptyInitially)
+#include <iostream>
+#include <type_traits>
+
+
+using namespace structs::test;
+
+TYPED_TEST_SUITE_P(DynamicArrayTest);
+
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, IsEmptyInitially) 
 {
-    EXPECT_EQ(a0.size(), 0);
+    EXPECT_EQ(this->a0_.size(), 0);
 }
-
-TEST_F(DynamicArrayTest, InitializedWithSingleElementTest)
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, InitializeWithSingleElement) 
 {
-    // initialized with an (int) type
-    EXPECT_EQ(b0.size(), 1);
-    EXPECT_EQ(b0.get(0), 100);
-
-    // .. TODO! ..
-    // initialized with an (std::string) type
-
-    // initialized with an (char) type
-
-    // initialized with an (char*) type
-
-    // initialized with an (double) type
-
-    // initialized with an (float) type
-
-    // initialized with an (any non-primitive) type
+    structs::DynamicArray<TypeParam> x{this->value_};
+    EXPECT_EQ(x.size(), 1);
+    EXPECT_EQ(x.get(0), this->value_);
 }
-
-TEST_F(DynamicArrayTest, InitializedWithArrayTest)
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, InitializeWithArrayTest) 
 {
-    // initialized with an (int) array
-    EXPECT_EQ(ba0.size(), 5);
-    EXPECT_EQ(ba0.get(0), 0);
-    EXPECT_EQ(ba0.get(1), 1);
-    EXPECT_EQ(ba0.get(2), 2);
-    EXPECT_EQ(ba0.get(3), 3);
-    EXPECT_EQ(ba0.get(4), 4);
+    structs::DynamicArray<TypeParam> xx(this->array_, INITIAL_SIZE);
 
-    // .. TODO! ..
-    // initialized with an (std::string) array
+    EXPECT_EQ(xx.size(), INITIAL_SIZE);
 
-    // initialized with an (char) array
-
-    // initialized with an (char*) array
-
-    // initialized with an (double) array
-
-    // initialized with an (float) array
-
-    // initialized with an (any non-primitive) array
-
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        EXPECT_EQ(xx.get(i), this->array_[i]);    
 }
-
-TEST_F(DynamicArrayTest, PushingElementsToDynamicArray)
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, PushBackMethodTest) 
 {
-    // Pushing to empty list
-    EXPECT_EQ(a1.size(), 1);
-    EXPECT_EQ(a1.get(0), -1);
+    for (size_t i = 0; i < this->sample_values_.size(); i++)
+    {
+        this->a0_.push_back(this->sample_values_[i]);
+    }
+    
+    
+    EXPECT_EQ(this->a0_.size(), this->sample_values_.size());
 
-    // Pushing to non empty list
-    EXPECT_EQ(a2.size(), 2);
-    EXPECT_EQ(a2.get(0), 1);
-    EXPECT_EQ(a2.get(1), 2);
 
-    // Pushing to a non empty list that was previously initialized by a constructor
-    EXPECT_EQ(x0.size(), 3);
-    EXPECT_EQ(x0.get(0), 1000);
-    EXPECT_EQ(x0.get(1), 2000);
-    EXPECT_EQ(x0.get(2), 3000);
-
-    // Pushing in a loop until full capacity of initial size is reached
-    EXPECT_EQ(a3.size(), INITIAL_SIZE);
-    EXPECT_EQ(a3.get(0), 0);
-    EXPECT_EQ(a3.get(5), 5);
-    EXPECT_EQ(a3.get(6), 6);
-    EXPECT_EQ(a3.get(9), 9);
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        EXPECT_EQ(this->a0_.get(i), this->sample_values_[i]);
 }
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, SetMethodTest)
+{
+
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, AddMethodTest)
+{
+    
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, GetMethodTest)
+{
+    
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, PopMethodTest)
+{
+    
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, RemoveMethodTest)
+{
+    
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, ResizeMethodTest)
+{
+    
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, IsEmptyMethodTest)
+{
+    
+}
+// #######################################################
+REGISTER_TYPED_TEST_SUITE_P(
+    DynamicArrayTest, 
+    IsEmptyInitially,
+    InitializeWithSingleElement,
+    InitializeWithArrayTest,
+    PushBackMethodTest,
+    SetMethodTest,
+    AddMethodTest,
+    GetMethodTest,
+    PopMethodTest,
+    RemoveMethodTest,
+    ResizeMethodTest,
+    IsEmptyMethodTest
+    );
+
+using MyTypes = ::testing::Types<char, int, char*, int*> ;
+
+INSTANTIATE_TYPED_TEST_SUITE_P(DynamicArrayTest_, DynamicArrayTest, MyTypes);
+
+// #######################################################
