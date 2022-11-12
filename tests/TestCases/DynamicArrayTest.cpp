@@ -84,8 +84,7 @@ TYPED_TEST_P(DynamicArrayTest, IsEmptyMethodTest)
     
 }
 // #######################################################
-REGISTER_TYPED_TEST_SUITE_P(
-    DynamicArrayTest, 
+REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest, 
     IsEmptyInitially,
     InitializeWithSingleElement,
     InitializeWithArrayTest,
@@ -99,7 +98,7 @@ REGISTER_TYPED_TEST_SUITE_P(
     IsEmptyMethodTest
     );
 
-using MyTypes = ::testing::Types<char, int, char*, int*> ;
+using MyTypes = ::testing::Types<char, int, char*, int*, std::string> ;
 
 INSTANTIATE_TYPED_TEST_SUITE_P(DynamicArrayTest_, DynamicArrayTest, MyTypes);
 

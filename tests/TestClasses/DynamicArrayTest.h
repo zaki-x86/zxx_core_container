@@ -30,6 +30,8 @@ namespace structs
          * @tparam size_t size of the array
          * @tparam std::vector<int> vector containing expected dynamic array content 
          * 
+         * @todo testing against std::string 
+         * apparently test fails when using std::string type, need to add specialized constructor std::string type
          */
 
         template<typename T>
@@ -101,6 +103,17 @@ void DynamicArrayTest<int*>::SetUp()
         sample_values_.push_back(new int(generate_numeric(INT32_MIN, INT32_MAX)));
 }
 
+template<>
+void DynamicArrayTest<std::string>::SetUp()
+{
+    value_ = generate_string(generate_numeric(0, 20));
+
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        array_[i] = generate_string(generate_numeric(0, 20));
+
+    for (size_t i = 0; i < INITIAL_SIZE; i++)
+        sample_values_.push_back(generate_string(generate_numeric(0, 20)));
+}
 
 template <typename T>
 void DynamicArrayTest<T>::TearDown()
