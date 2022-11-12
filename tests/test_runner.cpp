@@ -16,6 +16,5 @@
 int main(int argc, char *argv[])
 {
     ::testing::InitGoogleTest(&argc, argv);
-    ::testing::GTEST_FLAG(output)="xml:/home/zaki/Projects/2023/Structs/tests/TestReports/";
     return RUN_ALL_TESTS();
 }
