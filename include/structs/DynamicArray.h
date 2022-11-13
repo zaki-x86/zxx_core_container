@@ -178,15 +178,28 @@ T structs::DynamicArray<T>::pop()
 {
     if (m_size == 0)
         throw std::logic_error("Can't pop an empty array");
-    m_size--;
-    return m_data[m_size]; 
     
+    m_size--;
+    
+    return m_data[m_size];
 }
 
 template<typename T>
 T structs::DynamicArray<T>::remove( size_t index )
 {
-
+    if ( index > m_size - 1 )
+        throw std::out_of_range("Invalid: Index out of bound");
+    else if ( m_size == 0 )
+        throw std::logic_error("Can't remove elements from an empty array");
+    
+    T deleted = m_data[index];
+    
+    for (long i = index; i <= m_size - 1; i++)
+        m_data[i] = m_data[i + 1];
+    
+    m_size--;
+    
+    return deleted;
 }
 
 template<typename T>
