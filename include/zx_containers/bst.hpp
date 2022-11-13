@@ -9,3 +9,22 @@
  * @copyright Copyright (c) Zaki 2022
  * 
  */
+
+#pragma once
+
+#include <iostream>
+
+namespace zx_containers
+{
+    template <typename T>
+    class bst
+    {
+    private:
+        T /* data */
+    
+    public:
+        bst(T /* args */);
+    };
+    
+    
+} // namespace zx_containers

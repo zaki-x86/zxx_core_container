@@ -36,7 +36,12 @@ char generate_char()
         "abcdefghijklmnopqrstuvwxyz";
 
     const size_t max_index = (sizeof(charset) - 1);
-    return charset[ generate_numeric<int>(0, max_index) ];
+    char out = charset[ generate_numeric<int>(0, max_index) ];
+
+    if (out != '\0' && isalnum(out))
+        return out;
+    
+    return 'x';
 }
 
 
@@ -55,8 +60,18 @@ std::string generate_string(const size_t len)
     for (int i = 0; i < len; ++i) {
         tmp_s += alphanum[rand() % (sizeof(alphanum) - 1)];
     }
-    
-    return tmp_s;
+
+    if (tmp_s.size() != 0)
+        return tmp_s;
+
+    else if (tmp_s.size() == 0)
+    {
+        tmp_s = "empty";
+        return tmp_s;
+    }
+
+    else
+        return "empty";  
 }
 
 

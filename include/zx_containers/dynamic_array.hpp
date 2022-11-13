@@ -1,7 +1,7 @@
 /**
- * @file DynamicArray.h
- * @brief A class template for a DynamicArray type
- * @see [Dynamic Arrays](data/DynamicArray.md)
+ * @file darray.h
+ * @brief A class template for a darray type
+ * @see [Dynamic Arrays](data/darray.md)
  * @version 0.1
  * @date 2022-11-07
  * @author M Zaki
@@ -15,14 +15,14 @@
 #include <iostream>
 #include <algorithm>
 
-namespace structs
+namespace zx_containers
 {
 
 #define GROWTH_FACTOR 2
 #define INITIAL_SIZE 10
 
 template <typename T>
-class DynamicArray
+class darray
 {
 private:
     long m_capacity;
@@ -32,12 +32,12 @@ private:
 
 public:
     // constructors & destructors
-    DynamicArray();
-    DynamicArray(const DynamicArray&);
-    DynamicArray(T&);
-    DynamicArray(T&&);
-    DynamicArray(T*, long);
-    ~DynamicArray();
+    darray();
+    darray(const darray&);
+    darray(T&);
+    darray(T&&);
+    darray(T*, long);
+    ~darray();
 
     // operations
     void push_back(T);
@@ -52,7 +52,7 @@ public:
     void read();
     void reset();
 
-/*     DynamicArray<T>& operator= (const DynamicArray<T> && other)
+/*     darray<T>& operator= (const darray<T> && other)
     {
         delete[] m_data;
         m_data = nullptr;
@@ -69,10 +69,10 @@ public:
     } */
 };
 
-}// namespace structs
+}// namespace zx_containers
 
 template<typename T>
-structs::DynamicArray<T>::DynamicArray()
+zx_containers::darray<T>::darray()
 :m_capacity(INITIAL_SIZE),
 m_data(new T[m_capacity]),
 m_size(0)
@@ -84,7 +84,7 @@ m_size(0)
 }
 
 template<typename T>
-structs::DynamicArray<T>::DynamicArray(const DynamicArray& other)
+zx_containers::darray<T>::darray(const darray& other)
 {
     delete[] m_data;
     m_data = nullptr;
@@ -99,22 +99,22 @@ structs::DynamicArray<T>::DynamicArray(const DynamicArray& other)
 }
 
 template<typename T>
-structs::DynamicArray<T>::DynamicArray( T& value )
-: DynamicArray()
+zx_containers::darray<T>::darray( T& value )
+: darray()
 {    
     this->push_back(value);
 }
 
 template<typename T>
-structs::DynamicArray<T>::DynamicArray( T&& value )
-: DynamicArray()
+zx_containers::darray<T>::darray( T&& value )
+: darray()
 {
     this->push_back(value);
 }
 
 template<typename T>
-structs::DynamicArray<T>::DynamicArray( T* values, long size )
-: DynamicArray()
+zx_containers::darray<T>::darray( T* values, long size )
+: darray()
 {
     for (long i = 0; i < size; i++)
     {
@@ -124,13 +124,13 @@ structs::DynamicArray<T>::DynamicArray( T* values, long size )
 }
 
 template<typename T>
-structs::DynamicArray<T>::~DynamicArray()
+zx_containers::darray<T>::~darray()
 {
     delete[] m_data;
 }
 
 template<typename T>
-void structs::DynamicArray<T>::push_back( T value )
+void zx_containers::darray<T>::push_back( T value )
 {
     if (m_size >= m_capacity)
         resize();
@@ -140,7 +140,7 @@ void structs::DynamicArray<T>::push_back( T value )
 }
 
 template<typename T>
-void structs::DynamicArray<T>::set( long index, T value )
+void zx_containers::darray<T>::set( long index, T value )
 {
     if ( index < 0 )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -153,7 +153,7 @@ void structs::DynamicArray<T>::set( long index, T value )
 }
 
 template<typename T>
-void structs::DynamicArray<T>::add( long index, T value )
+void zx_containers::darray<T>::add( long index, T value )
 {
     if ( index < 0 )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -173,7 +173,7 @@ void structs::DynamicArray<T>::add( long index, T value )
 }
 
 template<typename T>
-T structs::DynamicArray<T>::get( long index )
+T zx_containers::darray<T>::get( long index )
 {
     if ( index < 0 )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -185,7 +185,7 @@ T structs::DynamicArray<T>::get( long index )
 }
 
 template<typename T>
-T structs::DynamicArray<T>::pop()
+T zx_containers::darray<T>::pop()
 {
     if (m_size == 0)
         throw std::logic_error("Can't pop an empty array");
@@ -196,7 +196,7 @@ T structs::DynamicArray<T>::pop()
 }
 
 template<typename T>
-T structs::DynamicArray<T>::remove( long index )
+T zx_containers::darray<T>::remove( long index )
 {
     if ( index < 0 )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -217,31 +217,31 @@ T structs::DynamicArray<T>::remove( long index )
 }
 
 template<typename T>
-long structs::DynamicArray<T>::size()
+long zx_containers::darray<T>::size()
 {
     return this->m_size;
 }
 
 template<typename T>
-long structs::DynamicArray<T>::capacity()
+long zx_containers::darray<T>::capacity()
 {
     return m_capacity;
 }
 
 template<typename T>
-bool structs::DynamicArray<T>::is_empty()
+bool zx_containers::darray<T>::is_empty()
 {
     
 }
 
 template<typename T>
-void structs::DynamicArray<T>::read()
+void zx_containers::darray<T>::read()
 {
     
 }
 
 template<typename T>
-void structs::DynamicArray<T>::resize()
+void zx_containers::darray<T>::resize()
 {
     T* tmp = new T[m_capacity * GROWTH_FACTOR];
     if (tmp == nullptr)
@@ -254,7 +254,7 @@ void structs::DynamicArray<T>::resize()
 }
 
 template<typename T>
-void structs::DynamicArray<T>::reset()
+void zx_containers::darray<T>::reset()
 {
     if (m_size == 0)
         return;

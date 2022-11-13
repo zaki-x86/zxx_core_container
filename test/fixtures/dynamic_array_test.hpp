@@ -17,13 +17,13 @@
 #include <ctime>
 #include <type_traits>
 
-#include "structs/structures.h"
+#include "zx_containers/containers.hpp"
 #include "gtest/gtest.h"
-#include "TestHelpers/generators.h"
+#include "helpers/generators.h"
 
 #define TEST_INITIAL_SIZE INITIAL_SIZE - 2
 
-namespace structs
+namespace zx_containers
 {
     namespace test
     {
@@ -33,18 +33,19 @@ namespace structs
         protected:
             void SetUp() override;
             void TearDown() override;
-
+            static void generate_random_test_value(T&);
+            static void generate_random_test_values(std::vector<T>&, long);
         public:
-            structs::DynamicArray<T> a0_;   // empty
-            structs::DynamicArray<T> a1_;   // filled upon initialization
+            zx_containers::darray<T> a0_;   // empty
+            zx_containers::darray<T> a1_;   // filled upon initialization
             T value_;
             T array_[TEST_INITIAL_SIZE];
             std::vector<T> sample_values_;
         };
     } // namespace test
-} // namespace structs
+} // namespace zx_containers
 
-using namespace structs::test;
+using namespace zx_containers::test;
 
 template <typename T>
 void DynamicArrayTest<T>::SetUp()

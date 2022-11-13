@@ -1,14 +1,14 @@
 
 #include "gtest/gtest.h"
-#include "structs/structures.h"
-#include "TestClasses/DynamicArrayTest.h"
-#include "TestHelpers/generators.h"
+#include "zx_containers/containers.hpp"
+#include "fixtures/dynamic_array_test.hpp"
+#include "helpers/generators.h"
 
 #include <iostream>
 #include <type_traits>
 
 
-using namespace structs::test;
+using namespace zx_containers::test;
 
 TYPED_TEST_SUITE_P(DynamicArrayTest);
 
@@ -23,14 +23,14 @@ TYPED_TEST_P(DynamicArrayTest, IsEmptyInitially)
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, InitializeWithSingleElement) 
 {
-    structs::DynamicArray<TypeParam> x{this->value_};
+    zx_containers::darray<TypeParam> x{this->value_};
     EXPECT_EQ(x.size(), 1);
     EXPECT_EQ(x.get(0), this->value_);
 }
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, InitializeWithArrayTest) 
 {
-    structs::DynamicArray<TypeParam> xx(this->array_, TEST_INITIAL_SIZE);
+    zx_containers::darray<TypeParam> xx(this->array_, TEST_INITIAL_SIZE);
 
     EXPECT_EQ(xx.size(), TEST_INITIAL_SIZE);
 
@@ -244,8 +244,16 @@ TYPED_TEST_P(DynamicArrayTest, PatchPushBackCausesResizeSimpleTest)
         EXPECT_EQ(this->a1_.get(i), this->sample_values_[i - initial_size]);
 }
 // #######################################################
-
+TYPED_TEST_P(DynamicArrayTest, SettingValueAtIndexExceedsSizeTest) 
+{
+    
+    
+}
 // #######################################################
+TYPED_TEST_P(DynamicArrayTest, SettingValueAtIndexExceedsCapacityTest) 
+{
+    
+}
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, IsEmptyAfterClearingArrayTest)
 {
@@ -293,6 +301,8 @@ REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest,
     RemoveIndexOutOfRangeTest,
     PushBackCausesResizeSimpleTest,
     PatchPushBackCausesResizeSimpleTest,
+    SettingValueAtIndexExceedsSizeTest,
+    SettingValueAtIndexExceedsCapacityTest,
     ResetMethodTest,
     IsEmptyAfterClearingArrayTest
     );
