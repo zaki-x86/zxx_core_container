@@ -25,8 +25,8 @@ template <typename T>
 class DynamicArray
 {
 private:
-    size_t m_capacity;
-    size_t m_size;
+    long m_capacity;
+    long m_size;
     T* m_data;
     void resize();
 
@@ -36,7 +36,7 @@ public:
     DynamicArray(const DynamicArray&);
     DynamicArray(T&);
     DynamicArray(T&&);
-    DynamicArray(T*, size_t);
+    DynamicArray(T*, long);
     ~DynamicArray();
 
     // operations
@@ -46,8 +46,8 @@ public:
     T get(long);
     T pop();
     T remove(long);
-    size_t size();
-    size_t capacity();
+    long size();
+    long capacity();
     bool is_empty();
     void read();
     void reset();
@@ -62,7 +62,7 @@ public:
         m_data = new T[m_capacity];
         m_size = other.size();
 
-        for (size_t i = 0; i < other.size(); i++)
+        for (long i = 0; i < other.size(); i++)
             push_back(other.get(i));
         
         return *this;
@@ -94,7 +94,7 @@ structs::DynamicArray<T>::DynamicArray(const DynamicArray& other)
     m_data = new T[m_capacity];
     m_size = other.size();
 
-    for (size_t i = 0; i < other.size(); i++)
+    for (long i = 0; i < other.size(); i++)
         push_back(other.get(i));
 }
 
@@ -113,10 +113,10 @@ structs::DynamicArray<T>::DynamicArray( T&& value )
 }
 
 template<typename T>
-structs::DynamicArray<T>::DynamicArray( T* values, size_t size )
+structs::DynamicArray<T>::DynamicArray( T* values, long size )
 : DynamicArray()
 {
-    for (size_t i = 0; i < size; i++)
+    for (long i = 0; i < size; i++)
     {
         this->push_back(*values);
         values++;
@@ -134,7 +134,7 @@ void structs::DynamicArray<T>::push_back( T value )
 {
     if (m_size >= m_capacity)
         resize();
-    
+
     *(m_data + m_size) = value;
     m_size ++;
 }
@@ -217,15 +217,15 @@ T structs::DynamicArray<T>::remove( long index )
 }
 
 template<typename T>
-size_t structs::DynamicArray<T>::size()
+long structs::DynamicArray<T>::size()
 {
     return this->m_size;
 }
 
 template<typename T>
-size_t structs::DynamicArray<T>::capacity()
+long structs::DynamicArray<T>::capacity()
 {
-    
+    return m_capacity;
 }
 
 template<typename T>
@@ -243,7 +243,14 @@ void structs::DynamicArray<T>::read()
 template<typename T>
 void structs::DynamicArray<T>::resize()
 {
-
+    T* tmp = new T[m_capacity * GROWTH_FACTOR];
+    if (tmp == nullptr)
+        throw std::bad_alloc();
+    
+    std::copy(m_data, m_data + m_capacity, tmp);
+    delete[] m_data;
+    m_data = tmp;
+    m_capacity = m_capacity * GROWTH_FACTOR;
 }
 
 template<typename T>
