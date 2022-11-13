@@ -87,7 +87,34 @@ TYPED_TEST_P(DynamicArrayTest, AddAtIndexGreaterThanZeroTest)
     // size is updated
     EXPECT_EQ(this->a1_.size(), initial_size + 1);  
 }
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, AddAtIndexZeroTest)
+{
+    size_t initial_size = this->a1_.size();
+    TypeParam first_element = this->a1_.get(0);
 
+    this->a1_.add(0, this->value_);
+
+    // Value is added at correct index
+    EXPECT_EQ(this->a1_.get(0), this->value_);
+    // Next value is correct
+    EXPECT_EQ(this->a1_.get(1), first_element);
+    // size is updated
+    EXPECT_EQ(this->a1_.size(), initial_size + 1);  
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, AddToEmptyArrayTest)
+{
+    size_t random_index = generate_numeric(1, TEST_INITIAL_SIZE);
+
+    EXPECT_ANY_THROW(this->a0_.add(random_index, this->value_));
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, AddAtIndexOutOfRangeTest)
+{
+
+    EXPECT_ANY_THROW(this->a1_.add(100, this->value_));
+}
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, GetIndexOutOfRangeTest)
 {
@@ -214,9 +241,9 @@ REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest,
     SetMethodTest,
     SetAtIndexLessThanZeroTest,
     AddAtIndexGreaterThanZeroTest,
-    //AddAtIndexZeroTest,
-    //AddToEmptyArrayTest,
-    //AddAtIndexOutOfRangeTest,
+    AddAtIndexZeroTest,
+    AddToEmptyArrayTest,
+    AddAtIndexOutOfRangeTest,
     GetIndexOutOfRangeTest,
     PopEmptyArrayTest,
     PopArrayWithSingleElementTest,
