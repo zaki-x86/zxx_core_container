@@ -41,11 +41,11 @@ public:
 
     // operations
     void push_back(T);
-    void set(size_t, T);
-    void add(size_t, T);
-    T get(size_t);
+    void set(long, T);
+    void add(long, T);
+    T get(long);
     T pop();
-    T remove(size_t);
+    T remove(long);
     size_t size();
     size_t capacity();
     bool is_empty();
@@ -140,20 +140,28 @@ void structs::DynamicArray<T>::push_back( T value )
 }
 
 template<typename T>
-void structs::DynamicArray<T>::set( size_t index, T value )
+void structs::DynamicArray<T>::set( long index, T value )
 {
-    if ( index < INITIAL_SIZE )
-        *(m_data + index) = value;
+    if ( index < 0 )
+        throw std::logic_error("Invalid: negative indices are not allowed.");
     
+    else if ( index < m_size )
+    {
+        *(m_data + index) = value;
+        return;
+    }  
 }
 
 template<typename T>
-void structs::DynamicArray<T>::add( size_t index, T value )
+void structs::DynamicArray<T>::add( long index, T value )
 {
-    if (index > m_size)
-        throw std::out_of_range("Invalid: Exceeds range, use set(size_t, T) instead");
+    if ( index < 0 )
+        throw std::logic_error("Invalid: negative indices are not allowed.");
+
+    else if (index > m_size)
+        throw std::out_of_range("Invalid: Exceeds range, use set(long, T) instead");
     
-    if ( m_size == m_capacity )
+    else if ( m_size == m_capacity )
         resize();
     
     for (long i = m_size - 1; i >= index; i--)
@@ -165,9 +173,12 @@ void structs::DynamicArray<T>::add( size_t index, T value )
 }
 
 template<typename T>
-T structs::DynamicArray<T>::get( size_t index )
+T structs::DynamicArray<T>::get( long index )
 {
-    if ( index >= m_size )
+    if ( index < 0 )
+        throw std::logic_error("Invalid: negative indices are not allowed.");
+
+    else if ( index >= m_size )
         throw std::out_of_range("Invalid: index is out of range\n");
     
     return m_data[index];
@@ -185,9 +196,12 @@ T structs::DynamicArray<T>::pop()
 }
 
 template<typename T>
-T structs::DynamicArray<T>::remove( size_t index )
+T structs::DynamicArray<T>::remove( long index )
 {
-    if ( index > m_size - 1 )
+    if ( index < 0 )
+        throw std::logic_error("Invalid: negative indices are not allowed.");
+
+    else if ( index > m_size - 1 )
         throw std::out_of_range("Invalid: Index out of bound");
     else if ( m_size == 0 )
         throw std::logic_error("Can't remove elements from an empty array");
