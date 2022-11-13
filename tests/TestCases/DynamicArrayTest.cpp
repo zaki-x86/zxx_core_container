@@ -75,10 +75,9 @@ TYPED_TEST_P(DynamicArrayTest, SetAtIndexLessThanZeroTest)
 
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, AddMethodTest)
+TYPED_TEST_P(DynamicArrayTest, AddAtIndexGreaterThanZeroTest)
 {
-    //structs::DynamicArray<TypeParam> initial_a1 = this->a1_;
-    size_t random_index = generate_numeric(0, TEST_INITIAL_SIZE);
+    size_t random_index = generate_numeric(1, TEST_INITIAL_SIZE);
     size_t initial_size = this->a1_.size();
 
     this->a1_.add(random_index, this->value_);
@@ -88,6 +87,7 @@ TYPED_TEST_P(DynamicArrayTest, AddMethodTest)
     // size is updated
     EXPECT_EQ(this->a1_.size(), initial_size + 1);  
 }
+
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, GetIndexOutOfRangeTest)
 {
@@ -111,9 +111,72 @@ TYPED_TEST_P(DynamicArrayTest, PopArrayWithSingleElementTest)
     EXPECT_EQ(this->a0_.size(), 0);
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, RemoveMethodTest)
+TYPED_TEST_P(DynamicArrayTest, PopRandomArrayTest)
 {
+    size_t initial_size = this->a1_.size();
+    TypeParam to_be_popped = this->a1_.get( initial_size - 1);
+
+    EXPECT_EQ(to_be_popped, this->a1_.pop());
+    EXPECT_EQ(this->a1_.size(), initial_size - 1);
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, RemoveFirstElementTest)
+{
+    size_t initial_size = this->a1_.size();
+    TypeParam to_be_deleted = this->a1_.get(0);
+    TypeParam next_to_be_deleted = this->a1_.get(1);
+
+    EXPECT_EQ(this->a1_.remove(0), to_be_deleted);
+    EXPECT_EQ(this->a1_.get(0), next_to_be_deleted);
+    EXPECT_EQ(this->a1_.size(), initial_size - 1);
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, RemoveFromSingleElementArrayTest)
+{
+    this->a0_.push_back(this->value_);
+    TypeParam deleted = this->a0_.remove(0);
+
+    EXPECT_EQ(deleted, this->value_);
+    EXPECT_EQ(this->a0_.size(), 0);
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, RemoveFromEmptyArrayTest)
+{
+    EXPECT_ANY_THROW(this->a0_.remove(generate_numeric<int>(0, 5)));
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, RemoveLastElementTest)
+{
+    size_t initial_size = this->a1_.size();
+    TypeParam to_be_deleted = this->a1_.get(initial_size - 1);
+    TypeParam previous_to_be_deleted = this->a1_.get(initial_size - 2);
+
+    EXPECT_EQ(to_be_deleted, this->a1_.remove(initial_size - 1));
+    size_t curr_size = this->a1_.size();
+    EXPECT_EQ(curr_size, initial_size - 1);
+    EXPECT_EQ(previous_to_be_deleted, this->a1_.get(curr_size - 1));
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, RemoveElementRandomIndexTest)
+{
+    size_t initial_size = this->a1_.size();
+    size_t rand_index = generate_numeric<int>(1, initial_size - 2);
+    TypeParam to_be_deleted = this->a1_.get(rand_index);
+    TypeParam next_to_be_deleted =  this->a1_.get(rand_index + 1);
+    TypeParam previous_to_be_deleted =  this->a1_.get(rand_index - 1);
     
+    EXPECT_EQ(to_be_deleted, this->a1_.remove(rand_index));
+    EXPECT_EQ(next_to_be_deleted, this->a1_.get(rand_index));
+    EXPECT_EQ(previous_to_be_deleted, this->a1_.get(rand_index - 1));
+    EXPECT_EQ(this->a1_.size(), initial_size - 1);
+}
+// #######################################################
+TYPED_TEST_P(DynamicArrayTest, RemoveIndexOutOfRangeTest)
+{
+    size_t last_index = this->a1_.size() - 1;
+    size_t error_index = generate_numeric(last_index + 1, last_index + 100);
+
+    EXPECT_ANY_THROW(this->a1_.remove(error_index));
 }
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, ResizeMethodTest)
@@ -150,11 +213,20 @@ REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest,
     PushBackMethodTest,
     SetMethodTest,
     SetAtIndexLessThanZeroTest,
-    AddMethodTest,
+    AddAtIndexGreaterThanZeroTest,
+    //AddAtIndexZeroTest,
+    //AddToEmptyArrayTest,
+    //AddAtIndexOutOfRangeTest,
     GetIndexOutOfRangeTest,
     PopEmptyArrayTest,
     PopArrayWithSingleElementTest,
-    RemoveMethodTest,
+    PopRandomArrayTest,
+    RemoveFirstElementTest,
+    RemoveFromEmptyArrayTest,
+    RemoveLastElementTest,
+    RemoveElementRandomIndexTest,
+    RemoveFromSingleElementArrayTest,
+    RemoveIndexOutOfRangeTest,
     ResizeMethodTest,
     ResetMethodTest,
     IsEmptyMethodTest

@@ -21,7 +21,7 @@
 #include "gtest/gtest.h"
 #include "TestHelpers/generators.h"
 
-#define TEST_INITIAL_SIZE 9
+#define TEST_INITIAL_SIZE INITIAL_SIZE - 2
 
 namespace structs
 {
