@@ -82,27 +82,27 @@ TYPED_TEST_P(DynamicArrayTest, SetAtIndexLessThanZeroTest)
 
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, AddAtIndexGreaterThanZeroTest)
+TYPED_TEST_P(DynamicArrayTest, InsertAtIndexGreaterThanZeroTest)
 {
     long random_index = generate_numeric(1, TEST_INITIAL_SIZE);
     long initial_size = this->a1_.size();
 
-    this->a1_.add(random_index, this->value_);
+    this->a1_.insert(random_index, this->value_);
 
-    // Value is added at correct index
+    // Value is inserted at correct index
     EXPECT_EQ(this->a1_.get(random_index), this->value_);
     // size is updated
     EXPECT_EQ(this->a1_.size(), initial_size + 1);  
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, AddAtIndexZeroTest)
+TYPED_TEST_P(DynamicArrayTest, InsertAtIndexZeroTest)
 {
     long initial_size = this->a1_.size();
     TypeParam first_element = this->a1_.get(0);
 
-    this->a1_.add(0, this->value_);
+    this->a1_.insert(0, this->value_);
 
-    // Value is added at correct index
+    // Value is inserted at correct index
     EXPECT_EQ(this->a1_.get(0), this->value_);
     // Next value is correct
     EXPECT_EQ(this->a1_.get(1), first_element);
@@ -110,17 +110,17 @@ TYPED_TEST_P(DynamicArrayTest, AddAtIndexZeroTest)
     EXPECT_EQ(this->a1_.size(), initial_size + 1);  
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, AddToEmptyArrayTest)
+TYPED_TEST_P(DynamicArrayTest, InsertToEmptyArrayTest)
 {
     long random_index = generate_numeric(1, TEST_INITIAL_SIZE);
 
-    EXPECT_ANY_THROW(this->a0_.add(random_index, this->value_));
+    EXPECT_ANY_THROW(this->a0_.insert(random_index, this->value_));
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, AddAtIndexOutOfRangeTest)
+TYPED_TEST_P(DynamicArrayTest, InsertAtIndexOutOfRangeTest)
 {
 
-    EXPECT_ANY_THROW(this->a1_.add(100, this->value_));
+    EXPECT_ANY_THROW(this->a1_.insert(100, this->value_));
 }
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, GetIndexOutOfRangeTest)
@@ -132,14 +132,14 @@ TYPED_TEST_P(DynamicArrayTest, GetIndexOutOfRangeTest)
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, PopEmptyArrayTest)
 {
-    EXPECT_ANY_THROW(this->a0_.pop());
+    EXPECT_ANY_THROW(this->a0_.pop_back());
     
 }
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, PopArrayWithSingleElementTest)
 {
     this->a0_.push_back(this->value_);
-    TypeParam popped = this->a0_.pop();
+    TypeParam popped = this->a0_.pop_back();
 
     EXPECT_EQ(popped, this->value_);
     EXPECT_EQ(this->a0_.size(), 0);
@@ -150,48 +150,48 @@ TYPED_TEST_P(DynamicArrayTest, PopRandomArrayTest)
     long initial_size = this->a1_.size();
     TypeParam to_be_popped = this->a1_.get( initial_size - 1);
 
-    EXPECT_EQ(to_be_popped, this->a1_.pop());
+    EXPECT_EQ(to_be_popped, this->a1_.pop_back());
     EXPECT_EQ(this->a1_.size(), initial_size - 1);
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, RemoveFirstElementTest)
+TYPED_TEST_P(DynamicArrayTest, EraseFirstElementTest)
 {
     long initial_size = this->a1_.size();
     TypeParam to_be_deleted = this->a1_.get(0);
     TypeParam next_to_be_deleted = this->a1_.get(1);
 
-    EXPECT_EQ(this->a1_.remove(0), to_be_deleted);
+    EXPECT_EQ(this->a1_.erase(0), to_be_deleted);
     EXPECT_EQ(this->a1_.get(0), next_to_be_deleted);
     EXPECT_EQ(this->a1_.size(), initial_size - 1);
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, RemoveFromSingleElementArrayTest)
+TYPED_TEST_P(DynamicArrayTest, EraseFromSingleElementArrayTest)
 {
     this->a0_.push_back(this->value_);
-    TypeParam deleted = this->a0_.remove(0);
+    TypeParam deleted = this->a0_.erase(0);
 
     EXPECT_EQ(deleted, this->value_);
     EXPECT_EQ(this->a0_.size(), 0);
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, RemoveFromEmptyArrayTest)
+TYPED_TEST_P(DynamicArrayTest, EraseFromEmptyArrayTest)
 {
-    EXPECT_ANY_THROW(this->a0_.remove(generate_numeric<int>(0, 5)));
+    EXPECT_ANY_THROW(this->a0_.erase(generate_numeric<int>(0, 5)));
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, RemoveLastElementTest)
+TYPED_TEST_P(DynamicArrayTest, EraseLastElementTest)
 {
     long initial_size = this->a1_.size();
     TypeParam to_be_deleted = this->a1_.get(initial_size - 1);
     TypeParam previous_to_be_deleted = this->a1_.get(initial_size - 2);
 
-    EXPECT_EQ(to_be_deleted, this->a1_.remove(initial_size - 1));
+    EXPECT_EQ(to_be_deleted, this->a1_.erase(initial_size - 1));
     long curr_size = this->a1_.size();
     EXPECT_EQ(curr_size, initial_size - 1);
     EXPECT_EQ(previous_to_be_deleted, this->a1_.get(curr_size - 1));
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, RemoveElementRandomIndexTest)
+TYPED_TEST_P(DynamicArrayTest, EraseElementRandomIndexTest)
 {
     long initial_size = this->a1_.size();
     long rand_index = generate_numeric<int>(1, initial_size - 2);
@@ -199,18 +199,18 @@ TYPED_TEST_P(DynamicArrayTest, RemoveElementRandomIndexTest)
     TypeParam next_to_be_deleted =  this->a1_.get(rand_index + 1);
     TypeParam previous_to_be_deleted =  this->a1_.get(rand_index - 1);
     
-    EXPECT_EQ(to_be_deleted, this->a1_.remove(rand_index));
+    EXPECT_EQ(to_be_deleted, this->a1_.erase(rand_index));
     EXPECT_EQ(next_to_be_deleted, this->a1_.get(rand_index));
     EXPECT_EQ(previous_to_be_deleted, this->a1_.get(rand_index - 1));
     EXPECT_EQ(this->a1_.size(), initial_size - 1);
 }
 // #######################################################
-TYPED_TEST_P(DynamicArrayTest, RemoveIndexOutOfRangeTest)
+TYPED_TEST_P(DynamicArrayTest, EraseIndexOutOfRangeTest)
 {
     long last_index = this->a1_.size() - 1;
     long error_index = generate_numeric(last_index + 1, last_index + 100);
 
-    EXPECT_ANY_THROW(this->a1_.remove(error_index));
+    EXPECT_ANY_THROW(this->a1_.erase(error_index));
 }
 // #######################################################
 // #######################################################
@@ -219,7 +219,7 @@ TYPED_TEST_P(DynamicArrayTest, RemoveIndexOutOfRangeTest)
 //
 TYPED_TEST_P(DynamicArrayTest, PushBackCausesResizeSimpleTest) 
 {
-   // Given: a1_.size() = 8, will add a random value 3 times to exceed initial size
+   // Given: a1_.size() = 8, will push a random value 3 times to exceed initial size
    this->a1_.push_back(this->value_);
    this->a1_.push_back(this->value_);
    this->a1_.push_back(this->value_);
@@ -372,20 +372,20 @@ REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest,
     PushToEmptyArrayTest,
     SetMethodTest,
     SetAtIndexLessThanZeroTest,
-    AddAtIndexGreaterThanZeroTest,
-    AddAtIndexZeroTest,
-    AddToEmptyArrayTest,
-    AddAtIndexOutOfRangeTest,
+    InsertAtIndexGreaterThanZeroTest,
+    InsertAtIndexZeroTest,
+    InsertToEmptyArrayTest,
+    InsertAtIndexOutOfRangeTest,
     GetIndexOutOfRangeTest,
     PopEmptyArrayTest,
     PopArrayWithSingleElementTest,
     PopRandomArrayTest,
-    RemoveFirstElementTest,
-    RemoveFromEmptyArrayTest,
-    RemoveLastElementTest,
-    RemoveElementRandomIndexTest,
-    RemoveFromSingleElementArrayTest,
-    RemoveIndexOutOfRangeTest,
+    EraseFirstElementTest,
+    EraseFromEmptyArrayTest,
+    EraseLastElementTest,
+    EraseElementRandomIndexTest,
+    EraseFromSingleElementArrayTest,
+    EraseIndexOutOfRangeTest,
     PushBackCausesResizeSimpleTest,
     PatchPushBackCausesResizeSimpleTest,
     SettingValueAtIndexExceedsSizeTest,

@@ -42,10 +42,10 @@ public:
     // operations
     void push_back(T);
     void set(long, T);
-    void add(long, T);
+    void insert(long, T);
     T get(long) const;
-    T pop();
-    T remove(long);
+    T pop_back();
+    T erase(long);
     long size() const;
     long capacity() const;
     bool is_empty();
@@ -150,7 +150,7 @@ void zx_containers::darray<T>::set( long index, T value )
 }
 
 template<typename T>
-void zx_containers::darray<T>::add( long index, T value )
+void zx_containers::darray<T>::insert( long index, T value )
 {
     if ( index < 0 )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -182,10 +182,10 @@ T zx_containers::darray<T>::get( long index ) const
 }
 
 template<typename T>
-T zx_containers::darray<T>::pop()
+T zx_containers::darray<T>::pop_back()
 {
     if (m_size == 0)
-        throw std::logic_error("Can't pop an empty array");
+        throw std::logic_error("Can't pop_back an empty array");
     
     m_size--;
     
@@ -193,7 +193,7 @@ T zx_containers::darray<T>::pop()
 }
 
 template<typename T>
-T zx_containers::darray<T>::remove( long index )
+T zx_containers::darray<T>::erase( long index )
 {
     if ( index < 0 )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -201,7 +201,7 @@ T zx_containers::darray<T>::remove( long index )
     else if ( index > m_size - 1 )
         throw std::out_of_range("Invalid: Index out of bound");
     else if ( m_size == 0 )
-        throw std::logic_error("Can't remove elements from an empty array");
+        throw std::logic_error("Can't erase elements from an empty array");
     
     T deleted = m_data[index];
     
