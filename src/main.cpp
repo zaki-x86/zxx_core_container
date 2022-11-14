@@ -10,13 +10,12 @@
  */
 
 #include <iostream>
-
 #include <zx_containers/containers.hpp>
-#include <gtest/gtest.h>
+
 
 int main(int argc, char const *argv[])
 {
-    
+
     return 0;
 }
 
