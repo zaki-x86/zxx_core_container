@@ -49,24 +49,9 @@ public:
     long size() const;
     long capacity() const;
     bool is_empty();
-    void read();
     void reset();
-
-/*     darray<T>& operator= (const darray<T> && other)
-    {
-        delete[] m_data;
-        m_data = nullptr;
-        m_size = 0;
-        m_capacity = INITIAL_SIZE;
-
-        m_data = new T[m_capacity];
-        m_size = other.size();
-
-        for (long i = 0; i < other.size(); i++)
-            push_back(other.get(i));
-        
-        return *this;
-    } */
+    std::ostream& print(std::ostream&) const;
+    //template<typename U> friend std::ostream& operator<<(std::ostream& os, U const& ar);
 };
 
 }// namespace zx_containers
@@ -247,12 +232,6 @@ bool zx_containers::darray<T>::is_empty()
 }
 
 template<typename T>
-void zx_containers::darray<T>::read()
-{
-    
-}
-
-template<typename T>
 void zx_containers::darray<T>::resize()
 {
     std::cout << "[--resize--] Running resize .. \n";
@@ -281,3 +260,22 @@ void zx_containers::darray<T>::reset()
         throw std::bad_alloc();
 }
 
+template<typename T>
+std::ostream& zx_containers::darray<T>::print(std::ostream& os) const
+{
+    os << "{ ";
+        for (size_t i = 0; i < m_size; i++)
+        {
+            os << m_data[i] << ", ";
+            if ( i == m_size - 1 )
+                os << m_data[i];
+        }
+        os << " }\n";
+        return os;
+}
+
+template<typename U>
+inline std::ostream& operator<<(std::ostream& os, zx_containers::darray<U> const& obj)
+{
+    return obj.print(os);
+}
