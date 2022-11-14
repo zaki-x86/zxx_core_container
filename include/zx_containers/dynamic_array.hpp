@@ -43,11 +43,11 @@ public:
     void push_back(T);
     void set(long, T);
     void add(long, T);
-    T get(long);
+    T get(long) const;
     T pop();
     T remove(long);
-    long size();
-    long capacity();
+    long size() const;
+    long capacity() const;
     bool is_empty();
     void read();
     void reset();
@@ -144,12 +144,24 @@ void zx_containers::darray<T>::set( long index, T value )
 {
     if ( index < 0 )
         throw std::logic_error("Invalid: negative indices are not allowed.");
-    
+
     else if ( index < m_size )
     {
         *(m_data + index) = value;
         return;
-    }  
+    }
+
+    // keep resizing as long as index > m_capacity
+    while( index > m_capacity )
+        resize();
+
+    for (size_t i = m_size; i <= index; i++)
+    {
+        *(m_data + i) = {};
+        m_size++;
+    }
+    
+    *(m_data + index) = value;
 }
 
 template<typename T>
@@ -173,7 +185,7 @@ void zx_containers::darray<T>::add( long index, T value )
 }
 
 template<typename T>
-T zx_containers::darray<T>::get( long index )
+T zx_containers::darray<T>::get( long index ) const
 {
     if ( index < 0 )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -217,13 +229,13 @@ T zx_containers::darray<T>::remove( long index )
 }
 
 template<typename T>
-long zx_containers::darray<T>::size()
+long zx_containers::darray<T>::size() const
 {
-    return this->m_size;
+    return m_size;
 }
 
 template<typename T>
-long zx_containers::darray<T>::capacity()
+long zx_containers::darray<T>::capacity() const
 {
     return m_capacity;
 }
@@ -243,6 +255,7 @@ void zx_containers::darray<T>::read()
 template<typename T>
 void zx_containers::darray<T>::resize()
 {
+    std::cout << "[--resize--] Running resize .. \n";
     T* tmp = new T[m_capacity * GROWTH_FACTOR];
     if (tmp == nullptr)
         throw std::bad_alloc();
