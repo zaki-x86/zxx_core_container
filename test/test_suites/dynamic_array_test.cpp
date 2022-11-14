@@ -2,7 +2,7 @@
 #include "gtest/gtest.h"
 #include "zx_containers/containers.hpp"
 #include "fixtures/dynamic_array_test.hpp"
-#include "helpers/generators.h"
+#include "helpers/generators.hpp"
 
 #include <iostream>
 #include <type_traits>
@@ -341,6 +341,13 @@ TYPED_TEST_P(DynamicArrayTest, IsEmptyAfterClearingArrayTest)
     EXPECT_EQ(this->a1_.size(), 0);
 }
 // #######################################################
+TYPED_TEST_P(DynamicArrayTest, PrintArrayTest)
+{
+    zx_containers::darray<TypeParam> x(this->array_, TEST_INITIAL_SIZE);
+    std::cout << "[----------] x =";
+    std::cout << x << std::endl;
+}
+// #######################################################
 TYPED_TEST_P(DynamicArrayTest, ResetMethodTest)
 {
     // test started empty
@@ -384,7 +391,8 @@ REGISTER_TYPED_TEST_SUITE_P(DynamicArrayTest,
     SettingValueAtIndexExceedsSizeTest,
     SettingValueAtIndexExceedsCapacityTest,
     ResetMethodTest,
-    IsEmptyAfterClearingArrayTest
+    IsEmptyAfterClearingArrayTest,
+    PrintArrayTest
     );
 
 using MyTypes = ::testing::Types<char, int, char*, int*, std::string> ;

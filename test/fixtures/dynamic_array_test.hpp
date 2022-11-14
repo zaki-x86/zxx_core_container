@@ -20,7 +20,7 @@
 
 #include "zx_containers/containers.hpp"
 #include "gtest/gtest.h"
-#include "helpers/generators.h"
+#include "helpers/generators.hpp"
 
 #define TEST_INITIAL_SIZE INITIAL_SIZE - 2
 
