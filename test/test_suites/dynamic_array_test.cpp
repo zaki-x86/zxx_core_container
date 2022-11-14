@@ -244,15 +244,95 @@ TYPED_TEST_P(DynamicArrayTest, PatchPushBackCausesResizeSimpleTest)
         EXPECT_EQ(this->a1_.get(i), this->sample_values_[i - initial_size]);
 }
 // #######################################################
+/**
+ * @brief Setting a value at an index i such that: m_size < i < m_capacity, 
+ * where m_size > 0
+ */
 TYPED_TEST_P(DynamicArrayTest, SettingValueAtIndexExceedsSizeTest) 
 {
+    //init(x): x.m_size = 0, x.m_capacity = 10
+    zx_containers::darray<TypeParam> x; 
+    // let: 1 =< initial_size < m_capacity
+    int initial_size = generate_numeric<int>( 1, x.capacity() - 5 );
+    std::cout << "[----------] initial_size = " << initial_size << "\n";
+    // let: n - 1 < rand_index < x.m_capacity
+    int rand_index = generate_numeric<int>( initial_size, x.capacity() - 1 );
+    std::cout << "[----------] rand_index = " << rand_index << "\n";
+    // set a rand_value to be set
+     TypeParam rand_value = generate_random_test_value<TypeParam>();
+     std::cout << "[----------] rand_value = " << rand_value << "\n";
     
+    // push n random values to x
+    std::cout << "[----------] x = { ";
+    for (size_t i = 0; i < initial_size; i++)
+    {
+        x.push_back( generate_random_test_value<TypeParam>() );
+        std::cout << x.get(i) << ", ";
+    }
+    std::cout << " }\n";
+
+    std::cout << "[----------] x.set(rand_index, rand_value)" << "\n";
+    x.set(rand_index, rand_value);   
+    std::cout << "[----------] x.get(rand_index)  = " << x.get(rand_index) << "\n";
+    std::cout << "[----------] x.get(rand_index - 1)  = " << x.get(rand_index - 1) << "\n";
+
+    std::cout << "[----------] x After setting \n";
+    std::cout << "[----------] x = { ";
+    for (size_t i = 0; i < x.size(); i++)
+    {
+        std::cout << x.get(i) << ", ";
+    }
+    std::cout << " }\n";
+    
+    EXPECT_EQ(x.get(rand_index), rand_value);
+    EXPECT_GE(x.size(), initial_size);
+
+    // if rand_index >= initial_size
+    // 
     
 }
 // #######################################################
+/**
+ * @brief Setting a value at an index i such that: i > m_capacity,
+ * where m_size > 0
+ */
 TYPED_TEST_P(DynamicArrayTest, SettingValueAtIndexExceedsCapacityTest) 
 {
+    zx_containers::darray<TypeParam> x; 
+     // let: 1 =< initial_size < m_capacity
+    int initial_size = generate_numeric<int>( 1, x.capacity() - 5 );
+    std::cout << "[----------] initial_size = " << initial_size << "\n";
+    // let: rand_index > x.m_capacity
+    int rand_index = generate_numeric<int>( x.capacity() - 1, 100 );
+    std::cout << "[----------] rand_index = " << rand_index << "\n";
+    // set a rand_value to be set
+    TypeParam rand_value = generate_random_test_value<TypeParam>();
+    std::cout << "[----------] rand_value = " << rand_value << "\n";
+
+    // push n random values to x
+    std::cout << "[----------] x = { ";
+    for (size_t i = 0; i < initial_size; i++)
+    {
+        x.push_back( generate_random_test_value<TypeParam>() );
+        std::cout << x.get(i) << ", ";
+    }
+    std::cout << " }\n";
+
+    std::cout << "[----------] x.set(rand_index, rand_value)" << "\n";
+    x.set(rand_index, rand_value);   
+    std::cout << "[----------] x.get(rand_index)  = " << x.get(rand_index) << "\n";
+    std::cout << "[----------] x.get(rand_index - 1)  = " << x.get(rand_index - 1) << "\n";
+
+    std::cout << "[----------] x After setting \n";
+    std::cout << "[----------] x = { ";
+    for (size_t i = 0; i < x.size(); i++)
+    {
+        std::cout << x.get(i) << ", ";
+    }
+    std::cout << " }\n";
     
+    EXPECT_EQ(x.get(rand_index), rand_value);
+    //EXPECT_GE(x.size(), initial_size);
 }
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, IsEmptyAfterClearingArrayTest)
