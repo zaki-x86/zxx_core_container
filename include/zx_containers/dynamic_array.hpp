@@ -228,7 +228,7 @@ long zx_containers::darray<T>::capacity() const
 template<typename T>
 bool zx_containers::darray<T>::is_empty()
 {
-    
+    return m_size == 0;
 }
 
 template<typename T>
