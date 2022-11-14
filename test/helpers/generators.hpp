@@ -3,6 +3,7 @@
 #include <iostream>
 #include <random>
 #include <cstdlib>
+#include <string>
 #include <ctime>
 #include <unistd.h>
 
