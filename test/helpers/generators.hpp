@@ -35,44 +35,44 @@ void set_random_test_value(
 
 void set_random_test_value(
     char*& var_, 
-    long size_ = generate_numeric<int>(0, 20)
+    size_t size_ = generate_numeric<size_t>(0, 20)
     );
 
 void set_random_test_value(
     std::string& var_, 
-    long size_ = generate_numeric<int>(0, 20)
+    size_t size_ = generate_numeric<size_t>(0, 20)
     );
 
 void set_random_test_values(
     std::vector<int>& vec_,
     int range_from =  INT32_MIN,
     int range_to = INT32_MAX,
-    long vec_size_ = 10
+    size_t vec_size_ = 10
     );
 
 void set_random_test_values(
     std::vector<int*>& vec_,
     int range_from =  INT32_MIN,
     int range_to = INT32_MAX,
-    long vec_size_ = 10
+    size_t vec_size_ = 10
     );
 
 void set_random_test_values(
     std::vector<char>& vec_,
     bool literal_only = false,
-    long vec_size_ = 10
+    size_t vec_size_ = 10
     );
 
 void set_random_test_values(
     std::vector<char*>& vec_,
-    long str_size = generate_numeric<int>(0, 20),
-    long vec_size_ = 10
+    size_t str_size = generate_numeric<size_t>(0, 20),
+    size_t vec_size_ = 10
     );
 
 void set_random_test_values(
     std::vector<std::string>& vec_, 
-    long str_size = generate_numeric<int>(0, 20),
-    long vec_size_ = 10
+    size_t str_size = generate_numeric<size_t>(0, 20),
+    size_t vec_size_ = 10
     );
 
 
@@ -116,8 +116,8 @@ std::string generate_string(const size_t len)
     std::string tmp_s;
     tmp_s.reserve(len);
 
-    for (int i = 0; i < len; ++i) {
-        tmp_s += alphanum[rand() % (sizeof(alphanum) - 1)];
+    for (size_t i = 0; i < len; ++i) {
+        tmp_s += alphanum[static_cast<size_t>(rand()) % (sizeof(alphanum) - 1)];
     }
 
     if (tmp_s.size() != 0)
@@ -134,14 +134,13 @@ std::string generate_string(const size_t len)
 }
 
 
-
 void set_random_test_value(
     int& var_, 
     int range_from, 
     int range_to
     )
 {
-    var_ = generate_numeric(range_from, range_to);
+    var_ = generate_numeric<int>(range_from, range_to);
 }
 
 
@@ -166,7 +165,7 @@ void set_random_test_value(
 
 void set_random_test_value(
     char*& var_, 
-    long size_ 
+    size_t size_ 
     )
 {
     var_ = strdup(generate_string(size_).c_str());
@@ -175,7 +174,7 @@ void set_random_test_value(
 
 void set_random_test_value(
     std::string& var_, 
-    long size_ 
+    size_t size_ 
     )
 {
     var_ = generate_string(size_);
@@ -186,11 +185,11 @@ void set_random_test_values(
     std::vector<int>& vec_,
     int range_from,
     int range_to,
-    long vec_size_ 
+    size_t vec_size_ 
     )
 {
     for (size_t i = 0; i < vec_size_; i++)
-        vec_.push_back(generate_numeric(range_from, range_to));
+        vec_.push_back(generate_numeric<int>(range_from, range_to));
 }
 
 
@@ -198,7 +197,7 @@ void set_random_test_values(
     std::vector<int*>& vec_,
     int range_from ,
     int range_to ,
-    long vec_size_ 
+    size_t vec_size_ 
     )
 {
     for (size_t i = 0; i < vec_size_; i++)
@@ -209,7 +208,7 @@ void set_random_test_values(
 void set_random_test_values(
     std::vector<char>& vec_,
     bool literal_only,
-    long vec_size_ 
+    size_t vec_size_ 
     )
 {
     for (size_t i = 0; i < vec_size_; i++)
@@ -219,8 +218,8 @@ void set_random_test_values(
 
 void set_random_test_values(
     std::vector<char*>& vec_,
-    long str_size,
-    long vec_size_
+    size_t str_size,
+    size_t vec_size_
     )
 {
     for (size_t i = 0; i < vec_size_; i++)
@@ -230,8 +229,8 @@ void set_random_test_values(
 
 void set_random_test_values(
     std::vector<std::string>& vec_, 
-    long str_size ,
-    long vec_size_
+    size_t str_size ,
+    size_t vec_size_
     )
 {
     for (size_t i = 0; i < vec_size_; i++)

@@ -22,7 +22,7 @@
 #include "gtest/gtest.h"
 #include "helpers/generators.hpp"
 
-#define TEST_INITIAL_SIZE INITIAL_SIZE - 2
+#define TEST_INITIAL_SIZE __INITIAL_SIZE__ - 2
 
 namespace zx_containers
 {
@@ -40,6 +40,8 @@ namespace zx_containers
             T value_;
             T array_[TEST_INITIAL_SIZE];
             std::vector<T> sample_values_;
+
+            void test_correct_instantiation();
         };
     } // namespace test
 } // namespace zx_containers
@@ -64,7 +66,7 @@ void DynamicArrayTest<T>::SetUp()
 template <typename T>
 void DynamicArrayTest<T>::TearDown()
 {
-    a1_.reset();
+    a1_.clear();
 }
 
 template <>
