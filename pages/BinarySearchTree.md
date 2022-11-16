@@ -1,1 +1,1 @@
-# Binary Search Trees #
+# Binary Search Trees #     {#bst}

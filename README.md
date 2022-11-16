@@ -1,6 +1,7 @@
-# Structs #
+# Containers #  
 
 [TOC]
+
 
 ## About ##
 
@@ -10,15 +11,15 @@ This project introduces basic data structures and algorithms that are used very 
 
 The basic represented data structures are:
 
-- [Dynamic Array](/home/zaki/Projects/2023/Structs/data/DynamicArray.md)
-- [Linked List](/home/zaki/Projects/2023/Structs/data/LinkedList.md)
-- [Stack](/home/zaki/Projects/2023/Structs/data/Stack.md)
-- [Queue](/home/zaki/Projects/2023/Structs/data/Queue.md)
-- [Binary Tree](/home/zaki/Projects/2023/Structs/data/BinaryTree.md)
-- [Hash Table](/home/zaki/Projects/2023/Structs/data/HashTable.md)
-- [Binary Search Tree](/home/zaki/Projects/2023/Structs/data/BinarySearchTree.md)
-- [Red Black Tree](/home/zaki/Projects/2023/Structs/data/RedBlackTree.md)
-- [Graph](/home/zaki/Projects/2023/Structs/data/Graph.md)
+- [Dynamic Array](pages/DynamicArray.md)
+- [Linked List](pages/LinkedList.md)
+- [Stack](pages/Stack.md)
+- [Queue](pages/Queue.md)
+- [Binary Tree](pages/BinaryTree.md)
+- [Hash Table](pages/HashTable.md)
+- [Binary Search Tree](pages/BinarySearchTree.md)
+- [Red Black Tree](pages/RedBlackTree.md)
+- [Graph](pages/Graph.md)
 
 ### Design ###
 

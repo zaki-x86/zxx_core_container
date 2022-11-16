@@ -1,1 +1,1 @@
-# Graphs #
+# Graphs # {#graph}

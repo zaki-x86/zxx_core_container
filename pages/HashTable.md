@@ -1,1 +1,1 @@
-# Hash Tables #
+# Hash Tables # {#hash_table}
