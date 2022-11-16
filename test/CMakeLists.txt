@@ -17,11 +17,18 @@ add_executable(
     ${test_headers}
 )
 
+add_executable(
+    ${CMAKE_PROJECT_NAME}TestCxx11
+    ${test_sources}
+    ${test_headers}
+)
+
   #
   # Set the compiler standard
   #
 
 target_compile_features(${CMAKE_PROJECT_NAME}Test PUBLIC cxx_std_17)
+target_compile_features(${CMAKE_PROJECT_NAME}TestCxx11 PUBLIC cxx_std_11)
 
   #
   # Setup code coverage if enabled
@@ -68,9 +75,22 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
         ${${CMAKE_PROJECT_NAME}_TEST_LIB}
     )
 
+    target_link_libraries(
+        ${CMAKE_PROJECT_NAME}TestCxx11
+        PUBLIC
+        GTest::gtest_main
+        ${GOOGLE_MOCK_LIBRARIES}
+        ${${CMAKE_PROJECT_NAME}_TEST_LIB}
+    )
+
     message(STATUS "linking test directory to ${CMAKE_PROJECT_NAME}Test ..")
     target_include_directories(
         ${CMAKE_PROJECT_NAME}Test
+        PUBLIC
+        ${CMAKE_SOURCE_DIR}/test
+    )
+    target_include_directories(
+        ${CMAKE_PROJECT_NAME}TestCxx11
         PUBLIC
         ${CMAKE_SOURCE_DIR}/test
     )
@@ -82,7 +102,14 @@ elseif(${CMAKE_PROJECT_NAME}_USE_CATCH2)
         PUBLIC
         Catch2::Catch2
         ${${CMAKE_PROJECT_NAME}_TEST_LIB}
-)
+    )
+    target_link_libraries(
+        ${CMAKE_PROJECT_NAME}TestCxx11
+        PUBLIC
+        Catch2::Catch2
+        ${${CMAKE_PROJECT_NAME}_TEST_LIB}
+    )
+    
 else()
     message(FATAL_ERROR "Unknown testing library. Please setup your desired unit testing library by using `target_link_libraries`.")  
 endif()
@@ -93,6 +120,7 @@ endif()
 
 include(GoogleTest)
 gtest_discover_tests(${CMAKE_PROJECT_NAME}Test)
+gtest_discover_tests(${CMAKE_PROJECT_NAME}TestCxx11)
 
 
 verbose_message("Finished adding unit tests for ${CMAKE_PROJECT_NAME}.")
