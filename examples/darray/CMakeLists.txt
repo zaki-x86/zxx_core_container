@@ -7,9 +7,7 @@ project(
 )
 
 set(sources
-    constructors.cpp
+    main.cpp
 )
 
 add_executable(${PROJECT_NAME}Constructor constructors)
-
-target_link_directories()
