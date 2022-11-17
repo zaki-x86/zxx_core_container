@@ -416,3 +416,13 @@ if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
   message(STATUS "Build unit tests for the project. Tests should always be found in the test folder\n")
   add_subdirectory(test)
 endif()
+
+##################################################################################
+##################################################################################
+
+#
+# Examples setup
+#
+
+message(STATUS "Building dynamic_array examples: ")
+add_subdirectory(examples/darray)

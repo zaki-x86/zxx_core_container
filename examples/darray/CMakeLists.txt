@@ -1,13 +1,26 @@
 cmake_minimum_required(VERSION 3.10)
 
 project(
-    DynamicArray
+    darray
     DESCRIPTION "Example code snippets for using dynamic_array.hpp"
     LANGUAGES CXX
 )
 
 set(sources
-    main.cpp
+    darray_examples.cpp
 )
 
-add_executable(${PROJECT_NAME}Constructor constructors)
+foreach(FILE ${sources})
+    message(STATUS "detected example source file: ${FILE}")
+endforeach()
+
+add_executable(${PROJECT_NAME}_examples ${sources})
+message(STATUS "Built executable target: ${${PROJECT_NAME}Examples}")
+
+target_link_libraries(${PROJECT_NAME}_examples
+    PRIVATE
+    ${CMAKE_PROJECT_NAME}
+)
+message(STATUS "Linked ${${PROJECT_NAME}_examples} against the following libraries: 
+            ${CMAKE_PROJECT_NAME}"
+            )
