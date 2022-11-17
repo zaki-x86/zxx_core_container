@@ -10,4 +10,11 @@
 // #include "red_black_tree.hpp"
 // #include "graph.hpp"
 
-
+/**
+ * @brief  The top level domain name of the library
+ * 
+ */
+namespace zx_containers
+{
+    
+}
