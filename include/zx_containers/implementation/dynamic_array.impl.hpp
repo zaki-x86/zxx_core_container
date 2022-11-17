@@ -1,12 +1,10 @@
-#include "dynamic_array.hpp"    // Useless but it's added to disable error squiggles 
+#include "../dynamic_array.hpp"     // Useless but it's added to disable error squiggles
 
 // *************************
 // create an alias template:
 // *************************
 template <typename T>
 using dynamic_array = typename zx_containers::darray<T>;
-
-
 
 namespace
 {
@@ -30,33 +28,68 @@ namespace
 ///@}
 }
 
+using namespace zx_containers;
+
 template<typename T>
 zx_containers::darray<T>::darray()
-:m_capacity(__INITIAL_SIZE__),
-m_data(new T[m_capacity]),
-m_size(0)
+try :   m_capacity(__INITIAL_SIZE__), 
+        m_data(new value_type[m_capacity]), 
+        m_size(0)
+{}
+catch(...)
 {
-    if (m_data == nullptr)
-        throw std::bad_alloc();
-
-    m_size = 0;
+    m_resource_allocation_failed = true;
 }
 
 template<typename T>
-zx_containers::darray<T>::darray(const darray& x)
+zx_containers::darray<T>::darray( size_t n, const value_type& value )
+try :   m_capacity(n), 
+        m_data(new T[m_capacity]), 
+        m_size(n)
 {
+    for (size_t i = 0; i < m_capacity; i++)
+        *(m_data + i) = value;   
+}
+catch(...)
+{
+    m_resource_allocation_failed = true;
+}
+
+template<typename T>
+zx_containers::darray<T>::darray( const darray& x )
+{
+    #if DEBUG
+    std::cout << "[----------] Copied!" << std::endl;
+    #endif // DEBUG
+
     delete[] m_data;
     m_data = nullptr;
     m_size = 0;
-    m_capacity = __INITIAL_SIZE__;
+    m_capacity = 0;
 
-    m_data = new T[m_capacity];
-    m_size = x.size();
+    try
+    {
+        m_data = new T[x.capacity()];
+        m_size = x.size();
+        m_capacity = x.capacity();
 
-    for (long i = 0; i < x.size(); i++)
-        push_back(x.get(i));
+        for (size_t i = 0; i < x.size(); i++)
+            push_back(x.at(i));
+    }
+    catch(...)
+    {
+        m_resource_allocation_failed = true;
+    }
 }
 
+template<typename T>
+zx_containers::darray<T>::darray( T* first, T* last )
+: darray()
+{
+   for (T* it = first; it != last; it++)
+        push_back(*it);
+   
+}
 
 template<typename T>
 zx_containers::darray<T>::~darray()
@@ -65,7 +98,7 @@ zx_containers::darray<T>::~darray()
 }
 
 template<typename T>
-void zx_containers::darray<T>::push_back( value_type value )
+void zx_containers::darray<T>::push_back( const value_type& value )
 {
     if (m_size >= m_capacity)
         resize();
@@ -75,9 +108,19 @@ void zx_containers::darray<T>::push_back( value_type value )
 }
 
 template<typename T>
-void zx_containers::darray<T>::set( size_type index, value_type value )
+void zx_containers::darray<T>::push_back( value_type&& value )
 {
-    if ( index < 0 )
+    if (m_size >= m_capacity)
+        resize();
+
+    *(m_data + m_size) = std::move(value);
+    m_size ++;
+}
+
+template<typename T>
+void zx_containers::darray<T>::set( size_type index, value_type& value )
+{
+    if ( index > INT64_MAX )
         throw std::logic_error("Invalid: negative indices are not allowed.");
 
     else if ( index < m_size )
@@ -86,7 +129,7 @@ void zx_containers::darray<T>::set( size_type index, value_type value )
         return;
     }
 
-    // keep resizing as long as index > m_capacity
+    // keep resizing as size_t as index > m_capacity
     while( index > m_capacity )
         resize();
 
@@ -100,29 +143,47 @@ void zx_containers::darray<T>::set( size_type index, value_type value )
 }
 
 template<typename T>
-void zx_containers::darray<T>::insert( size_type index, value_type value )
+void zx_containers::darray<T>::insert( size_type index, const value_type& value )
 {
-    if ( index < 0 )
+    if ( index > INT64_MAX )
         throw std::logic_error("Invalid: negative indices are not allowed.");
 
     else if (index > m_size)
-        throw std::out_of_range("Invalid: Exceeds range, use set(size_type, T) instead");
+        throw std::out_of_range("Invalid: Exceeds range, use set(size_t, T) instead");
     
     else if ( m_size == m_capacity )
         resize();
     
-    for (long i = m_size - 1; i >= index; i--)
-        m_data[i+1] = m_data[i];  
+    for (size_t i = m_size; i > index; i--)
+        m_data[i] = m_data[i - 1];  
     
     m_data[index] = value;
     m_size ++;
+}
+
+template<typename T>
+void zx_containers::darray<T>::insert(size_type index, value_type&& value)
+{
+    if ( index > INT64_MAX )
+        throw std::logic_error("Invalid: negative indices are not allowed.");
+
+    else if (index > m_size)
+        throw std::out_of_range("Invalid: Exceeds range, use set(size_t, T) instead");
     
+    else if ( m_size == m_capacity )
+        resize();
+    
+    for (size_t i = m_size; i > index; i--)
+        m_data[i] = m_data[i - 1]; 
+    
+    m_data[index] = std::move(value);
+    m_size ++;
 }
 
 template<typename T>
 auto zx_containers::darray<T>::at( size_type index ) const -> value_type
 {
-    if ( index < 0 )
+    if ( index > INT64_MAX )
         throw std::logic_error("Invalid: negative indices are not allowed.");
 
     else if ( index >= m_size )
@@ -145,7 +206,7 @@ auto zx_containers::darray<T>::pop_back() -> value_type
 template<typename T>
 auto zx_containers::darray<T>::erase( size_type index ) -> value_type
 {
-    if ( index < 0 )
+    if ( index > INT64_MAX )
         throw std::logic_error("Invalid: negative indices are not allowed.");
 
     else if ( index > m_size - 1 )
@@ -155,7 +216,7 @@ auto zx_containers::darray<T>::erase( size_type index ) -> value_type
     
     T deleted = m_data[index];
     
-    for (long i = index; i <= m_size - 1; i++)
+    for (size_t i = index; i <= m_size - 1; i++)
         m_data[i] = m_data[i + 1];
     
     m_size--;
@@ -184,14 +245,19 @@ bool zx_containers::darray<T>::empty()
 template<typename T>
 void zx_containers::darray<T>::resize()
 {
-    T* tmp = new T[m_capacity * __GROWTH_FACTOR__];
-    if (tmp == nullptr)
-        throw std::bad_alloc();
     
-    std::copy(m_data, m_data + m_capacity, tmp);
-    delete[] m_data;
-    m_data = tmp;
-    m_capacity = m_capacity * __GROWTH_FACTOR__;
+    try
+    {
+        T* tmp = new T[m_capacity * __GROWTH_FACTOR__];
+        std::copy(m_data, m_data + m_capacity, tmp);
+        delete[] m_data;
+        m_data = tmp;
+        m_capacity = m_capacity * __GROWTH_FACTOR__;
+    }
+    catch(const std::exception& e)
+    {
+        m_resource_allocation_failed = true;
+    }    
 }
 
 template<typename T>
@@ -203,24 +269,41 @@ void zx_containers::darray<T>::clear()
     delete[] m_data;
     this->m_capacity = __INITIAL_SIZE__;
     this->m_size = 0;
-    this->m_data = new T[m_capacity];
-
-    if (m_data == nullptr)
-        throw std::bad_alloc();
+    try
+    {
+        this->m_data = new T[m_capacity];
+    }
+    catch(const std::exception& e)
+    {
+        m_resource_allocation_failed = true;
+    }
+    
 }
 
 template<typename T>
 std::ostream& zx_containers::darray<T>::print(std::ostream& os) const
 {
+    if (m_size == 0)
+        os << " { }" ;
     os << "{ ";
         for (size_t i = 0; i < m_size; i++)
         {
-            os << m_data[i] << ", ";
             if ( i == m_size - 1 )
+            {
                 os << m_data[i];
+                break;
+            }
+                
+            os << m_data[i] << ", ";
         }
         os << " }\n";
         return os;
+}
+
+template<typename T>
+bool zx_containers::darray<T>::resource_allocation_failed()
+{
+    return m_resource_allocation_failed;
 }
 
 template<typename U>
@@ -228,3 +311,4 @@ inline std::ostream& operator<<(std::ostream& os, zx_containers::darray<U> const
 {
     return obj.print(os);
 }
+
