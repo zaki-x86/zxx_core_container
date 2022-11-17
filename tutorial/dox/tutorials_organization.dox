@@ -10,7 +10,9 @@
  */
 
 /**
- * @page Containers Containers
+ * @page Tutorials Tutorials
+ * 
+ * 
  * 
  * @subpage dynamic_array
  * @subpage linked_list
@@ -21,4 +23,5 @@
  * @subpage bst
  * @subpage rb_tree
  * @subpage graph
+ * @endinternal
  */
