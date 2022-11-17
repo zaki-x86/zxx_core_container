@@ -1,20 +1,15 @@
 /**
- * @file Stack.h
- * @author M Zaki
- * @brief A class API to work with stack data structures
- * @see [Stacks](data/Stack.md)
+ * @file stack.hpp
+ * @author M Zaki (mamadov_zicx@gmail.com)
+ * @brief stack container definitions
  * @version 0.1
- * @date 2022-11-08
+ * @date 2022-11-16
  * 
- * @copyright Copyright (c) Zaki 2022
+ * @copyright Copyright (c) 2022
  * 
  */
 
-#pragma once
-
-#include <iostream>
-
-namespace zx_contaners
+namespace zx_containers
 {
     template <typename T>
     class stack
@@ -27,4 +22,4 @@ namespace zx_contaners
     };
     
     
-} // namespace zx_contaners
+} // namespace zx_containers
