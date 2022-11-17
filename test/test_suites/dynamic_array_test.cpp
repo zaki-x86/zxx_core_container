@@ -22,7 +22,25 @@ TYPED_TEST_SUITE_P(DynamicArrayTest);
  */
 TYPED_TEST_P(DynamicArrayTest, DefaultConstructorTest) 
 {
+    //! [Default constructor]
 
+    zx_containers::darray<TypeParam> a0{};
+    zx_containers::darray<TypeParam> a1;
+    zx_containers::darray<TypeParam> a2 = {};
+    
+    //! [Default constructor]
+
+    //! [Expected output]
+
+    EXPECT_TRUE(a0.empty());
+    EXPECT_TRUE(a1.empty());
+    EXPECT_TRUE(a2.empty());
+
+    EXPECT_FALSE(a0.resource_allocation_failed());
+    EXPECT_FALSE(a1.resource_allocation_failed());
+    EXPECT_FALSE(a2.resource_allocation_failed());
+
+    //! [Expected output]
 }
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, FillConstructorTest) 
@@ -32,7 +50,14 @@ TYPED_TEST_P(DynamicArrayTest, FillConstructorTest)
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, RangeConstructorTest) 
 {
+    TypeParam values[5];
+    TypeParam value = generate_random_test_value<TypeParam>();
+    std::fill(values, values + 5, value);
 
+    zx_containers::darray<TypeParam> x(values, values + 5);
+
+    EXPECT_EQ(x.at(0), value);
+    EXPECT_EQ(x.size(), 5);
 }
 // #######################################################
 // #######################################################
@@ -350,7 +375,7 @@ TYPED_TEST_P(DynamicArrayTest, IsEmptyAfterClearingArrayTest)
 // #######################################################
 TYPED_TEST_P(DynamicArrayTest, PrintArrayTest)
 {
-    GTEST_SKIP();
+    //GTEST_SKIP();
     //zx_containers::darray<TypeParam> x;
     zx_containers::darray<TypeParam> x(5, generate_random_test_value<TypeParam>());
     std::cout << "[----------] x =";
