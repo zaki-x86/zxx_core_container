@@ -19,5 +19,24 @@ int main(int argc, char const *argv[])
 
     //! [BasicUsage]
 
+    darray<int> x;
+    x.push_back(1);
+    x.push_back(2);
+    x.push_back(3);
+    x.push_back(4);
+
+    darray<int>::iterator it;
+
+    for (it = x.begin(); it != x.end(); ++it)
+    {
+        std::cout << *it << " ";
+    }
+
+    for(auto var : x)
+    {
+        std::cout << var << " ";
+    }
+    
+
     return 0;
 }
