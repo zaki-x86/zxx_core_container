@@ -13,7 +13,7 @@ set(headers
 
 set(test_sources
   ${PROJECT_SOURCE_DIR}/test/runner.cpp
-  ${PROJECT_SOURCE_DIR}/test/test_suites/dynamic_array_test.cpp
+  ${PROJECT_SOURCE_DIR}/test/test_suites/darray_test.cpp
   ${PROJECT_SOURCE_DIR}/test/test_suites/binary_tree_test.cpp
   ${PROJECT_SOURCE_DIR}/test/test_suites/bst_test.cpp
   ${PROJECT_SOURCE_DIR}/test/test_suites/graph_test.cpp
@@ -25,7 +25,7 @@ set(test_sources
 )
 
 set(test_fixtures
-  ${PROJECT_SOURCE_DIR}/test/fixtures/dynamic_array_test.hpp
+  ${PROJECT_SOURCE_DIR}/test/fixtures/darray_test.hpp
   ${PROJECT_SOURCE_DIR}/test/fixtures/binary_tree_test.hpp
   ${PROJECT_SOURCE_DIR}/test/fixtures/bst_test.hpp
   ${PROJECT_SOURCE_DIR}/test/fixtures/graph_test.hpp

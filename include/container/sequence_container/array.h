@@ -11,5 +11,5 @@
 
 #pragma once
 
-#include "zxx_array.h"
-#include "array.tcc"
+#include "zxx/zxx_array.h"
+#include "zxx/array.tcc"

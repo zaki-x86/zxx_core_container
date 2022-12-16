@@ -1,6 +1,5 @@
 ## NOTES
 # Disabled doxygen build temporarely
-# Disabled unit testing temporarely
 
 cmake_minimum_required(VERSION 3.15)
 
@@ -421,7 +420,7 @@ message(STATUS "Finished building requirements for installing the package.\n")
 if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
   enable_testing()
   message(STATUS "Build unit tests for the project. Tests should always be found in the test folder\n")
-  #add_subdirectory(test)
+  add_subdirectory(test)
 endif()
 
 ##################################################################################

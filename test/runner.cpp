@@ -1,17 +1,17 @@
 /**
  * @file test_runner.cpp
  * @author M Zaki 
- * @brief test driver for the test cases created in tests/ and src/test_structs
+ * @brief test driver
  * @version 0.1
  * @date 2022-11-07
  * 
- * @copyright Copyright Zaki (c) 2022
+ * @copyright Copyright M Zaki (c) 2022
  * 
  */
 
 #include <iostream>
 #include "gtest/gtest.h"
-#include <zx_containers/containers.hpp>
+#include "container/container.h"
 
 int main(int argc, char *argv[])
 {

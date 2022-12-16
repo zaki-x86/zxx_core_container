@@ -4,8 +4,10 @@
 #include <random>
 #include <cstdlib>
 #include <string>
+#include <cstring>
 #include <ctime>
 #include <unistd.h>
+
 
 // definitions 
 
@@ -30,7 +32,7 @@ void set_random_test_value(
 
 void set_random_test_value(
     char& var_,
-    bool literal_only = false
+    bool __attribute__((unused)) literal_only = false
     );
 
 void set_random_test_value(
@@ -59,7 +61,7 @@ void set_random_test_values(
 
 void set_random_test_values(
     std::vector<char>& vec_,
-    bool literal_only = false,
+    bool __attribute__((unused)) literal_only = false,
     size_t vec_size_ = 10
     );
 
@@ -156,7 +158,7 @@ void set_random_test_value(
 
 void set_random_test_value(
     char& var_,
-    bool literal_only
+    bool __attribute__((unused)) literal_only
     )
 {
     var_ = generate_char();
@@ -207,7 +209,7 @@ void set_random_test_values(
 
 void set_random_test_values(
     std::vector<char>& vec_,
-    bool literal_only,
+    bool __attribute__((unused)) literal_only,
     size_t vec_size_ 
     )
 {

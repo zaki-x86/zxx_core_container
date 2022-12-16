@@ -9,18 +9,6 @@
  * 
  */
 
-/**
- * @file darray.hpp
- * @author M Zaki
- * @brief A class template for a darray type
- * @see [Dynamic Arrays](data/darray.md)
- * @version 0.1
- * @date 2022-11-07
- * 
- * @copyright Copyright (c) Zaki 2022
- * 
- */
-
 #pragma once
 
 #define DEBUG true  ///< Flag set to enable some logging for debugging 
@@ -31,23 +19,10 @@
 #include <memory>
 #include <type_traits>
 
+#include "config/zxx_config.h"
 
-#if __cplusplus >= 201103L
-#define GLIBZXX_CONSTEXPR constexpr  
-#endif
-#if __cplusplus >= 201703L
-#define GLIBZXX_CONSTEXPR constexpr
-#endif
-#if __cplusplus >= 202003L
-#define GLIBZXX_CONSTEXPR constexpr
-#endif
-
-namespace zxx = std;
-
-namespace container
-{
-
-template <typename T,  typename Allocator = zxx::allocator<T>>
+BEGIN_NS_ZXX_CORE_CONTAINER
+template <typename T,  typename Allocator = std::allocator<T>>
 class darray
 {
 private:
@@ -65,90 +40,15 @@ public:
     using value_type = T;
     using reference = value_type&;
     using const_reference = const value_type&;
-    using pointer = zxx::allocator_traits<Allocator>::pointer
-    using const_pointer = zxx::allocator_traits<Allocator>::const_pointer;
+    using pointer = typename std::allocator_traits<Allocator>::pointer;
+    using const_pointer = typename std::allocator_traits<Allocator>::const_pointer;
     using iterator = T*;
     using const_iterator = const T*;
-    using difference_type = zxx::ptrdiff_t;
+    using difference_type = std::ptrdiff_t;
     using allocator_type = Allocator;
     using size_type = size_t;
-    using reverse_iterator = zxx::reverse_iterator<iterator> ; 
-    using const_reverse_iterator = zxx::reverse_iterator<const_iterator> ; 
-
-public:
-    /*****************
-     * darray iterator
-     *****************/
-    struct iterator
-    {
-        using self = iterator;
-        typedef typename Allocator::difference_type difference_type;
-        typedef typename Allocator::value_type value_type;
-        typedef typename Allocator::reference reference;
-        typedef typename Allocator::pointer pointer;
-        typedef zxx::random_access_iterator_tag iterator_category;
-
-        iterator() : _m_ptr(nullptr) {};
-
-        iterator( pointer ptr ) :_m_ptr(ptr) {}
-
-        reference operator*() const
-        {
-            return *_m_ptr;
-        }
-
-        pointer operator->() const
-        {
-            return _m_ptr;
-        }
-
-        self& operator++()
-        {
-            ++_m_ptr;
-            return *this;
-        }
-
-        self operator++( int )
-        {
-            return _m_ptr;
-        }
-
-        self& operator--()
-        {
-            _m_ptr--;
-            return *this;
-        }
-
-        self operator--( int )
-        {
-            return _m_ptr--;
-        }
-
-        self operator+( difference_type d ) const
-        {
-            return _m_ptr + d;
-        }
-
-        self operator-( difference_type d ) const
-        {
-            return _m_ptr - d;
-        }
-
-        bool operator==( const self& x ) const
-        {
-            return _m_ptr == x._m_ptr;
-        }
-
-        bool operator!=( const self& x ) const
-        {
-            return !(*this == x);
-        }
-
-
-        private:
-            pointer _m_ptr;
-    };
-    
+    using reverse_iterator = std::reverse_iterator<iterator> ; 
+    using const_reverse_iterator = std::reverse_iterator<const_iterator> ; 
 
 public:
     
@@ -176,18 +76,19 @@ public:
         Allocator& alloc 
     );
 
-    GLIBZXX_CONSTEXPR explicit 
+    GLIBZXX_CONSTEXPR
     darray( 
         size_type n, 
-        const value_type& value = {},
+        const value_type& value = value_type{},
         const Allocator& alloc = Allocator()
     );
 
-    GLIBZXX_CONSTEXPR 
+
+    GLIBZXX_CONSTEXPR explicit
     darray( 
-        size_type count,
-        const Allocator& alloc = Allocator() )
-    ;
+        size_type n,
+        const Allocator& alloc = Allocator() 
+    );
 
     template<typename InputIterator>
     GLIBZXX_CONSTEXPR
@@ -199,7 +100,7 @@ public:
 
     GLIBZXX_CONSTEXPR 
     darray( 
-        zxx::initializer_list<T> init,
+        std::initializer_list<T> init,
         const Allocator& alloc = Allocator() 
     );
     
@@ -212,52 +113,52 @@ public:
     darray& operator=( darray&& x );
 
     GLIBZXX_CONSTEXPR 
-    darray& operator=( zxx::initializer_list<T> init );
+    darray& operator=( std::initializer_list<T> init );
 
-    template< class T, class Alloc >
+    template< typename U, typename Alloc >
     GLIBZXX_CONSTEXPR
     friend bool operator==( 
         const darray& x,
         const darray& y
-    ) const;
+    );
 
-    template< class T, class Alloc >
+    template< typename U, typename Alloc >
     GLIBZXX_CONSTEXPR
     friend bool operator!=( 
         const darray& x,
         const darray& y
-    ) const;
+    );
 
-    template< class T, class Alloc >
+    template< typename U, typename Alloc >
     GLIBZXX_CONSTEXPR
     friend bool operator<( 
         const darray& x,
         const darray& y 
-    ) const; 
+    ); 
 
-    template< class T, class Alloc >
+    template< typename U, typename Alloc >
     GLIBZXX_CONSTEXPR
     friend bool operator>( 
         const darray& x,
         const darray& y 
-    ) const; 
+    ); 
 
-    template< class T, class Alloc >
+    template< typename U, typename Alloc >
     GLIBZXX_CONSTEXPR
     friend bool operator<=( 
         const darray& x,
         const darray& y
-    ) const;
+    );
 
-    template< class T, class Alloc >
+    template< typename U, typename Alloc >
     GLIBZXX_CONSTEXPR
     friend bool operator>=( 
         const darray& x,
         const darray& y
-    ) const;
+    );
 
     #if __cplusplus >= 202003L
-    template< class T, class Alloc >
+    template< typename U, typename Alloc >
     GLIBZXX_CONSTEXPR
     friend bool operator>=<( 
         const darray& x,
@@ -372,7 +273,7 @@ public:
 
     GLIBZXX_CONSTEXPR
     iterator
-    insert(const_iterator it, zxx::initializer_list<T> init ); 
+    insert(const_iterator it, std::initializer_list<T> init ); 
 
     GLIBZXX_CONSTEXPR
     iterator
@@ -393,19 +294,19 @@ public:
 
     GLIBZXX_CONSTEXPR
     size_type
-    capacity() const;
+    capacity() const noexcept;
 
     GLIBZXX_CONSTEXPR
     size_type 
-    size() const;
+    size() const noexcept;
 
     GLIBZXX_CONSTEXPR
     size_type
-    max_size() const;
+    max_size() const noexcept;
 
     GLIBZXX_CONSTEXPR
     bool 
-    empty() const;
+    empty() const noexcept;
 
     GLIBZXX_CONSTEXPR
     void 
@@ -421,9 +322,9 @@ public:
     get_allocator() const; 
 
     GLIBZXX_CONSTEXPR
-    zxx::ostream&
-    print(zxx::ostream&) const;
+    std::ostream&
+    print( std::ostream& ) const;
 
 };
 
-}
+END_NS_ZXX_CORE_CONTAINER
