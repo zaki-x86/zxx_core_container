@@ -1,14 +1,14 @@
 set(sources
-  ${PROJECT_SOURCE_DIR}/src/main.cpp
+  # ${PROJECT_SOURCE_DIR}/src/main.cpp
 )
 
 set(exe_sources
-  ${PROJECT_SOURCE_DIR}/src/main.cpp
-  ${sources}
+  # ${PROJECT_SOURCE_DIR}/src/main.cpp
+  # ${sources}
 )
 
 set(headers
-  ${PROJECT_SOURCE_DIR}/include/zx_containers/containers.hpp
+  ${PROJECT_SOURCE_DIR}/include/container/container.h
 )
 
 set(test_sources

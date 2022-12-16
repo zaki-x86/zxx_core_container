@@ -1,3 +1,7 @@
+## NOTES
+# Disabled doxygen build temporarely
+# Disabled unit testing temporarely
+
 cmake_minimum_required(VERSION 3.15)
 
 ##################################################################################
@@ -8,9 +12,10 @@ cmake_minimum_required(VERSION 3.15)
 #
 
 project(
-  ZxContainers
+  zxx_core_container
   VERSION 0.1.0
-  DESCRIPTION "Custom containers in c++"
+  DESCRIPTION "An extension to the standard container library in c++"
+  HOMEPAGE_URL ""
   LANGUAGES CXX
 )
 
@@ -21,9 +26,9 @@ project(
 # Set project options
 #
 
-include(cmake/StandardSettings.cmake)
-include(cmake/StaticAnalyzers.cmake)
-include(cmake/Utils.cmake)
+include(scripts/cmake/StandardSettings.cmake)
+include(scripts/cmake/StaticAnalyzers.cmake)
+include(scripts/cmake/Utils.cmake)
 
 if(NOT CMAKE_BUILD_TYPE)
   set(CMAKE_BUILD_TYPE "Debug")
@@ -67,8 +72,8 @@ endif()
 # Enable package managers
 #
 
-include(cmake/Conan.cmake)
-include(cmake/Vcpkg.cmake)
+include(scripts/cmake/Conan.cmake)
+include(scripts/cmake/Vcpkg.cmake)
 
 ##################################################################################
 ##################################################################################
@@ -78,7 +83,7 @@ include(cmake/Vcpkg.cmake)
 #
 
 # Find all headers and implementation files
-include(cmake/SourcesAndHeaders.cmake)
+include(scripts/cmake/SourcesAndHeaders.cmake)
 
 if(${PROJECT_NAME}_BUILD_EXECUTABLE)
   add_executable(${PROJECT_NAME} ${exe_sources})
@@ -131,6 +136,7 @@ endif()
 set_target_properties(
   ${PROJECT_NAME}
   PROPERTIES
+  LINKER_LANGUAGE CXX
   ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
   LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
   RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}"
@@ -139,6 +145,7 @@ if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
   set_target_properties(
     ${PROJECT_NAME}_LIB
     PROPERTIES
+    LINKER_LANGUAGE CXX
     ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
     OUTPUT_NAME ${PROJECT_NAME}
@@ -155,15 +162,15 @@ message(STATUS "Added all header and implementation files.\n")
 #
 
 if(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
-  target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_17)
+  target_compile_features(${PROJECT_NAME} INTERFACE cxx_std_11)
 else()
-  target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_17)
+  target_compile_features(${PROJECT_NAME} PUBLIC cxx_std_11)
 
   if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
-    target_compile_features(${PROJECT_NAME}_LIB PUBLIC cxx_std_17)
+    target_compile_features(${PROJECT_NAME}_LIB PUBLIC cxx_std_11)
   endif()
 endif()
-include(cmake/CompilerWarnings.cmake)
+include(scripts/cmake/CompilerWarnings.cmake)
 set_project_warnings(${PROJECT_NAME})
 
 verbose_message("Applied compiler warnings. Using standard ${CMAKE_CXX_STANDARD}.\n")
@@ -175,7 +182,7 @@ verbose_message("Applied compiler warnings. Using standard ${CMAKE_CXX_STANDARD}
 # Enable Doxygen
 #
 
-include(cmake/Doxygen.cmake)
+# include(cmake/Doxygen.cmake)
 
 ##################################################################################
 ##################################################################################
@@ -323,7 +330,7 @@ install(
 #
 
 configure_file(
-  ${CMAKE_CURRENT_LIST_DIR}/cmake/version.hpp.in
+  ${CMAKE_CURRENT_LIST_DIR}/scripts/cmake/version.hpp.in
   include/${PROJECT_NAME_LOWERCASE}/version.hpp
   @ONLY
 )
@@ -368,7 +375,7 @@ write_basic_package_version_file(
 )
 
 configure_package_config_file(
-  ${CMAKE_CURRENT_LIST_DIR}/cmake/${PROJECT_NAME}Config.cmake.in
+  ${CMAKE_CURRENT_LIST_DIR}/scripts/cmake/${PROJECT_NAME}Config.cmake.in
   ${CMAKE_CURRENT_BINARY_DIR}/${PROJECT_NAME}Config.cmake
   INSTALL_DESTINATION
   ${CMAKE_INSTALL_LIBDIR}/cmake/${PROJECT_NAME}
@@ -414,7 +421,7 @@ message(STATUS "Finished building requirements for installing the package.\n")
 if(${PROJECT_NAME}_ENABLE_UNIT_TESTING)
   enable_testing()
   message(STATUS "Build unit tests for the project. Tests should always be found in the test folder\n")
-  add_subdirectory(test)
+  #add_subdirectory(test)
 endif()
 
 ##################################################################################
@@ -425,4 +432,4 @@ endif()
 #
 
 message(STATUS "Building dynamic_array examples: ")
-add_subdirectory(examples/darray)
+#add_subdirectory(examples/darray)
