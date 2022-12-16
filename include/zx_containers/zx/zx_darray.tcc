@@ -1,10 +1,13 @@
-#include "../dynamic_array.hpp"     // Useless but it's added to disable error squiggles
+#include "zx_darray.hpp"     // Useless but it's added to disable error squiggles
 
 // *************************
 // create an alias template:
 // *************************
-template <typename T>
-using dynamic_array = typename zx_containers::darray<T>;
+template<typename T,  typename Allocator>
+using dynamic_array = typename zx_containers::darray<T, Allocator>;
+
+template<typename T,  typename Allocator>
+using iterator = typename zx_containers::darray<T, Allocator>::iterator;
 
 namespace
 {
@@ -13,25 +16,25 @@ namespace
  * using typename aliases 
  */
 ///@{
-    template <typename T>
-    using value_type = typename dynamic_array<T>::value_type;
-    template <typename T>
-    using reference = typename dynamic_array<T>::reference;
-    template <typename T>
-    using const_reference = typename dynamic_array<T>::const_reference;
-    template <typename T>
-    using pointer = typename dynamic_array<T>::pointer;
-    template <typename T>
-    using const_pointer = typename dynamic_array<T>::const_pointer;
-    template <typename T>
-    using size_type = typename dynamic_array<T>::size_type;
+    template<typename T,  typename Allocator = std::allocator<T>>
+    using value_type = typename dynamic_array<T, Allocator>::value_type;
+    template<typename T,  typename Allocator = std::allocator<T>>
+    using reference = typename dynamic_array<T, Allocator>::reference;
+    template<typename T,  typename Allocator = std::allocator<T>>
+    using const_reference = typename dynamic_array<T, Allocator>::const_reference;
+    template<typename T,  typename Allocator = std::allocator<T>>
+    using pointer = typename dynamic_array<T, Allocator>::pointer;
+    template<typename T,  typename Allocator = std::allocator<T>>
+    using const_pointer = typename dynamic_array<T, Allocator>::const_pointer;
+    template<typename T,  typename Allocator = std::allocator<T>>
+    using size_type = typename dynamic_array<T, Allocator>::size_type;
 ///@}
 }
 
 using namespace zx_containers;
 
-template<typename T>
-zx_containers::darray<T>::darray()
+template<typename T, typename Allocator>
+zx_containers::darray<T, Allocator>::darray()
 try :   m_capacity(__INITIAL_SIZE__), 
         m_data(new value_type[m_capacity]), 
         m_size(0)
@@ -41,8 +44,8 @@ catch(...)
     m_resource_allocation_failed = true;
 }
 
-template<typename T>
-zx_containers::darray<T>::darray( size_t n, const value_type& value )
+template<typename T, typename Allocator>
+zx_containers::darray<T, Allocator>::darray( size_t n, const value_type& value )
 try :   m_capacity(n), 
         m_data(new T[m_capacity]), 
         m_size(n)
@@ -55,8 +58,8 @@ catch(...)
     m_resource_allocation_failed = true;
 }
 
-template<typename T>
-zx_containers::darray<T>::darray( const darray& x )
+template<typename T, typename Allocator>
+zx_containers::darray<T, Allocator>::darray( const darray& x )
 {
     #if DEBUG
     std::cout << "[----------] Copied!" << std::endl;
@@ -82,8 +85,8 @@ zx_containers::darray<T>::darray( const darray& x )
     }
 }
 
-template<typename T>
-zx_containers::darray<T>::darray( T* first, T* last )
+template<typename T, typename Allocator>
+zx_containers::darray<T, Allocator>::darray( T* first, T* last )
 : darray()
 {
    for (T* it = first; it != last; it++)
@@ -91,14 +94,26 @@ zx_containers::darray<T>::darray( T* first, T* last )
    
 }
 
-template<typename T>
-zx_containers::darray<T>::~darray()
+template<typename T, typename Allocator>
+zx_containers::darray<T, Allocator>::~darray()
 {
     delete[] m_data;
 }
 
-template<typename T>
-void zx_containers::darray<T>::push_back( const value_type& value )
+template<typename T, typename Allocator>
+typename zx_containers::darray<T, Allocator>::iterator zx_containers::darray<T, Allocator>::begin()
+{
+    return iterator(m_data);
+}
+
+template<typename T, typename Allocator>
+typename zx_containers::darray<T, Allocator>::iterator zx_containers::darray<T, Allocator>::end()
+{
+    return iterator(m_data + m_size);
+}
+
+template<typename T, typename Allocator>
+void zx_containers::darray<T, Allocator>::push_back( const value_type& value )
 {
     if (m_size >= m_capacity)
         resize();
@@ -107,8 +122,8 @@ void zx_containers::darray<T>::push_back( const value_type& value )
     m_size ++;
 }
 
-template<typename T>
-void zx_containers::darray<T>::push_back( value_type&& value )
+template<typename T, typename Allocator>
+void zx_containers::darray<T, Allocator>::push_back( value_type&& value )
 {
     if (m_size >= m_capacity)
         resize();
@@ -117,8 +132,8 @@ void zx_containers::darray<T>::push_back( value_type&& value )
     m_size ++;
 }
 
-template<typename T>
-void zx_containers::darray<T>::set( size_type index, value_type& value )
+template<typename T, typename Allocator>
+void zx_containers::darray<T, Allocator>::set( size_type index, value_type& value )
 {
     if ( index > INT64_MAX )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -142,8 +157,8 @@ void zx_containers::darray<T>::set( size_type index, value_type& value )
     *(m_data + index) = value;
 }
 
-template<typename T>
-void zx_containers::darray<T>::insert( size_type index, const value_type& value )
+template<typename T, typename Allocator>
+void zx_containers::darray<T, Allocator>::insert( size_type index, const value_type& value )
 {
     if ( index > INT64_MAX )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -161,8 +176,8 @@ void zx_containers::darray<T>::insert( size_type index, const value_type& value 
     m_size ++;
 }
 
-template<typename T>
-void zx_containers::darray<T>::insert(size_type index, value_type&& value)
+template<typename T, typename Allocator>
+void zx_containers::darray<T, Allocator>::insert(size_type index, value_type&& value)
 {
     if ( index > INT64_MAX )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -180,8 +195,8 @@ void zx_containers::darray<T>::insert(size_type index, value_type&& value)
     m_size ++;
 }
 
-template<typename T>
-auto zx_containers::darray<T>::at( size_type index ) const -> value_type
+template<typename T, typename Allocator>
+auto zx_containers::darray<T, Allocator>::at( size_type index ) const -> const_reference
 {
     if ( index > INT64_MAX )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -192,8 +207,8 @@ auto zx_containers::darray<T>::at( size_type index ) const -> value_type
     return m_data[index];
 }
 
-template<typename T>
-auto zx_containers::darray<T>::pop_back() -> value_type
+template<typename T, typename Allocator>
+auto zx_containers::darray<T, Allocator>::pop_back() -> value_type
 {
     if (m_size == 0)
         throw std::logic_error("Can't pop_back an empty array");
@@ -203,8 +218,8 @@ auto zx_containers::darray<T>::pop_back() -> value_type
     return m_data[m_size];
 }
 
-template<typename T>
-auto zx_containers::darray<T>::erase( size_type index ) -> value_type
+template<typename T, typename Allocator>
+auto zx_containers::darray<T, Allocator>::erase( size_type index ) -> value_type
 {
     if ( index > INT64_MAX )
         throw std::logic_error("Invalid: negative indices are not allowed.");
@@ -224,26 +239,26 @@ auto zx_containers::darray<T>::erase( size_type index ) -> value_type
     return deleted;
 }
 
-template<typename T>
-auto zx_containers::darray<T>::size() const -> size_type
+template<typename T, typename Allocator>
+auto zx_containers::darray<T, Allocator>::size() const noexcept -> size_type
 {
     return m_size;
 }
 
-template<typename T>
-auto zx_containers::darray<T>::capacity() const -> size_type
+template<typename T, typename Allocator>
+auto zx_containers::darray<T, Allocator>::capacity() const noexcept -> size_type
 {
     return m_capacity;
 }
 
-template<typename T>
-bool zx_containers::darray<T>::empty()
+template<typename T, typename Allocator>
+bool zx_containers::darray<T, Allocator>::empty() const noexcept
 {
     return m_size == 0;
 }
 
-template<typename T>
-void zx_containers::darray<T>::resize()
+template<typename T, typename Allocator>
+void zx_containers::darray<T, Allocator>::resize()
 {
     
     try
@@ -260,8 +275,8 @@ void zx_containers::darray<T>::resize()
     }    
 }
 
-template<typename T>
-void zx_containers::darray<T>::clear()
+template<typename T, typename Allocator>
+void zx_containers::darray<T, Allocator>::clear()
 {
     if (m_size == 0)
         return;
@@ -280,8 +295,8 @@ void zx_containers::darray<T>::clear()
     
 }
 
-template<typename T>
-std::ostream& zx_containers::darray<T>::print(std::ostream& os) const
+template<typename T, typename Allocator>
+std::ostream& zx_containers::darray<T, Allocator>::print(std::ostream& os) const
 {
     if (m_size == 0)
         os << " { }" ;
@@ -300,8 +315,8 @@ std::ostream& zx_containers::darray<T>::print(std::ostream& os) const
         return os;
 }
 
-template<typename T>
-bool zx_containers::darray<T>::resource_allocation_failed()
+template<typename T, typename Allocator>
+bool zx_containers::darray<T, Allocator>::resource_allocation_failed()
 {
     return m_resource_allocation_failed;
 }
