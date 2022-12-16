@@ -9,25 +9,25 @@
  * 
  */
 
-#pragma once
+#ifndef _CONTAINER_H_
+
+#define _CONTAINER_H_
 
 #include "sequence_container/array.h"
 #include "sequence_container/darray.h"
-#include "sequence_container/linked_list.h"
+#include "sequence_container/forward_list.h"
 #include "sequence_container/list.h"
 #include "associative_container/hash_table.h"
-#include "associative_container/binary_tree.h"
-#include "associative_container/bst.h"
-#include "associative_container/avl.h"
-#include "associative_container/red_black_tree.h"
-#include "associative_container/heap.h"
-#include "associative_container/graph.h"
+#include "associative_container/set.h"
+#include "associative_container/map.h"
+#include "associative_container/multiset.h"
+#include "associative_container/multimap.h"
+#include "associative_container/unordered_set.h"
+#include "associative_container/unordered_map.h"
+#include "associative_container/unordered_multiset.h"
+#include "associative_container/unordered_multimap.h"
 #include "adaptor_container/stack.h"
 #include "adaptor_container/queue.h"
-#include "adaptor_container/set.h"
-#include "adaptor_container/map.h"
-#include "adaptor_container/unordered_set.h"
-#include "adaptor_container/unordered_map.h"
 
 
 namespace zxx
@@ -44,3 +44,5 @@ namespace zxx
         }
     }
 }
+
+#endif
