@@ -8,6 +8,8 @@ name: CMake Build Matrix
 # Controls when the action will run. Triggers the workflow on push
 on: 
   push:
+    branches:
+      - main
   pull_request:
   release:
     # tags:
