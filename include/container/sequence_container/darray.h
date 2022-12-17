@@ -9,7 +9,11 @@
  * 
  */
 
-#pragma once
+#ifndef _DARRAY_H_
+
+#define _DARRAY_H_
 
 #include "zxx/zxx_darray.h"
 #include "zxx/darray.tcc"
+
+#endif // !_DARRAY_H_

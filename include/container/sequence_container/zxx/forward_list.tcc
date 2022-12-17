@@ -1,5 +1,5 @@
 /**
- * @file linked_list.tcc
+ * @file forward_list.tcc
  * @author M Zaki (mamadov_zicx@gmail.com)
  * @brief Implementation of a singly linked list container
  * @version 0.1

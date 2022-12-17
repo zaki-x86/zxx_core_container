@@ -1,5 +1,5 @@
 /**
- * @file linked_list.h
+ * @file forward_list.h
  * @author M Zaki (mamadov_zicx@gmail.com)
  * @brief singly linked list container header file
  * @version 0.1
@@ -9,8 +9,12 @@
  * 
  */
 
-#pragma once
+#ifndef _FORWARD_LIST_H_
 
+#define _FORWARD_LIST_H_
 
-#include "zxx/zxx_linked_list.h"
-#include "zxx/linked_list.tcc"
+#include "zxx/zxx_forward_list.h"
+#include "zxx/forward_list.tcc"
+
+#endif // !_FORWARD_LIST_H
+

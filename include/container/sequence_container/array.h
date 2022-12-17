@@ -9,7 +9,11 @@
  * 
  */
 
-#pragma once
+#ifndef _ARRAY_H_
+
+#define _ARRAY_H_
 
 #include "zxx/zxx_array.h"
 #include "zxx/array.tcc"
+
+#endif // !_ARRAY_H_

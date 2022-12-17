@@ -1,6 +1,6 @@
 /**
  * @file container.h
- * @author M Zaki (mamadov_zicx@gmail.com)
+ * @author M Zaki (zaki.x86@gmail.com)
  * @brief container library header file
  * @version 0.1
  * @date 2022-12-16
@@ -8,6 +8,7 @@
  * @copyright Copyright (c) 2022
  * 
  */
+
 
 #ifndef _CONTAINER_H_
 
@@ -30,18 +31,31 @@
 #include "adaptor_container/queue.h"
 
 
+/**
+ * @brief Main namespace for all `zxx::` libraries.
+ */
 namespace zxx
 {
+    /**
+     * @brief Core namespace for all basic facilities that `zxx` provides, including but not limited to: algorithm, container, memory, ... etc.
+     */
     namespace core {
 
+        /**
+         * @brief Container namespace for all data structures defines with `zxx::core` library.
+         */
         namespace container {
             
+            /**
+             * @brief Test namespace, in which test cases and mocks of `zxx::core::container` components are defined.
+             */
             namespace test
             {
                 
             } // namespace test
             
         }
+
     }
 }
 
