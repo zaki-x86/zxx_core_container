@@ -1,9 +1,3 @@
-#ifndef _ZXX_CONFIG_H
-
-#define _ZXX_CONFIG_H_
-
-#ifdef __unix__
-
 #define CONST const
 #define EXPLICIT explicit
 
@@ -52,7 +46,6 @@
 
 // MACROS FOR MSVC 
 
-#ifdef _WIN32 || WIN32
 #if _MSC_VER >= 1910
 
 #ifdef CONST
@@ -66,8 +59,3 @@
 #endif // EXPLICIT
 
 #endif MSC_VER >= 1910
-#endif // WIN32
-
-#endif // DEBUG
-
-#endif // !_ZXX_CONFIG_H
