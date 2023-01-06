@@ -227,6 +227,7 @@ TYPED_TEST_P(darray_test, GetAllocatorTest)
 // #################
 
 REGISTER_TYPED_TEST_SUITE_P(darray_test, 
+    // Construction Unit Tests 
     DefaultConstructorWithDefaultAllocatorTest,
     DefaultConstructorWithCustomAllocatorTest,
     CopyConstructorWithDefaultAllocatorTest,
@@ -241,9 +242,13 @@ REGISTER_TYPED_TEST_SUITE_P(darray_test,
     RangeConstructorWithCustomAllocatorTest,
     InitializerListConstructorWithDefaultAllocatorTest,
     InitializerListConstructorWithCustomAllocatorTest,
+
+    // Assignment Unit Tests
     CopyAssignmentTest,
     MoveAssignmentTest,
     InitializerListAssignmentTest,
+
+    // Modifiers Unit Tests
     EmplaceBackTest,
     EmplaceTest,
     PushBackLvTest,
@@ -258,18 +263,33 @@ REGISTER_TYPED_TEST_SUITE_P(darray_test,
     RangeEraseTest,
     ClearTest,
     SwapTest,
+
+    // Storage and Size Unit Tests
     CapacityTest,
     SizeTest,
     MaxSizeTest,
     EmptyTest,
     ReserveTest,
     ShrinkToFitTest,
+
+    // Observers Unit Tests
     GetAllocatorTest
 );
 
-using MyTypes = ::testing::Types<char, int, long, char*, int*, std::string*, std::string, std::vector<int>> ;
+using TestTypeParameters = ::testing::Types<
+    char, 
+    int, 
+    long, 
+    char*,
+    char[], 
+    int*,
+    int[], 
+    std::string*, 
+    std::string, 
+    std::vector<int>
+    > ;
 
-INSTANTIATE_TYPED_TEST_SUITE_P(darray_test_, darray_test, MyTypes);
+INSTANTIATE_TYPED_TEST_SUITE_P(darray_test_, darray_test, TestTypeParameters);
 
 // #######################################################
 

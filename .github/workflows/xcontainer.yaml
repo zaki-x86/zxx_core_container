@@ -149,7 +149,7 @@ jobs:
         run: |
           mkdir build
           mkdir instdir
-          cmake .. \
+          cmake  \
             -S . \
             -B build \
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
@@ -161,7 +161,7 @@ jobs:
 
       - name: Install Strip
         shell: bash
-        run: cmake --install . --strip
+        run: cmake --install build --strip
 
       - name: Pack
         shell: bash
