@@ -68,7 +68,7 @@ public:
     GLIBZXX_CONSTEXPR
     darray( 
         size_type n, 
-        const value_type& value = value_type{},
+        const value_type& value = value_type(),
         const Allocator& alloc = Allocator()
     );
 

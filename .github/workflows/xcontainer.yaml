@@ -86,15 +86,24 @@ jobs:
         run: |
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
+      
+
+      - name: cache dependencies on windows
+        uses: actions/cache@v1.0.3
+        id: cache-env-windows
+        with:
+          path:
+
+
       - name: Install dependencies on windows
         if: startsWith(matrix.config.os, 'windows')
         run: |
           choco install ninja cmake
-          choco install visualstudio2019community
-          choco install visualstudio2019-workload-nativedesktop # required  
+          # choco install visualstudio2019community
+          # choco install visualstudio2019-workload-nativedesktop # required  
           ninja --version
           cmake --version
-        # cmd "${{ matrix.config.environment_script }}"
+          cmd "${{ matrix.config.environment_script }}"
 
       - name: Install dependencies on ubuntu
         if: startsWith(matrix.config.name, 'Ubuntu_Latest_GCC')
