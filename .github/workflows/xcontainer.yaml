@@ -87,18 +87,17 @@ jobs:
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
       
-
-      - name: cache deps windows
+      - if: startsWith(matrix.config.os, 'windows') 
+        name: cache deps windows
         uses: actions/cache@v1.0.3
         id: cache-deps-windows
         env:
           cache-name: cache-win-deps
-        continue-on-error: true
         with:
           path: |
             "C:\Program Files (x86)\CMake $(cmake --version)"
             "C:\Program Files (x86)\Ninja $(ninja --version)"
-            "C:/Program Files (x86)/Microsoft Visual Studio"
+            "C:\Program Files (x86)\Microsoft Visual Studio"
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Install dependencies on windows
