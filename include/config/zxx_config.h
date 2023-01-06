@@ -1,3 +1,6 @@
+#define CONST const
+#define EXPLICIT explicit
+
 #if __cplusplus >= 201103L
 #define GLIBZXX_CONSTEXPR constexpr  
 #endif
@@ -38,6 +41,23 @@
                     namespace test {            \
 
 #define END_NS_ZXX_CORE_CONTAINER_TEST  }}}}
-
-
 #endif
+
+
+// MACROS FOR MSVC 
+
+#ifdef _WIN32 || WIN32
+#if _MSC_VER >= 1910
+
+#ifdef CONST
+#undef CONST
+#define CONST
+#endif // CONST
+
+#ifdef EXPLICIT
+#undef EXPLICIT
+#define EXPLICIT
+#endif // EXPLICIT
+
+#endif MSC_VER >= 1910
+#endif // WIN32

@@ -87,7 +87,7 @@ jobs:
           echo github.event.action: ${{ github.event.action }}
           echo github.event_name: ${{ github.event_name }}
       
-      - if: startsWith(matrix.config.os, 'windows') 
+      - if: startsWith(matrix.config.os, 'windows') && startsWith(matrix.config.cxx, 'cl')
         name: cache deps windows
         uses: actions/cache@v1.0.3
         id: cache-deps-windows
@@ -173,7 +173,9 @@ jobs:
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
             -DCMAKE_INSTALL_PREFIX:PATH=../instdir
-      - name: Build
+      
+      - if: startsWith(matrix.config.os, 'windows') && startsWith(matrix.config.cxx, 'cl') 
+        name: Build
         shell: bash
         run: cmake --build build --config ${{ matrix.config.build_type }}
 
