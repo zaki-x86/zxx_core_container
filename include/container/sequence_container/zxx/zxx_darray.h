@@ -24,14 +24,7 @@
 BEGIN_NS_ZXX_CORE_CONTAINER
 template <typename T,  typename Allocator = std::allocator<T>>
 class darray
-{
-private:
-    size_t m_capacity;                             
-    T* m_data;                          
-    size_t m_size;                      
-    void resize();                      
-    bool m_resource_allocation_failed;
-
+{                  
 public:
     // temporary - till all libraries are implemented
     // ************
@@ -51,12 +44,8 @@ public:
     using const_reverse_iterator = std::reverse_iterator<const_iterator> ; 
 
 public:
-    
-    GLIBZXX_CONSTEXPR 
-    darray();
-
     GLIBZXX_CONSTEXPR explicit 
-    darray( Allocator& alloc );
+    darray( const Allocator& alloc = Allocator() );
 
     GLIBZXX_CONSTEXPR 
     darray( const darray& other );

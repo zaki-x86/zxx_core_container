@@ -14,16 +14,9 @@
 
 BEGIN_NS_ZXX_CORE_CONTAINER
 
-    template<typename T, typename Allocator>
-    GLIBZXX_CONSTEXPR 
-    darray<T, Allocator>::darray()
-    {
-
-    }
-
     template<typename T, typename Allocator>    
     GLIBZXX_CONSTEXPR 
-    darray<T, Allocator>::darray( Allocator& alloc )
+    darray<T, Allocator>::darray( const Allocator& alloc )
     {
 
     }
