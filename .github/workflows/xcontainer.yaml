@@ -93,6 +93,7 @@ jobs:
         id: cache-deps-windows
         env:
           cache-name: cache-win-deps
+        continue-on-error: true
         with:
           path: |
             "C:\Program Files (x86)\CMake $(cmake --version)"
@@ -103,7 +104,6 @@ jobs:
       - name: Install dependencies on windows
         env:
           CACHE_HIT: ${{ steps.cache-win-deps.outputs.cache-hit }}
-        
         if: startsWith(matrix.config.os, 'windows') && steps.cache-win-deps.outputs.cache-hit != 'true'
         run: |
           choco install ninja cmake
