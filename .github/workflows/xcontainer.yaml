@@ -97,6 +97,7 @@ jobs:
           path: |
             "C:\ProgramData\chocolatey\lib\ninja"
             "C:\ProgramData\chocolatey\lib\cmake"
+            "C:"
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Install dependencies on windows
