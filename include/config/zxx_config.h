@@ -1,3 +1,7 @@
+#ifndef _ZXX_CONFIG_H
+
+#define _ZXX_CONFIG_H_
+
 #define CONST const
 #define EXPLICIT explicit
 
@@ -61,3 +65,5 @@
 
 #endif MSC_VER >= 1910
 #endif // WIN32
+
+#endif // !_ZXX_CONFIG_H
