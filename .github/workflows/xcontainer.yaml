@@ -95,9 +95,8 @@ jobs:
           cache-name: cache-win-deps
         with:
           path: |
-            "C:\Program Files (x86)\CMake $(cmake --version)"
-            "C:\Program Files (x86)\Ninja $(ninja --version)"
-            "C:\Program Files (x86)\Microsoft Visual Studio"
+            "C:\ProgramData\chocolatey\lib\ninja"
+            "C:\ProgramData\chocolatey\lib\cmake"
           key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Install dependencies on windows
@@ -174,13 +173,11 @@ jobs:
             -G "${{ matrix.config.generators }}" \
             -DCMAKE_INSTALL_PREFIX:PATH=../instdir
       
-      - if: startsWith(matrix.config.cxx, 'cl') == false
-        name: Build
+      - name: Build
         shell: bash
         run: cmake --build build --config ${{ matrix.config.build_type }}
       
-      - if: startsWith(matrix.config.cxx, 'cl') == false
-        name: Install Strip
+      - name: Install Strip
         shell: bash
         run: cmake --install build --strip
 
