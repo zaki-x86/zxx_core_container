@@ -104,8 +104,7 @@ jobs:
         env:
           CACHE_HIT: ${{ steps.cache-win-deps.outputs.cache-hit }}
         
-        if: startsWith(matrix.config.os, 'windows')
-        if: steps.cache-win-deps.outputs.cache-hit != 'true'
+        if: startsWith(matrix.config.os, 'windows') && steps.cache-win-deps.outputs.cache-hit != 'true'
         run: |
           choco install ninja cmake
           choco install visualstudio2019community
