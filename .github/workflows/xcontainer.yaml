@@ -88,11 +88,10 @@ jobs:
           echo github.event_name: ${{ github.event_name }}
       
 
-      - name: cache dependencies on windows
-        uses: actions/cache@v1.0.3
-        id: cache-env-windows
-        with:
-          path:
+      #- name: cache cmake windows
+      #  uses: actions/cache@v1.0.3
+      #  id: cache-cmake-windows
+
 
 
       - name: Install dependencies on windows
