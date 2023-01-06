@@ -88,18 +88,28 @@ jobs:
           echo github.event_name: ${{ github.event_name }}
       
 
-      #- name: cache cmake windows
-      #  uses: actions/cache@v1.0.3
-      #  id: cache-cmake-windows
-
-
+      - name: cache deps windows
+        uses: actions/cache@v1.0.3
+        id: cache-deps-windows
+        env:
+          cache-name: cache-win-deps
+        with:
+          path: |
+            "C:\Program Files (x86)\CMake $(cmake --version)"
+            "C:\Program Files (x86)\Ninja $(ninja --version)"
+            "C:/Program Files (x86)/Microsoft Visual Studio"
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
 
       - name: Install dependencies on windows
+        env:
+          CACHE_HIT: ${{ steps.cache-win-deps.outputs.cache-hit }}
+        
         if: startsWith(matrix.config.os, 'windows')
+        if: steps.cache-win-deps.outputs.cache-hit != 'true'
         run: |
           choco install ninja cmake
-          # choco install visualstudio2019community
-          # choco install visualstudio2019-workload-nativedesktop # required  
+          choco install visualstudio2019community
+          choco install visualstudio2019-workload-nativedesktop # required  
           ninja --version
           cmake --version
           cmd "${{ matrix.config.environment_script }}"
