@@ -11,7 +11,7 @@ cmake_minimum_required(VERSION 3.15)
 #
 
 project(
-  zxx_core_container
+  container
   VERSION 0.1.0
   DESCRIPTION "An extension to the standard container library in c++"
   HOMEPAGE_URL ""

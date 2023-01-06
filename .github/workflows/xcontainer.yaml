@@ -90,6 +90,8 @@ jobs:
         if: startsWith(matrix.config.os, 'windows')
         run: |
           choco install ninja cmake
+          choco install visualstudio2019community
+          choco install visualstudio2019-workload-nativedesktop # required  
           ninja --version
           cmake --version
         # cmd "${{ matrix.config.environment_script }}"
