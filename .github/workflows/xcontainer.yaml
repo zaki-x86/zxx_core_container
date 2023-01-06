@@ -174,7 +174,7 @@ jobs:
             -G "${{ matrix.config.generators }}" \
             -DCMAKE_INSTALL_PREFIX:PATH=../instdir
       
-      - if: startsWith(matrix.config.os, 'windows') && startsWith(matrix.config.cxx, 'cl') 
+      - if: startsWith(matrix.config.cxx, 'cl') == false
         name: Build
         shell: bash
         run: cmake --build build --config ${{ matrix.config.build_type }}
