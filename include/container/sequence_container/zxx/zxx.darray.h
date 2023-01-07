@@ -44,140 +44,368 @@ public:
   using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
 public:
-  GLIBZXX_CONSTEXPR explicit darray(const Allocator &alloc = Allocator());
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ explicit darray(const Allocator &alloc = Allocator());
 
-  GLIBZXX_CONSTEXPR darray(const darray &other);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray(const darray &other);
 
-  GLIBZXX_CONSTEXPR darray(const darray &other, Allocator &alloc);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray(const darray &other, Allocator &alloc);
 
-  GLIBZXX_CONSTEXPR darray(darray &&other);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray(darray &&other);
 
-  GLIBZXX_CONSTEXPR darray(darray &&other, Allocator &alloc);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray(darray &&other, Allocator &alloc);
 
-  GLIBZXX_CONSTEXPR darray(size_type n, const value_type &value = value_type(),
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray(size_type n, const value_type &value = value_type(),
                            const Allocator &alloc = Allocator());
 
-  GLIBZXX_CONSTEXPR explicit darray(size_type n,
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ explicit darray(size_type n,
                                     const Allocator &alloc = Allocator());
 
   template <typename InputIterator>
-  GLIBZXX_CONSTEXPR darray(InputIterator first, InputIterator last,
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray(InputIterator first, InputIterator last,
                            const Allocator &alloc = Allocator());
 
-  GLIBZXX_CONSTEXPR darray(std::initializer_list<T> init,
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray(std::initializer_list<T> init,
                            const Allocator &alloc = Allocator());
 
   ~darray();
 
-  GLIBZXX_CONSTEXPR darray &operator=(const darray &x);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray &operator=(const darray &x);
 
-  GLIBZXX_CONSTEXPR darray &operator=(darray &&x);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray &operator=(darray &&x);
 
-  GLIBZXX_CONSTEXPR darray &operator=(std::initializer_list<T> init);
-
-  template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR friend bool operator==(const darray &x, const darray &y);
-
-  template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR friend bool operator!=(const darray &x, const darray &y);
-
-  template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR friend bool operator<(const darray &x, const darray &y);
-
-  template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR friend bool operator>(const darray &x, const darray &y);
-
-  template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR friend bool operator<=(const darray &x, const darray &y);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ darray &operator=(std::initializer_list<T> init);
 
   template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR friend bool operator>=(const darray &x, const darray &y);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ friend bool operator==(const darray &x, const darray &y);
+
+  template <typename U, typename Alloc>
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ friend bool operator!=(const darray &x, const darray &y);
+
+  template <typename U, typename Alloc>
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ friend bool operator<(const darray &x, const darray &y);
+
+  template <typename U, typename Alloc>
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ friend bool operator>(const darray &x, const darray &y);
+
+  template <typename U, typename Alloc>
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ friend bool operator<=(const darray &x, const darray &y);
+
+  template <typename U, typename Alloc>
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ friend bool operator>=(const darray &x, const darray &y);
 
 #if __cplusplus >= 202003L
   template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR friend bool operator>=<(const darray &x,
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ friend bool operator>=<(const darray &x,
                                             const darray &y) const;
 #endif
 
-  GLIBZXX_CONSTEXPR iterator begin();
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator begin();
 
-  GLIBZXX_CONSTEXPR const_iterator cbegin() const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ const_iterator cbegin() const;
 
-  GLIBZXX_CONSTEXPR iterator end();
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator end();
 
-  GLIBZXX_CONSTEXPR const_iterator cend() const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ const_iterator cend() const;
 
-  GLIBZXX_CONSTEXPR reverse_iterator rbegin();
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ reverse_iterator rbegin();
 
-  GLIBZXX_CONSTEXPR const_reverse_iterator crbegin() const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ const_reverse_iterator crbegin() const;
 
-  GLIBZXX_CONSTEXPR reverse_iterator rend();
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ reverse_iterator rend();
 
-  GLIBZXX_CONSTEXPR const_reverse_iterator crend() const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ const_reverse_iterator crend() const;
 
-  GLIBZXX_CONSTEXPR reference operator[](size_type n);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ reference operator[](size_type n);
 
-  GLIBZXX_CONSTEXPR const_reference operator[](size_type n) const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ const_reference operator[](size_type n) const;
 
-  GLIBZXX_CONSTEXPR reference at(size_type n);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ reference at(size_type n);
 
-  GLIBZXX_CONSTEXPR const_reference at(size_type n) const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ const_reference at(size_type n) const;
 
-  GLIBZXX_CONSTEXPR reference front();
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ reference front();
 
-  GLIBZXX_CONSTEXPR const_reference front() const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ const_reference front() const;
 
-  GLIBZXX_CONSTEXPR reference back();
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ reference back();
 
-  GLIBZXX_CONSTEXPR const_reference back() const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ const_reference back() const;
 
-  template <class... Args> GLIBZXX_CONSTEXPR void emplace_back(Args &&... args);
+  template <class... Args> 
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ void emplace_back(Args &&... args);
 
   template <class... Args>
-  GLIBZXX_CONSTEXPR iterator emplace(const_iterator it, Args &&... args);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator emplace(const_iterator it, Args &&... args);
 
-  GLIBZXX_CONSTEXPR void push_back(const T &x);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ void push_back(const T &x);
 
-  GLIBZXX_CONSTEXPR void push_back(T &&x);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ void push_back(T &&x);
 
-  GLIBZXX_CONSTEXPR void pop_back();
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ void pop_back();
 
-  GLIBZXX_CONSTEXPR iterator insert(const_iterator it, const T &x);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator insert(const_iterator it, const T &x);
 
-  GLIBZXX_CONSTEXPR iterator insert(const_iterator it, T &&x);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator insert(const_iterator it, T &&x);
 
-  GLIBZXX_CONSTEXPR iterator insert(const_iterator it, size_type n, T &x);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator insert(const_iterator it, size_type n, T &x);
 
   template <class InputIterator>
-  GLIBZXX_CONSTEXPR iterator insert(const_iterator it, InputIterator first,
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator insert(const_iterator it, InputIterator first,
                                     InputIterator last);
 
-  GLIBZXX_CONSTEXPR iterator insert(const_iterator it,
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator insert(const_iterator it,
                                     std::initializer_list<T> init);
 
-  GLIBZXX_CONSTEXPR iterator erase(const_iterator it);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator erase(const_iterator it);
 
-  GLIBZXX_CONSTEXPR iterator erase(const_iterator first, const_iterator last);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ iterator erase(const_iterator first, const_iterator last);
 
-  GLIBZXX_CONSTEXPR void clear();
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ void clear();
 
-  GLIBZXX_CONSTEXPR void swap(darray &darr);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ void swap(darray &darr);
 
-  GLIBZXX_CONSTEXPR size_type capacity() const noexcept;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ size_type capacity() const noexcept;
 
-  GLIBZXX_CONSTEXPR size_type size() const noexcept;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ size_type size() const noexcept;
 
-  GLIBZXX_CONSTEXPR size_type max_size() const noexcept;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ size_type max_size() const noexcept;
 
-  GLIBZXX_CONSTEXPR bool empty() const noexcept;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ bool empty() const noexcept;
 
-  GLIBZXX_CONSTEXPR void reserve(size_type n);
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ void reserve(size_type n);
 
-  GLIBZXX_CONSTEXPR void shrink_to_fit();
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ void shrink_to_fit();
 
-  GLIBZXX_CONSTEXPR Allocator get_allocator() const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ Allocator get_allocator() const;
 
-  GLIBZXX_CONSTEXPR std::ostream &print(std::ostream &) const;
+  
+#if __cplusplus >= 201703L
+constexpr
+#endif
+ std::ostream &print(std::ostream &) const;
 };
 
 END_NS_ZXX_CORE_CONTAINER
