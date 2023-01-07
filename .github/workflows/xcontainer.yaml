@@ -107,8 +107,8 @@ jobs:
       
       - name: build with cmake
         uses: lukka/run-cmake@v3
+        shell: bash
         with:
-          useShell: bash
           cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
           cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
           cmakeAppendedArgs: '-DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache' -D CMAKE_INSTALL_PREFIX:PATH=../instdir
