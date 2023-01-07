@@ -1,5 +1,5 @@
 set(sources
-  # ${PROJECT_SOURCE_DIR}/src/main.cpp
+  ${PROJECT_SOURCE_DIR}/src/main.cpp
 )
 
 set(exe_sources
