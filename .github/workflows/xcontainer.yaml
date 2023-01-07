@@ -78,20 +78,6 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      
-      #- name: cache build
-      #  uses: actions/cache@v3
-      #  id: cache-config
-      #  env:
-      #    cache-name: cache-config
-      #  with:
-      #    path: |
-      #      "${{github.workspace}}/build"     
-      #    key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/Makefile') }}
-      #    restore-keys: |
-      #      ${{ runner.os }}-build-${{ env.cache-name }}-
-      #      ${{ runner.os }}-build-
-      #      ${{ runner.os }}-
 
       - name: Install dependencies on windows
         if: startsWith(matrix.config.name, 'windows')
