@@ -44,368 +44,140 @@ public:
   using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
 public:
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- explicit darray(const Allocator &alloc = Allocator());
+  explicit darray(const Allocator &alloc = Allocator());
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray(const darray &other);
+  darray(const darray &other);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray(const darray &other, Allocator &alloc);
+  darray(const darray &other, Allocator &alloc);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray(darray &&other);
+  darray(darray &&other);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray(darray &&other, Allocator &alloc);
+  darray(darray &&other, Allocator &alloc);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray(size_type n, const value_type &value = value_type(),
+  darray(size_type n, const value_type &value = value_type(),
                            const Allocator &alloc = Allocator());
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- explicit darray(size_type n,
+  explicit darray(size_type n,
                                     const Allocator &alloc = Allocator());
 
   template <typename InputIterator>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray(InputIterator first, InputIterator last,
+  darray(InputIterator first, InputIterator last,
                            const Allocator &alloc = Allocator());
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray(std::initializer_list<T> init,
+  darray(std::initializer_list<T> init,
                            const Allocator &alloc = Allocator());
 
   ~darray();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray &operator=(const darray &x);
+  darray &operator=(const darray &x);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray &operator=(darray &&x);
+  darray &operator=(darray &&x);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- darray &operator=(std::initializer_list<T> init);
+  darray &operator=(std::initializer_list<T> init);
 
   template <typename U, typename Alloc>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- friend bool operator==(const darray &x, const darray &y);
+  friend bool operator==(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- friend bool operator!=(const darray &x, const darray &y);
+  friend bool operator!=(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- friend bool operator<(const darray &x, const darray &y);
+  friend bool operator<(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- friend bool operator>(const darray &x, const darray &y);
+  friend bool operator>(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- friend bool operator<=(const darray &x, const darray &y);
+  friend bool operator<=(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- friend bool operator>=(const darray &x, const darray &y);
+  friend bool operator>=(const darray &x, const darray &y);
 
 #if __cplusplus >= 202003L
   template <typename U, typename Alloc>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- friend bool operator>=<(const darray &x,
+  friend bool operator>=<(const darray &x,
                                             const darray &y) const;
 #endif
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator begin();
+  iterator begin();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- const_iterator cbegin() const;
+  const_iterator cbegin() const;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator end();
+  iterator end();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- const_iterator cend() const;
+  const_iterator cend() const;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- reverse_iterator rbegin();
+  reverse_iterator rbegin();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- const_reverse_iterator crbegin() const;
+  const_reverse_iterator crbegin() const;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- reverse_iterator rend();
+  reverse_iterator rend();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- const_reverse_iterator crend() const;
+  const_reverse_iterator crend() const;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- reference operator[](size_type n);
+  reference operator[](size_type n);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- const_reference operator[](size_type n) const;
+  const_reference operator[](size_type n) const;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- reference at(size_type n);
+  reference at(size_type n);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- const_reference at(size_type n) const;
+  const_reference at(size_type n) const;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- reference front();
+  reference front();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- const_reference front() const;
+  const_reference front() const;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- reference back();
+  reference back();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- const_reference back() const;
+  const_reference back() const;
 
-  template <class... Args> 
-#if __cplusplus >= 201703L
-constexpr
-#endif
- void emplace_back(Args &&... args);
+  template <class... Args> void emplace_back(Args &&... args);
 
   template <class... Args>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator emplace(const_iterator it, Args &&... args);
+  iterator emplace(const_iterator it, Args &&... args);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- void push_back(const T &x);
+  void push_back(const T &x);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- void push_back(T &&x);
+  void push_back(T &&x);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- void pop_back();
+  void pop_back();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator insert(const_iterator it, const T &x);
+  iterator insert(const_iterator it, const T &x);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator insert(const_iterator it, T &&x);
+  iterator insert(const_iterator it, T &&x);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator insert(const_iterator it, size_type n, T &x);
+  iterator insert(const_iterator it, size_type n, T &x);
 
   template <class InputIterator>
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator insert(const_iterator it, InputIterator first,
+  iterator insert(const_iterator it, InputIterator first,
                                     InputIterator last);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator insert(const_iterator it,
+  iterator insert(const_iterator it,
                                     std::initializer_list<T> init);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator erase(const_iterator it);
+  iterator erase(const_iterator it);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- iterator erase(const_iterator first, const_iterator last);
+  iterator erase(const_iterator first, const_iterator last);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- void clear();
+  void clear();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- void swap(darray &darr);
+  void swap(darray &darr);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- size_type capacity() const noexcept;
+  size_type capacity() const noexcept;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- size_type size() const noexcept;
+  size_type size() const noexcept;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- size_type max_size() const noexcept;
+  size_type max_size() const noexcept;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- bool empty() const noexcept;
+  bool empty() const noexcept;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- void reserve(size_type n);
+  void reserve(size_type n);
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- void shrink_to_fit();
+  void shrink_to_fit();
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- Allocator get_allocator() const;
+  Allocator get_allocator() const;
 
-  
-#if __cplusplus >= 201703L
-constexpr
-#endif
- std::ostream &print(std::ostream &) const;
+  std::ostream &print(std::ostream &) const;
 };
 
 END_NS_ZXX_CORE_CONTAINER
