@@ -14,11 +14,11 @@
 #define GLIBZXX_CONSTEXPR20
 #endif*/
 
-/* #if __cplusplus >= 202003L
+#if __cplusplus >= 202003L
 #define GLIBZXX_CONSTEXPR constexpr
 #else
 #define GLIBZXX_CONSTEXPR
-#endif */
+#endif
 
 
 #if __cplusplus >= 201703L
