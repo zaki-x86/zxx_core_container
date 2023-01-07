@@ -1,8 +1,5 @@
 # Source: https://gist.github.com/NickNaso/0d478f1481686d5bcc868cac06620a60
 
-# This is a basic workflow to help you get started with Actions
-# workflow - цепочка действий
-# Имя процесса Билдится на всех типах 📦 🐍
 name: CMake Build Matrix
 
 # Controls when the action will run. Triggers the workflow on push
@@ -21,7 +18,7 @@ jobs:
   build:
     # The type of runner that the job will run on
     name: ${{ matrix.config.name }}
-    runs-on: ${{ matrix.config.os }} # будет запускаться по очереди на всех типах машин
+    runs-on: ${{ matrix.config.os }} 
     strategy:
       fail-fast: false
       matrix:

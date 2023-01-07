@@ -124,56 +124,56 @@ darray<T, Allocator>::crend() const {
 template <typename T, typename Allocator>
 GLIBZXX_CONSTEXPR typename darray<T, Allocator>::reference
 darray<T, Allocator>::operator[](size_type n) {
-  typename darray<T, Allocator>::reference a;
+  typename darray<T, Allocator>::reference a = T();
   return a;
 }
 
 template <typename T, typename Allocator>
 GLIBZXX_CONSTEXPR typename darray<T, Allocator>::const_reference
 darray<T, Allocator>::operator[](size_type n) const {
-  typename darray<T, Allocator>::const_reference a;
+  typename darray<T, Allocator>::const_reference a = T();
   return a;
 }
 
 template <typename T, typename Allocator>
 GLIBZXX_CONSTEXPR typename darray<T, Allocator>::reference
 darray<T, Allocator>::at(size_type n) {
-  typename darray<T, Allocator>::reference a;
+  typename darray<T, Allocator>::reference a = T();
   return a;
 }
 
 template <typename T, typename Allocator>
 GLIBZXX_CONSTEXPR typename darray<T, Allocator>::const_reference
 darray<T, Allocator>::at(size_type n) const {
-  typename darray<T, Allocator>::const_reference a;
+  typename darray<T, Allocator>::const_reference a = T();
   return a;
 }
 
 template <typename T, typename Allocator>
 GLIBZXX_CONSTEXPR typename darray<T, Allocator>::reference
 darray<T, Allocator>::front() {
-  typename darray<T, Allocator>::reference a;
+  typename darray<T, Allocator>::reference a = T();
   return a;
 }
 
 template <typename T, typename Allocator>
 GLIBZXX_CONSTEXPR typename darray<T, Allocator>::const_reference
 darray<T, Allocator>::front() const {
-  typename darray<T, Allocator>::const_reference a;
+  typename darray<T, Allocator>::const_reference a = T();
   return a;
 }
 
 template <typename T, typename Allocator>
 GLIBZXX_CONSTEXPR typename darray<T, Allocator>::reference
 darray<T, Allocator>::back() {
-  typename darray<T, Allocator>::reference a;
+  typename darray<T, Allocator>::reference a = T();
   return a;
 }
 
 template <typename T, typename Allocator>
 GLIBZXX_CONSTEXPR typename darray<T, Allocator>::const_reference
 darray<T, Allocator>::back() const {
-  typename darray<T, Allocator>::const_reference a;
+  typename darray<T, Allocator>::const_reference a = T();
   return a;
 }
 
