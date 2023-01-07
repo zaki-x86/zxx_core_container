@@ -151,9 +151,9 @@ jobs:
         name: Test on Windows
         shell: bash
         run: |
-          ./build/test/container/container_container_test_cxx11.exe
-          ./build/test/container/container_container_test_cxx17.exe
-          ./build/test/container/container_container_test_cxx20.exe
+          ./build/test/container/Release/container_container_test_cxx11.exe
+          ./build/test/container/Release/container_container_test_cxx17.exe
+          ./build/test/container/Release/container_container_test_cxx20.exe
 
       - name: Pack
         shell: bash
