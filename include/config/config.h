@@ -20,7 +20,7 @@
 #define GLIBZXX_CONSTEXPR
 #endif
 
- */
+
 #if __cplusplus >= 201703L
 
 #define BEGIN_NS_ZXX_CORE_CONTAINER namespace zxx::core::container {
