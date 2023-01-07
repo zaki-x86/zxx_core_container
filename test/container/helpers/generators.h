@@ -2,6 +2,7 @@
 
 #define _GENERATORS_H_
 
+
 #include <iostream>
 #include <random>
 #include <cstdlib>
@@ -39,7 +40,11 @@ void set_random_test_value(
 
 void set_random_test_value(
     char& var_,
-    bool __attribute__((unused)) literal_only = false
+    bool
+    #if defined(__GNUC__) || defined(__GNUG__)
+    __attribute__((unused))
+    #endif
+literal_only = false
     );
 
 void set_random_test_value(
@@ -68,7 +73,11 @@ void set_random_test_values(
 
 void set_random_test_values(
     std::vector<char>& vec_,
-    bool __attribute__((unused)) literal_only = false,
+    bool
+    #if defined(__GNUC__) || defined(__GNUG__)
+    __attribute__((unused))
+    #endif
+literal_only = false,
     size_t vec_size_ = 10
     );
 
@@ -165,7 +174,11 @@ void set_random_test_value(
 
 void set_random_test_value(
     char& var_,
-    bool __attribute__((unused)) literal_only
+    bool
+    #if defined(__GNUC__) || defined(__GNUG__)
+    __attribute__((unused))
+    #endif
+literal_only
     )
 {
     var_ = generate_char();
@@ -216,7 +229,11 @@ void set_random_test_values(
 
 void set_random_test_values(
     std::vector<char>& vec_,
-    bool __attribute__((unused)) literal_only,
+    bool
+    #if defined(__GNUC__) || defined(__GNUG__)
+    __attribute__((unused))
+    #endif
+literal_only,
     size_t vec_size_ 
     )
 {
