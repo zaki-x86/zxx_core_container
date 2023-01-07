@@ -100,10 +100,10 @@ jobs:
         with:
           key: ${{ matrix.config.os }}-${{ matrix.config.build_type }}
       
-      - name: create install directory
-        shell: bash
-        runs:
-          mkdir instdir
+      # - name: create install directory
+      #   shell: bash
+      #   runs:
+      #     mkdir instdir
       
       - name: build with cmake
         uses: lukka/run-cmake@v3
