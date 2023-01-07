@@ -136,9 +136,10 @@ jobs:
         name: Test on Windows
         shell: cmd
         run: |
-          build/test/container/Release/container_container_test_cxx11.exe
-          build/test/container/Release/container_container_test_cxx17.exe
-          build/test/container/Release/container_container_test_cxx20.exe
+          cd build/test/container/Release
+          container_container_test_cxx11.exe
+          container_container_test_cxx17.exe
+          container_container_test_cxx20.exe
 
       - name: Pack
         shell: bash
