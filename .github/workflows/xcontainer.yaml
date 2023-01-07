@@ -101,6 +101,7 @@ jobs:
           key: ${{ matrix.config.os }}-${{ matrix.config.build_type }}
       
       - name: create install directory
+        shell: bash
         runs:
           mkdir instdir
       
