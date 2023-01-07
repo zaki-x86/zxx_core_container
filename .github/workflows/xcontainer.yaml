@@ -113,7 +113,11 @@ jobs:
         uses: hendrikmuhs/ccache-action@v1.1
         with:
           key: ${{ matrix.config.os }}-${{ matrix.config.build_type }}
-
+      
+      - name: create install directory
+        runs:
+          mkdir instdir
+      
       - name: build with cmake
         uses: lukka/run-cmake@v3
         with:
@@ -123,8 +127,7 @@ jobs:
           cmakeAppendedArgs: '-DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache' -D CMAKE_INSTALL_PREFIX:PATH=../instdir
           buildWithCMake: true
           buildDirectory: '${{ github.workspace }}/build'
-        runs:
-          mkdir instdir
+          
       - name: Test std_cxx20
         shell: bash
         if: startsWith(matrix.config.name, 'windows') == false
