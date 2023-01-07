@@ -12,4 +12,3 @@ project(
 verbose_message("Initial setup...")
 
 add_subdirectory(container)
-add_subdirectory(graph)
