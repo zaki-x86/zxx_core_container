@@ -135,7 +135,7 @@ jobs:
       
       - if: startsWith(matrix.config.name, 'windows') && startsWith(matrix.config.cxx, 'cl') 
         name: Test on Windows
-        shell: cmd
+        shell: bash
         run: |
           cd build/test/container/Release
           container_container_test_cxx11.exe
