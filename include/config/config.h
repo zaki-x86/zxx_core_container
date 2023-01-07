@@ -1,6 +1,6 @@
-#ifndef _ZXX_CONFIG_H_
+#ifndef _CONFIG_H_
 
-#define _ZXX_CONFIG_H_
+#define _CONFIG_H_
 
 
 #if __cplusplus >= 201103L

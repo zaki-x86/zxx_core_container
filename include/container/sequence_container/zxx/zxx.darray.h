@@ -20,7 +20,7 @@
 #include <memory>
 #include <type_traits>
 
-#include "config/zxx.config.h"
+#include "config/config.h"
 
 BEGIN_NS_ZXX_CORE_CONTAINER
 template <typename T, typename Allocator = std::allocator<T>> class darray {
