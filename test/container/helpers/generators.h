@@ -1,7 +1,6 @@
-#ifndef _GENERATORS_HPP_
+#ifndef _GENERATORS_H_
 
-#define _GENERATORS_HPP_
-
+#define _GENERATORS_H_
 
 #include <iostream>
 #include <random>

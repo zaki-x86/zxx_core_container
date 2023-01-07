@@ -1,6 +1,6 @@
-#ifndef _DARRAY_TEST_HPP_
+#ifndef _DARRAY_TEST_H_
 
-#define _DARRAY_TEST_HPP_
+#define _DARRAY_TEST_H_
 
 
 #include "helpers/ultimate.h"

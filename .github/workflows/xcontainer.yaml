@@ -121,10 +121,11 @@ jobs:
           cmake  \
             -S . \
             -B build \
+            -G "Ninja"
             -DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} \
             -G "${{ matrix.config.generators }}" \
             -DCMAKE_INSTALL_PREFIX:PATH=../instdir \
-            -Dcontainer_ENABLE_UNIT_TESTING=OFF   \
+            -Dcontainer_ENABLE_UNIT_TESTING=ON   \
             -Dcontainer_BUILD_EXECUTABLE=ON
       
       - name: Build
