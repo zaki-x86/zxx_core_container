@@ -97,7 +97,7 @@ jobs:
           
       - name: create install directory
         shell: bash
-        runs:
+        run:
           mkdir instdir
       
       - name: ccache
