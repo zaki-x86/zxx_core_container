@@ -116,8 +116,6 @@ jobs:
 
       - name: build with cmake
         uses: lukka/run-cmake@v3
-        runs:
-          mkdir instdir
         with:
           useShell: bash
           cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
@@ -125,7 +123,8 @@ jobs:
           cmakeAppendedArgs: '-DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache' -D CMAKE_INSTALL_PREFIX:PATH=../instdir
           buildWithCMake: true
           buildDirectory: '${{ github.workspace }}/build'
-
+        runs:
+          mkdir instdir
       - name: Test std_cxx20
         shell: bash
         if: startsWith(matrix.config.name, 'windows') == false
