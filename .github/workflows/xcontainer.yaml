@@ -100,17 +100,17 @@ jobs:
         with:
           key: ${{ matrix.config.os }}-${{ matrix.config.build_type }}
       
-      # - name: create install directory
-      #   shell: bash
-      #   runs:
-      #     mkdir instdir
+       - name: create install directory
+         shell: bash
+         runs:
+           mkdir instdir
       
       - name: build with cmake
         uses: lukka/run-cmake@v3
         with:
           cmakeListsOrSettingsJson: CMakeListsTxtAdvanced
           cmakeListsTxtPath: '${{ github.workspace }}/CMakeLists.txt'
-          cmakeAppendedArgs: '-DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache'
+          cmakeAppendedArgs: '-DCMAKE_BUILD_TYPE=${{ matrix.config.build_type }} -D CMAKE_C_COMPILER_LAUNCHER=ccache -D CMAKE_CXX_COMPILER_LAUNCHER=ccache -D CMAKE_INSTALL_PREFIX:PATH=../instdir' 
           buildWithCMake: true
           buildDirectory: '${{ github.workspace }}/build'
           
