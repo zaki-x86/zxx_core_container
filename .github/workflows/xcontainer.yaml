@@ -152,6 +152,7 @@ jobs:
       
       - if: startsWith(matrix.config.name, 'windows')
         name: Test on Windows
+        shell: bash
         run: |
           ./build/test/container/container_container_test_cxx11.exe
           ./build/test/container/container_container_test_cxx17.exe
