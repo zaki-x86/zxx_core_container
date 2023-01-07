@@ -44,140 +44,140 @@ public:
   using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
 public:
-  constexpr explicit darray(const Allocator &alloc = Allocator());
+  CONSTEXPR explicit darray(const Allocator &alloc = Allocator());
 
-  constexpr darray(const darray &other);
+  CONSTEXPR darray(const darray &other);
 
-  constexpr darray(const darray &other, Allocator &alloc);
+  CONSTEXPR darray(const darray &other, Allocator &alloc);
 
-  constexpr darray(darray &&other);
+  CONSTEXPR darray(darray &&other);
 
-  constexpr darray(darray &&other, Allocator &alloc);
+  CONSTEXPR darray(darray &&other, Allocator &alloc);
 
-  constexpr darray(size_type n, const value_type &value = value_type(),
+  CONSTEXPR darray(size_type n, const value_type &value = value_type(),
                            const Allocator &alloc = Allocator());
 
-  constexpr explicit darray(size_type n,
+  CONSTEXPR explicit darray(size_type n,
                                     const Allocator &alloc = Allocator());
 
   template <typename InputIterator>
-  constexpr darray(InputIterator first, InputIterator last,
+  CONSTEXPR darray(InputIterator first, InputIterator last,
                            const Allocator &alloc = Allocator());
 
-  constexpr darray(std::initializer_list<T> init,
+  CONSTEXPR darray(std::initializer_list<T> init,
                            const Allocator &alloc = Allocator());
 
   ~darray();
 
-  constexpr darray &operator=(const darray &x);
+  CONSTEXPR darray &operator=(const darray &x);
 
-  constexpr darray &operator=(darray &&x);
+  CONSTEXPR darray &operator=(darray &&x);
 
-  constexpr darray &operator=(std::initializer_list<T> init);
-
-  template <typename U, typename Alloc>
-  constexpr friend bool operator==(const darray &x, const darray &y);
+  CONSTEXPR darray &operator=(std::initializer_list<T> init);
 
   template <typename U, typename Alloc>
-  constexpr friend bool operator!=(const darray &x, const darray &y);
+  CONSTEXPR friend bool operator==(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  constexpr friend bool operator<(const darray &x, const darray &y);
+  CONSTEXPR friend bool operator!=(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  constexpr friend bool operator>(const darray &x, const darray &y);
+  CONSTEXPR friend bool operator<(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  constexpr friend bool operator<=(const darray &x, const darray &y);
+  CONSTEXPR friend bool operator>(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  constexpr friend bool operator>=(const darray &x, const darray &y);
+  CONSTEXPR friend bool operator<=(const darray &x, const darray &y);
+
+  template <typename U, typename Alloc>
+  CONSTEXPR friend bool operator>=(const darray &x, const darray &y);
 
 #if __cplusplus >= 202003L
   template <typename U, typename Alloc>
-  constexpr friend bool operator>=<(const darray &x,
+  CONSTEXPR friend bool operator>=<(const darray &x,
                                             const darray &y) const;
 #endif
 
-  constexpr iterator begin();
+  CONSTEXPR iterator begin();
 
-  constexpr const_iterator cbegin() const;
+  CONSTEXPR const_iterator cbegin() const;
 
-  constexpr iterator end();
+  CONSTEXPR iterator end();
 
-  constexpr const_iterator cend() const;
+  CONSTEXPR const_iterator cend() const;
 
-  constexpr reverse_iterator rbegin();
+  CONSTEXPR reverse_iterator rbegin();
 
-  constexpr const_reverse_iterator crbegin() const;
+  CONSTEXPR const_reverse_iterator crbegin() const;
 
-  constexpr reverse_iterator rend();
+  CONSTEXPR reverse_iterator rend();
 
-  constexpr const_reverse_iterator crend() const;
+  CONSTEXPR const_reverse_iterator crend() const;
 
-  constexpr reference operator[](size_type n);
+  CONSTEXPR reference operator[](size_type n);
 
-  constexpr const_reference operator[](size_type n) const;
+  CONSTEXPR const_reference operator[](size_type n) const;
 
-  constexpr reference at(size_type n);
+  CONSTEXPR reference at(size_type n);
 
-  constexpr const_reference at(size_type n) const;
+  CONSTEXPR const_reference at(size_type n) const;
 
-  constexpr reference front();
+  CONSTEXPR reference front();
 
-  constexpr const_reference front() const;
+  CONSTEXPR const_reference front() const;
 
-  constexpr reference back();
+  CONSTEXPR reference back();
 
-  constexpr const_reference back() const;
+  CONSTEXPR const_reference back() const;
 
-  template <class... Args> constexpr void emplace_back(Args &&... args);
+  template <class... Args> CONSTEXPR void emplace_back(Args &&... args);
 
   template <class... Args>
-  constexpr iterator emplace(const_iterator it, Args &&... args);
+  CONSTEXPR iterator emplace(const_iterator it, Args &&... args);
 
-  constexpr void push_back(const T &x);
+  CONSTEXPR void push_back(const T &x);
 
-  constexpr void push_back(T &&x);
+  CONSTEXPR void push_back(T &&x);
 
-  constexpr void pop_back();
+  CONSTEXPR void pop_back();
 
-  constexpr iterator insert(const_iterator it, const T &x);
+  CONSTEXPR iterator insert(const_iterator it, const T &x);
 
-  constexpr iterator insert(const_iterator it, T &&x);
+  CONSTEXPR iterator insert(const_iterator it, T &&x);
 
-  constexpr iterator insert(const_iterator it, size_type n, T &x);
+  CONSTEXPR iterator insert(const_iterator it, size_type n, T &x);
 
   template <class InputIterator>
-  constexpr iterator insert(const_iterator it, InputIterator first,
+  CONSTEXPR iterator insert(const_iterator it, InputIterator first,
                                     InputIterator last);
 
-  constexpr iterator insert(const_iterator it,
+  CONSTEXPR iterator insert(const_iterator it,
                                     std::initializer_list<T> init);
 
-  constexpr iterator erase(const_iterator it);
+  CONSTEXPR iterator erase(const_iterator it);
 
-  constexpr iterator erase(const_iterator first, const_iterator last);
+  CONSTEXPR iterator erase(const_iterator first, const_iterator last);
 
-  constexpr void clear();
+  CONSTEXPR void clear();
 
-  constexpr void swap(darray &darr);
+  CONSTEXPR void swap(darray &darr);
 
-  constexpr size_type capacity() const noexcept;
+  CONSTEXPR size_type capacity() const noexcept;
 
-  constexpr size_type size() const noexcept;
+  CONSTEXPR size_type size() const noexcept;
 
-  constexpr size_type max_size() const noexcept;
+  CONSTEXPR size_type max_size() const noexcept;
 
-  constexpr bool empty() const noexcept;
+  CONSTEXPR bool empty() const noexcept;
 
-  constexpr void reserve(size_type n);
+  CONSTEXPR void reserve(size_type n);
 
-  constexpr void shrink_to_fit();
+  CONSTEXPR void shrink_to_fit();
 
-  constexpr Allocator get_allocator() const;
+  CONSTEXPR Allocator get_allocator() const;
 
-  constexpr std::ostream &print(std::ostream &) const;
+  CONSTEXPR std::ostream &print(std::ostream &) const;
 };
 
 END_NS_ZXX_CORE_CONTAINER
