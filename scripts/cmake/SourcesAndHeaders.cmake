@@ -4,7 +4,7 @@ set(sources
 
 set(exe_sources
   # ${PROJECT_SOURCE_DIR}/src/main.cpp
-  # ${sources}
+  ${sources}
 )
 
 set(container_header
