@@ -1,0 +1,3 @@
+/home/zaki/Projects/2023/Project_ZxxCore/zxx_core_container/cache/googletest-subbuild/CMakeFiles/rebuild_cache.dir
+/home/zaki/Projects/2023/Project_ZxxCore/zxx_core_container/cache/googletest-subbuild/CMakeFiles/edit_cache.dir
+/home/zaki/Projects/2023/Project_ZxxCore/zxx_core_container/cache/googletest-subbuild/CMakeFiles/googletest-populate.dir
