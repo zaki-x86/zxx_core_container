@@ -134,16 +134,16 @@ jobs:
 
       - name: Test std_cxx20
         shell: bash
-        if: ! startsWith(matrix.config.name, 'windows')
+        if: startsWith(matrix.config.name, 'windows') == false
         run: |
           ./build/test/container/container_container_test_cxx20
-        if: startsWith(matrix.config.name, 'windows')
+        if: startsWith(matrix.config.name, 'windows') == true
         run: |
           ./build/test/container/container_container_test_cxx20.exe
         
       - name: Test std_cxx17
         shell: bash
-        if: ! startsWith(matrix.config.name, 'windows')
+        if: startsWith(matrix.config.name, 'windows') == false
         run: |
           ./build/test/container/container_container_test_cxx17
         if: startsWith(matrix.config.name, 'windows')
@@ -152,7 +152,7 @@ jobs:
 
       - name: Test std_cxx11
         shell: bash
-        if: ! startsWith(matrix.config.name, 'windows')
+        if: startsWith(matrix.config.name, 'windows') == false
         run: |
           ./build/test/container/container_container_test_cxx11
         if: startsWith(matrix.config.name, 'windows')
