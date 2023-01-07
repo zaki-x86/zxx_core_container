@@ -129,12 +129,21 @@ jobs:
         shell: bash
         run: cmake --build build --config ${{ matrix.config.build_type }}
 
-      - name: Test
+      - name: Test std_cxx20
         shell: bash
-        #if: ! startsWith(matrix.config.name, 'windows')
         run: |
           ./build/test/container/container_container_test_cxx20
-          
+
+      - name: Test std_cxx17
+        shell: bash
+        run: |
+          ./build/test/container/container_container_test_cxx17
+
+      - name: Test std_cxx11
+        shell: bash
+        run: |
+          ./build/test/container/container_container_test_cxx11
+
       - name: Pack
         shell: bash
         working-directory: instdir
