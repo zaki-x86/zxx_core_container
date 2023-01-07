@@ -1,5 +1,7 @@
-#define CONST const
-#define EXPLICIT explicit
+#ifndef _ZXX_CONFIG_H_
+
+#define _ZXX_CONFIG_H_
+
 
 #if __cplusplus >= 201103L
 #define GLIBZXX_CONSTEXPR constexpr  
@@ -44,18 +46,4 @@
 #endif
 
 
-// MACROS FOR MSVC 
-
-#if _MSC_VER >= 1910
-
-#ifdef CONST
-#undef CONST
-#define CONST
-#endif // CONST
-
-#ifdef EXPLICIT
-#undef EXPLICIT
-#define EXPLICIT
-#endif // EXPLICIT
-
-#endif MSC_VER >= 1910
+#endif // !_ZXX_CONFIG_H

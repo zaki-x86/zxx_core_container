@@ -8,7 +8,7 @@
  * @copyright Copyright (c) 2022
  *
  */
-#include "config/zxx_config.h"
+#include "config/zxx.config.h"
 //#include "zxx_darray.h" // Useless but it's added to disable error squiggles
 
 BEGIN_NS_ZXX_CORE_CONTAINER

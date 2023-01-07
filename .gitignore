@@ -9,9 +9,8 @@ Testing
 docs/source/doxygen/xml
 
 #Temporary disabled
-include/zx_algorithms
-include/zx_traits
 libs
 new_version
 *.temp.*
 *.temp.*
+cpp.hint

@@ -1,4 +1,7 @@
-#pragma once
+#ifndef _GENERATORS_HPP_
+
+#define _GENERATORS_HPP_
+
 
 #include <iostream>
 #include <random>
@@ -253,3 +256,5 @@ T generate_random_test_values()
 {
 
 }
+
+#endif // !_GENERATORS_H_

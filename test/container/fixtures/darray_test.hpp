@@ -1,4 +1,7 @@
-#pragma once
+#ifndef _DARRAY_TEST_HPP_
+
+#define _DARRAY_TEST_HPP_
+
 
 #include "helpers/ultimate.h"
 
@@ -15,3 +18,6 @@ BEGIN_NS_ZXX_CORE_CONTAINER_TEST
     };
 
 END_NS_ZXX_CORE_CONTAINER_TEST
+
+
+#endif // !_DARRAY_TEST_HPP
