@@ -1,4 +1,4 @@
-#include "fixtures/darray.test.hpp"
+#include "fixtures/darray.test.h"
 
 BEGIN_NS_ZXX_CORE_CONTAINER_TEST
 
