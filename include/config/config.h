@@ -24,7 +24,7 @@
 #define BEGIN_NS_ZXX_CORE_CONTAINER             \
     namespace zxx {                             \
             namespace core {                    \
-                namespace container {           \
+                namespace container {           
 
 #define END_NS_ZXX_CORE_CONTAINER  }}}
 #endif
@@ -40,7 +40,7 @@
     namespace zxx {                             \
             namespace core {                    \
                 namespace container {           \
-                    namespace test {            \
+                    namespace test {            
 
 #define END_NS_ZXX_CORE_CONTAINER_TEST  }}}}
 #endif
