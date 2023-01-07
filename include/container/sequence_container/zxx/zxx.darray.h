@@ -44,140 +44,140 @@ public:
   using const_reverse_iterator = std::reverse_iterator<const_iterator>;
 
 public:
-  GLIBZXX_CONSTEXPR20 explicit darray(const Allocator &alloc = Allocator());
+  constexpr explicit darray(const Allocator &alloc = Allocator());
 
-  GLIBZXX_CONSTEXPR20 darray(const darray &other);
+  constexpr darray(const darray &other);
 
-  GLIBZXX_CONSTEXPR20 darray(const darray &other, Allocator &alloc);
+  constexpr darray(const darray &other, Allocator &alloc);
 
-  GLIBZXX_CONSTEXPR20 darray(darray &&other);
+  constexpr darray(darray &&other);
 
-  GLIBZXX_CONSTEXPR20 darray(darray &&other, Allocator &alloc);
+  constexpr darray(darray &&other, Allocator &alloc);
 
-  GLIBZXX_CONSTEXPR20 darray(size_type n, const value_type &value = value_type(),
+  constexpr darray(size_type n, const value_type &value = value_type(),
                            const Allocator &alloc = Allocator());
 
-  GLIBZXX_CONSTEXPR20 explicit darray(size_type n,
+  constexpr explicit darray(size_type n,
                                     const Allocator &alloc = Allocator());
 
   template <typename InputIterator>
-  GLIBZXX_CONSTEXPR20 darray(InputIterator first, InputIterator last,
+  constexpr darray(InputIterator first, InputIterator last,
                            const Allocator &alloc = Allocator());
 
-  GLIBZXX_CONSTEXPR20 darray(std::initializer_list<T> init,
+  constexpr darray(std::initializer_list<T> init,
                            const Allocator &alloc = Allocator());
 
   ~darray();
 
-  GLIBZXX_CONSTEXPR20 darray &operator=(const darray &x);
+  constexpr darray &operator=(const darray &x);
 
-  GLIBZXX_CONSTEXPR20 darray &operator=(darray &&x);
+  constexpr darray &operator=(darray &&x);
 
-  GLIBZXX_CONSTEXPR20 darray &operator=(std::initializer_list<T> init);
-
-  template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR20 friend bool operator==(const darray &x, const darray &y);
+  constexpr darray &operator=(std::initializer_list<T> init);
 
   template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR20 friend bool operator!=(const darray &x, const darray &y);
+  constexpr friend bool operator==(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR20 friend bool operator<(const darray &x, const darray &y);
+  constexpr friend bool operator!=(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR20 friend bool operator>(const darray &x, const darray &y);
+  constexpr friend bool operator<(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR20 friend bool operator<=(const darray &x, const darray &y);
+  constexpr friend bool operator>(const darray &x, const darray &y);
 
   template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR20 friend bool operator>=(const darray &x, const darray &y);
+  constexpr friend bool operator<=(const darray &x, const darray &y);
+
+  template <typename U, typename Alloc>
+  constexpr friend bool operator>=(const darray &x, const darray &y);
 
 #if __cplusplus >= 202003L
   template <typename U, typename Alloc>
-  GLIBZXX_CONSTEXPR20 friend bool operator>=<(const darray &x,
+  constexpr friend bool operator>=<(const darray &x,
                                             const darray &y) const;
 #endif
 
-  GLIBZXX_CONSTEXPR20 iterator begin();
+  constexpr iterator begin();
 
-  GLIBZXX_CONSTEXPR20 const_iterator cbegin() const;
+  constexpr const_iterator cbegin() const;
 
-  GLIBZXX_CONSTEXPR20 iterator end();
+  constexpr iterator end();
 
-  GLIBZXX_CONSTEXPR20 const_iterator cend() const;
+  constexpr const_iterator cend() const;
 
-  GLIBZXX_CONSTEXPR20 reverse_iterator rbegin();
+  constexpr reverse_iterator rbegin();
 
-  GLIBZXX_CONSTEXPR20 const_reverse_iterator crbegin() const;
+  constexpr const_reverse_iterator crbegin() const;
 
-  GLIBZXX_CONSTEXPR20 reverse_iterator rend();
+  constexpr reverse_iterator rend();
 
-  GLIBZXX_CONSTEXPR20 const_reverse_iterator crend() const;
+  constexpr const_reverse_iterator crend() const;
 
-  GLIBZXX_CONSTEXPR20 reference operator[](size_type n);
+  constexpr reference operator[](size_type n);
 
-  GLIBZXX_CONSTEXPR20 const_reference operator[](size_type n) const;
+  constexpr const_reference operator[](size_type n) const;
 
-  GLIBZXX_CONSTEXPR20 reference at(size_type n);
+  constexpr reference at(size_type n);
 
-  GLIBZXX_CONSTEXPR20 const_reference at(size_type n) const;
+  constexpr const_reference at(size_type n) const;
 
-  GLIBZXX_CONSTEXPR20 reference front();
+  constexpr reference front();
 
-  GLIBZXX_CONSTEXPR20 const_reference front() const;
+  constexpr const_reference front() const;
 
-  GLIBZXX_CONSTEXPR20 reference back();
+  constexpr reference back();
 
-  GLIBZXX_CONSTEXPR20 const_reference back() const;
+  constexpr const_reference back() const;
 
-  template <class... Args> GLIBZXX_CONSTEXPR20 void emplace_back(Args &&... args);
+  template <class... Args> constexpr void emplace_back(Args &&... args);
 
   template <class... Args>
-  GLIBZXX_CONSTEXPR20 iterator emplace(const_iterator it, Args &&... args);
+  constexpr iterator emplace(const_iterator it, Args &&... args);
 
-  GLIBZXX_CONSTEXPR20 void push_back(const T &x);
+  constexpr void push_back(const T &x);
 
-  GLIBZXX_CONSTEXPR20 void push_back(T &&x);
+  constexpr void push_back(T &&x);
 
-  GLIBZXX_CONSTEXPR20 void pop_back();
+  constexpr void pop_back();
 
-  GLIBZXX_CONSTEXPR20 iterator insert(const_iterator it, const T &x);
+  constexpr iterator insert(const_iterator it, const T &x);
 
-  GLIBZXX_CONSTEXPR20 iterator insert(const_iterator it, T &&x);
+  constexpr iterator insert(const_iterator it, T &&x);
 
-  GLIBZXX_CONSTEXPR20 iterator insert(const_iterator it, size_type n, T &x);
+  constexpr iterator insert(const_iterator it, size_type n, T &x);
 
   template <class InputIterator>
-  GLIBZXX_CONSTEXPR20 iterator insert(const_iterator it, InputIterator first,
+  constexpr iterator insert(const_iterator it, InputIterator first,
                                     InputIterator last);
 
-  GLIBZXX_CONSTEXPR20 iterator insert(const_iterator it,
+  constexpr iterator insert(const_iterator it,
                                     std::initializer_list<T> init);
 
-  GLIBZXX_CONSTEXPR20 iterator erase(const_iterator it);
+  constexpr iterator erase(const_iterator it);
 
-  GLIBZXX_CONSTEXPR20 iterator erase(const_iterator first, const_iterator last);
+  constexpr iterator erase(const_iterator first, const_iterator last);
 
-  GLIBZXX_CONSTEXPR20 void clear();
+  constexpr void clear();
 
-  GLIBZXX_CONSTEXPR20 void swap(darray &darr);
+  constexpr void swap(darray &darr);
 
-  GLIBZXX_CONSTEXPR20 size_type capacity() const noexcept;
+  constexpr size_type capacity() const noexcept;
 
-  GLIBZXX_CONSTEXPR20 size_type size() const noexcept;
+  constexpr size_type size() const noexcept;
 
-  GLIBZXX_CONSTEXPR20 size_type max_size() const noexcept;
+  constexpr size_type max_size() const noexcept;
 
-  GLIBZXX_CONSTEXPR20 bool empty() const noexcept;
+  constexpr bool empty() const noexcept;
 
-  GLIBZXX_CONSTEXPR20 void reserve(size_type n);
+  constexpr void reserve(size_type n);
 
-  GLIBZXX_CONSTEXPR20 void shrink_to_fit();
+  constexpr void shrink_to_fit();
 
-  GLIBZXX_CONSTEXPR20 Allocator get_allocator() const;
+  constexpr Allocator get_allocator() const;
 
-  GLIBZXX_CONSTEXPR20 std::ostream &print(std::ostream &) const;
+  constexpr std::ostream &print(std::ostream &) const;
 };
 
 END_NS_ZXX_CORE_CONTAINER
