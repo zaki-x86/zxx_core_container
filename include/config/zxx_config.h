@@ -1,4 +1,4 @@
-#ifndef _ZXX_CONFIG_H
+#ifndef _ZXX_CONFIG_H_
 
 #define _ZXX_CONFIG_H_
 
