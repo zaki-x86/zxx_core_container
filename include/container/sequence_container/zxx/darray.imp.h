@@ -306,9 +306,9 @@ darray<T, Allocator>::print(std::ostream &os) const {
 
 END_NS_ZXX_CORE_CONTAINER // namespace container
 
-    template <typename U>
-    GLIBZXX_CONSTEXPR std::ostream &
-    operator<<(std::ostream &os, zxx::core::container::darray<U> const &obj) {
+template <typename U>
+GLIBZXX_CONSTEXPR std::ostream &
+operator<<(std::ostream &os, zxx::core::container::darray<U> const &obj) {
   return obj.print(os);
 }
 

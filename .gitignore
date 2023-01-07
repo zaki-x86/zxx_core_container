@@ -13,3 +13,4 @@ libs
 new_version
 *.temp.*
 *.temp.*
+cpp.hint

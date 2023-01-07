@@ -1,12 +1,8 @@
 
 #define GLIBZXX_CONSTEXPR  
 
-#if __cplusplus >= 201703L
-
 #define BEGIN_NS_ZXX_CORE_CONTAINER namespace zxx::core::container {
 #define END_NS_ZXX_CORE_CONTAINER }
-
-#else
 
 #define BEGIN_NS_ZXX_CORE_CONTAINER             \
     namespace zxx {                             \
@@ -14,14 +10,9 @@
                 namespace container {           \
 
 #define END_NS_ZXX_CORE_CONTAINER  }}}
-#endif
-
-#if __cplusplus >= 201703L
 
 #define BEGIN_NS_ZXX_CORE_CONTAINER_TEST namespace zxx::core::container::test {
 #define END_NS_ZXX_CORE_CONTAINER_TEST }
-
-#else
 
 #define BEGIN_NS_ZXX_CORE_CONTAINER_TEST        \
     namespace zxx {                             \
@@ -30,5 +21,4 @@
                     namespace test {            \
 
 #define END_NS_ZXX_CORE_CONTAINER_TEST  }}}}
-#endif
 
