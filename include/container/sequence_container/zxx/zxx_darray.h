@@ -9,9 +9,10 @@
  *
  */
 
-#pragma once
 
-#define DEBUG true ///< Flag set to enable some logging for debugging
+#ifndef _ZXX_DARRAY_H_
+
+#define _ZXX_DARRAY_H_
 
 #include <algorithm>
 #include <exception>
@@ -180,3 +181,6 @@ public:
 };
 
 END_NS_ZXX_CORE_CONTAINER
+
+
+#endif // !_ZXX_DARRAY_H_
