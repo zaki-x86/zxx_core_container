@@ -4,13 +4,19 @@
 
 
 #if __cplusplus >= 201103L
-#define GLIBZXX_CONSTEXPR constexpr  
+#define GLIBZXX_CONSTEXPR11 constexpr
+#define GLIBZXX_CONSTEXPR17
+#define GLIBZXX_CONSTEXPR20
 #endif
 #if __cplusplus >= 201703L
-#define GLIBZXX_CONSTEXPR constexpr
+#define GLIBZXX_CONSTEXPR11
+#define GLIBZXX_CONSTEXPR17 constexpr
+#define GLIBZXX_CONSTEXPR20
 #endif
 #if __cplusplus >= 202003L
-#define GLIBZXX_CONSTEXPR constexpr
+#define GLIBZXX_CONSTEXPR11
+#define GLIBZXX_CONSTEXPR17
+#define GLIBZXX_CONSTEXPR20 constexpr
 #endif
 
 
