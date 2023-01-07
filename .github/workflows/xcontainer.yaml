@@ -146,7 +146,7 @@ jobs:
 
       - name: Test std_cxx11
         shell: bash
-        if: ! startsWith(matrix.config.name, 'windows') == false
+        if: startsWith(matrix.config.name, 'windows') == false
         run: |
           ./build/test/container/container_container_test_cxx11
       
