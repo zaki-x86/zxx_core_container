@@ -136,9 +136,9 @@ jobs:
         name: Test on Windows
         shell: bash
         run: |
-          ./${{github_workspace}}/build/test/container/Release/container_container_test_cxx11.exe
-          ./${{github_workspace}}/build/test/container/Release/container_container_test_cxx17.exe
-          ./${{github_workspace}}/build/test/container/Release/container_container_test_cxx20.exe
+          ./${{github.workspace}}/build/test/container/Release/container_container_test_cxx11.exe
+          ./${{github.workspace}}/build/test/container/Release/container_container_test_cxx17.exe
+          ./${{github.workspace}}/build/test/container/Release/container_container_test_cxx20.exe
 
       - name: Pack
         shell: bash
