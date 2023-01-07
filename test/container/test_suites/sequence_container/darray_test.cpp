@@ -1,6 +1,6 @@
 #include "fixtures/darray.test.h"
 
-BEGIN_NS_ZXX_CORE_CONTAINER_TEST
+namespace zxx { namespace core { namespace container { namespace test {
 
 TYPED_TEST_SUITE_P(darray_test);
 
@@ -293,4 +293,4 @@ INSTANTIATE_TYPED_TEST_SUITE_P(darray_test_, darray_test, TestTypeParameters);
 
 // #######################################################
 
-END_NS_ZXX_CORE_CONTAINER_TEST
+}}}}

@@ -5,7 +5,7 @@
 
 #include "helpers/ultimate.h"
 
-BEGIN_NS_ZXX_CORE_CONTAINER_TEST
+namespace zxx { namespace core { namespace container { namespace test {
 
     template<typename T>
     class darray_test : public ::testing::Test
@@ -17,7 +17,7 @@ BEGIN_NS_ZXX_CORE_CONTAINER_TEST
         void assert_correct_instantiation();
     };
 
-END_NS_ZXX_CORE_CONTAINER_TEST
+}}}}
 
 
 #endif // !_DARRAY_TEST_HPP
