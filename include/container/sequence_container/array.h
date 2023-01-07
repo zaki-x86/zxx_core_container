@@ -14,6 +14,6 @@
 #define _ARRAY_H_
 
 #include "zxx/zxx_array.h"
-#include "zxx/array.tcc"
+#include "zxx/array.imp.h"
 
 #endif // !_ARRAY_H_

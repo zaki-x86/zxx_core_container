@@ -18,7 +18,7 @@
 #include "sequence_container/darray.h"
 #include "sequence_container/forward_list.h"
 #include "sequence_container/list.h"
-#include "associative_container/hash_table.h"
+/* #include "associative_container/hash_table.h"
 #include "associative_container/set.h"
 #include "associative_container/map.h"
 #include "associative_container/multiset.h"
@@ -28,7 +28,7 @@
 #include "associative_container/unordered_multiset.h"
 #include "associative_container/unordered_multimap.h"
 #include "adaptor_container/stack.h"
-#include "adaptor_container/queue.h"
+#include "adaptor_container/queue.h" */
 
 
 /**

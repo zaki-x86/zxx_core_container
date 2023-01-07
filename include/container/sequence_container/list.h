@@ -14,6 +14,6 @@
 #define _LIST_H_
 
 #include "zxx/zxx_list.h"
-#include "zxx/list.tcc"
+#include "zxx/list.imp.h"
 
 #endif // !_LIST_H_

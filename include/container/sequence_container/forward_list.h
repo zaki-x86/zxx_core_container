@@ -14,7 +14,7 @@
 #define _FORWARD_LIST_H_
 
 #include "zxx/zxx_forward_list.h"
-#include "zxx/forward_list.tcc"
+#include "zxx/forward_list.imp.h"
 
 #endif // !_FORWARD_LIST_H
 

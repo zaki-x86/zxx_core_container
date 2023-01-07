@@ -14,6 +14,6 @@
 #define _DARRAY_H_
 
 #include "zxx/zxx_darray.h"
-#include "zxx/darray.tcc"
+#include "zxx/darray.imp.h"
 
 #endif // !_DARRAY_H_
