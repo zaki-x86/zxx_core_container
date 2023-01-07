@@ -9,7 +9,12 @@
 #include <string>
 #include <cstring>
 #include <ctime>
+
+#ifdef __unix__
+
 #include <unistd.h>
+
+#endif // __unix__
 
 
 // definitions 
