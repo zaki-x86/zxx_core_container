@@ -13,24 +13,24 @@ verbose_message("Setting up target ${CMAKE_PROJECT_NAME}ContainerTest...")
 
 
 add_executable(
-    ${CMAKE_PROJECT_NAME}_container_test
+    ${CMAKE_PROJECT_NAME}_test
     ${container_test_sources}
 )
 
 add_executable(
-    ${CMAKE_PROJECT_NAME}_container_test_cxx11
-    ${container_test_sources}
-    ${test_headers}
-)
-
-add_executable(
-    ${CMAKE_PROJECT_NAME}_container_test_cxx17
+    ${CMAKE_PROJECT_NAME}_test_cxx11
     ${container_test_sources}
     ${test_headers}
 )
 
 add_executable(
-    ${CMAKE_PROJECT_NAME}_container_test_cxx20
+    ${CMAKE_PROJECT_NAME}_test_cxx17
+    ${container_test_sources}
+    ${test_headers}
+)
+
+add_executable(
+    ${CMAKE_PROJECT_NAME}_test_cxx20
     ${container_test_sources}
     ${test_headers}
 )
@@ -39,9 +39,9 @@ add_executable(
   # Set the compiler standard
   #
 
-target_compile_features(${CMAKE_PROJECT_NAME}_container_test_cxx11 PUBLIC cxx_std_11)
-target_compile_features(${CMAKE_PROJECT_NAME}_container_test_cxx17 PUBLIC cxx_std_17)
-target_compile_features(${CMAKE_PROJECT_NAME}_container_test_cxx20 PUBLIC cxx_std_20)
+target_compile_features(${CMAKE_PROJECT_NAME}_test_cxx11 PUBLIC cxx_std_11)
+target_compile_features(${CMAKE_PROJECT_NAME}_test_cxx17 PUBLIC cxx_std_17)
+target_compile_features(${CMAKE_PROJECT_NAME}_test_cxx20 PUBLIC cxx_std_20)
 
   #
   # Setup code coverage if enabled
@@ -81,7 +81,7 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
 
     message(STATUS "linking gtest libraries to ${CMAKE_PROJECT_NAME}Test ..")
     target_link_libraries(
-        ${CMAKE_PROJECT_NAME}_container_test
+        ${CMAKE_PROJECT_NAME}_test
         PUBLIC
         GTest::gtest_main
         ${GOOGLE_MOCK_LIBRARIES}
@@ -89,7 +89,7 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
     )
 
     target_link_libraries(
-        ${CMAKE_PROJECT_NAME}_container_test_cxx11
+        ${CMAKE_PROJECT_NAME}_test_cxx11
         PUBLIC
         GTest::gtest_main
         ${GOOGLE_MOCK_LIBRARIES}
@@ -97,7 +97,7 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
     )
 
     target_link_libraries(
-        ${CMAKE_PROJECT_NAME}_container_test_cxx17
+        ${CMAKE_PROJECT_NAME}_test_cxx17
         PUBLIC
         GTest::gtest_main
         ${GOOGLE_MOCK_LIBRARIES}
@@ -105,7 +105,7 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
     )
 
     target_link_libraries(
-        ${CMAKE_PROJECT_NAME}_container_test_cxx20
+        ${CMAKE_PROJECT_NAME}_test_cxx20
         PUBLIC
         GTest::gtest_main
         ${GOOGLE_MOCK_LIBRARIES}
@@ -114,22 +114,22 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
 
     message(STATUS "linking test directory to ${CMAKE_PROJECT_NAME}Test ..")
     target_include_directories(
-        ${CMAKE_PROJECT_NAME}_container_test
+        ${CMAKE_PROJECT_NAME}_test
         PUBLIC
         ${CMAKE_SOURCE_DIR}/test/container
     )
     target_include_directories(
-        ${CMAKE_PROJECT_NAME}_container_test_cxx11
+        ${CMAKE_PROJECT_NAME}_test_cxx11
         PUBLIC
         ${CMAKE_SOURCE_DIR}/test/container
     )
     target_include_directories(
-        ${CMAKE_PROJECT_NAME}_container_test_cxx17
+        ${CMAKE_PROJECT_NAME}_test_cxx17
         PUBLIC
         ${CMAKE_SOURCE_DIR}/test/container
     )
     target_include_directories(
-        ${CMAKE_PROJECT_NAME}_container_test_cxx20
+        ${CMAKE_PROJECT_NAME}_test_cxx20
         PUBLIC
         ${CMAKE_SOURCE_DIR}/test/container
     )
@@ -137,25 +137,25 @@ if(${CMAKE_PROJECT_NAME}_USE_GTEST)
 elseif(${CMAKE_PROJECT_NAME}_USE_CATCH2)
     find_package(Catch2 REQUIRED)
     target_link_libraries(
-        ${CMAKE_PROJECT_NAME}_container_test
+        ${CMAKE_PROJECT_NAME}test
         PUBLIC
         Catch2::Catch2
         ${${CMAKE_PROJECT_NAME}_TEST_LIB}
     )
     target_link_libraries(
-        ${CMAKE_PROJECT_NAME}_container_test_cxx11
+        ${CMAKE_PROJECT_NAME}test_cxx11
         PUBLIC
         Catch2::Catch2
         ${${CMAKE_PROJECT_NAME}_TEST_LIB}
     )
     target_link_libraries(
-        ${CMAKE_PROJECT_NAME}_container_test_cxx17
+        ${CMAKE_PROJECT_NAME}test_cxx17
         PUBLIC
         Catch2::Catch2
         ${${CMAKE_PROJECT_NAME}_TEST_LIB}
     )
     target_link_libraries(
-        ${CMAKE_PROJECT_NAME}_container_test_cxx20
+        ${CMAKE_PROJECT_NAME}test_cxx20
         PUBLIC
         Catch2::Catch2
         ${${CMAKE_PROJECT_NAME}_TEST_LIB}
@@ -170,11 +170,10 @@ endif()
 #
 
 include(GoogleTest)
-gtest_discover_tests(${CMAKE_PROJECT_NAME}_container_test)
-#gtest_discover_tests(${CMAKE_PROJECT_NAME}_container_test_cxx11)
-#gtest_discover_tests(${CMAKE_PROJECT_NAME}_container_test_cxx17)
-#gtest_discover_tests(${CMAKE_PROJECT_NAME}_container_test_cxx20)
 
-
+gtest_discover_tests(${CMAKE_PROJECT_NAME}_test_cxx11)
+gtest_discover_tests(${CMAKE_PROJECT_NAME}_test)
+gtest_discover_tests(${CMAKE_PROJECT_NAME}_test_cxx17)
+gtest_discover_tests(${CMAKE_PROJECT_NAME}_test_cxx20)
 
 verbose_message("Finished adding unit tests for ${CMAKE_PROJECT_NAME}.")
