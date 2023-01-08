@@ -123,12 +123,16 @@ jobs:
         endif()
         set(ENV{PATH} "$ENV{GITHUB_WORKSPACE}${path_separator}$ENV{PATH}")
 
+        # Ninja and gtest doesn't seem to be compatible with MinGW
+        # Therefore, code is branched as below:
+        
         if ("${{ runner.os }}" STREQUAL "Windows" AND "${{ matrix.config.cxx }}" STREQUAL "g++")
           execute_process(
             COMMAND cmake
               -S .
               -B build
               -D CMAKE_BUILD_TYPE=$ENV{BUILD_TYPE}
+              -G Ninja
               -D CMAKE_C_COMPILER_LAUNCHER=ccache
               -D CMAKE_CXX_COMPILER_LAUNCHER=ccache
             RESULT_VARIABLE result
