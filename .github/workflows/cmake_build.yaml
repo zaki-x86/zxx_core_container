@@ -217,7 +217,7 @@ jobs:
           message(FATAL_ERROR "Running tests failed!")
         endif()
     - name: Install Strip
-      run: cmake --install build --component container --config "Release" --prefix instdir --strip
+      run: cmake --install build --config "Release" --prefix instdir --strip --verbose
 
     - name: Pack
       working-directory: instdir
