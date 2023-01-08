@@ -23,7 +23,7 @@ jobs:
             cc: "cl", cxx: "cl",
             environment_script: "C:/Program Files/Microsoft Visual Studio/2022/Enterprise/VC/Auxiliary/Build/vcvars64.bat"
           }
-        # Build fails with MinGW
+        # Test Build fails with MinGW
         # - {
         #     name: "Windows Latest MinGW", artifact: "Windows-MinGW.7z",
         #     os: windows-latest,

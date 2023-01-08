@@ -22,6 +22,10 @@ macro(setup_gtest)
 
     # For Windows: Prevent overriding the parent project's compiler/linker settings
     set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
+
+    # Prevent gtest libs from being installed
+    option(INSTALL_GMOCK "Install Googletest's GMock?" OFF)
+    option(INSTALL_GTEST "Install Googletest's GTest?" OFF)
     FetchContent_MakeAvailable(googletest)
 
     # build gmock if needed
