@@ -110,6 +110,12 @@ jobs:
         buildWithCMake: true
         buildDirectory: '${{ github.workspace }}/build'
         cmakeBuildType: ${{ matrix.config.build_type }}
+        
+    - name: post build directories
+      shell: cmd
+      run:
+        tree /f /a
+
     - name: ccache statistics
       shell: cmake -P {0}
       run: |
