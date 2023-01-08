@@ -5,10 +5,12 @@ cmake_minimum_required(VERSION 3.15)
 #
 
 project(
-  ${CMAKE_PROJECT_NAME}Test
+  container_test
   LANGUAGES CXX
 )
 
-verbose_message("Initial setup...")
 
-add_subdirectory(container)
+add_subdirectory(container/darray.test)
+
+
+verbose_message("Finished adding unit tests for ${CMAKE_PROJECT_NAME}.")

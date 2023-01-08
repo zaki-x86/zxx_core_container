@@ -9,7 +9,6 @@ Testing
 docs/source/doxygen/xml
 
 #Temporary disabled
-libs
 new_version
 *.temp.*
 *.temp.*

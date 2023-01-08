@@ -86,7 +86,7 @@ include(scripts/cmake/Vcpkg.cmake)
 # Find all headers and implementation files
 include(scripts/cmake/SourcesAndHeaders.cmake)
 
-if(${PROJECT_NAME}_BUILD_EXECUTABLE)
+if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${exe_sources} )
   add_executable(${PROJECT_NAME} ${exe_sources})
 
   if(${PROJECT_NAME}_VERBOSE_OUTPUT)
@@ -106,6 +106,7 @@ if(${PROJECT_NAME}_BUILD_EXECUTABLE)
       endforeach()
     endif()
   endif()
+  
 elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
   add_library(${PROJECT_NAME} INTERFACE)
 
@@ -115,6 +116,7 @@ elseif(${PROJECT_NAME}_BUILD_HEADERS_ONLY)
       verbose_message("* ${header}")
     endforeach()
   endif()
+
 else()
   add_library(
     ${PROJECT_NAME}
@@ -142,16 +144,17 @@ set_target_properties(
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin/${CMAKE_BUILD_TYPE}"
   )
-  if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
-    set_target_properties(
-      ${PROJECT_NAME}_LIB
-      PROPERTIES
-      LINKER_LANGUAGE CXX
-      ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
-      LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
-      OUTPUT_NAME ${PROJECT_NAME}
-    )
-  endif()
+  
+if(${PROJECT_NAME}_BUILD_EXECUTABLE AND ${PROJECT_NAME}_ENABLE_UNIT_TESTING)
+  set_target_properties(
+    ${PROJECT_NAME}_LIB
+    PROPERTIES
+    LINKER_LANGUAGE CXX
+    ARCHIVE_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+    LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/lib/${CMAKE_BUILD_TYPE}"
+    OUTPUT_NAME ${PROJECT_NAME}
+  )
+endif()
 
 
 message(STATUS "Added all header and implementation files.\n")
