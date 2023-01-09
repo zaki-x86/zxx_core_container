@@ -23,7 +23,7 @@ struct Darray_base {
    * allows you to create a new allocator type that is compatible with a
    * different type.
    */
-  using _Tp_alloc_type = typename std::allocator_traits<Allocator>::template rebind_alloc<T>;
+  using _Tp_alloc_type = std::allocator_traits<Allocator>;
 
   /**
    * @brief Nested struct to store the data for the vector.

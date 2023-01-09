@@ -1,6 +1,6 @@
 #ifndef _DARRAY_TESTS_H_
 
-#define _DARRAY_TESTS_H
+#define _DARRAY_TESTS_H_
 
 #include "container/darray.test/darray.fixture.h"
 
