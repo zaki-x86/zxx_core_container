@@ -11,6 +11,7 @@
 
 #include <iostream>
 #include <container/darray.h>
+#include <container/array.h>
 
 
 int main(int argc, char const *argv[])

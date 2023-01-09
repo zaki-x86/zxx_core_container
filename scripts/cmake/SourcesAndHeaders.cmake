@@ -11,7 +11,7 @@ set(headers
   include/container/darray.h
   # include/container/forward_list.h
   # include/container/list.h
-  # include/container/array.h
+  include/container/array.h
   # include/container/hash_table.h
   # include/container/map.h
   # include/container/multimap.h
