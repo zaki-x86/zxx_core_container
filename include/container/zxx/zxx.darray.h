@@ -43,7 +43,6 @@ BEGIN_NS_ZXX_CORE_CONTAINER
  * @tparam Allocator The allocator type to use for allocating memory for the
  * container.
  */
-
 template <typename T, typename Allocator>
 struct Darray_base;
 

@@ -13,7 +13,7 @@
 
 BEGIN_NS_ZXX_CORE_CONTAINER
 
-template <typename T, typename Allocator = std::allocator<T>>
+template <typename T, typename Allocator>
 struct Darray_base {
 
   /**
