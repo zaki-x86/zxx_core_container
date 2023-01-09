@@ -68,6 +68,19 @@ struct Darray_base;
  */
 template <typename T, typename Allocator = std::allocator<T>>
 class darray : protected Darray_base<T, Allocator> {
+protected:
+  /**
+   *  These two functions and three data members are all from the
+   *  base class.  They should be pretty self-explanatory.
+   */
+  using darray_type = darray<T, Allocator>;
+  using _Base = Darray_base<T, Allocator>; 
+  using T_alloc_type = typename _Base::_Tp_alloc_type;
+  using _Base::_m_allocate;
+  using _Base::_m_deallocate;
+  using _Base::_m_get_Tp_allocator;
+  using _Base::_m_impl;
+
 public:
   /**
    * @brief The type of the elements stored in the darray.
@@ -93,23 +106,23 @@ public:
   /**
    * @brief A reference to an element in the darray.
    */
-  using reference = value_type &;
+  using reference = typename T_alloc_type::reference;
 
   /**
    * @brief A const reference to an element in the darray.
    */
-  using const_reference = const value_type &;
+  using const_reference = typename T_alloc_type::const_reference;
 
   /**
    * @brief A pointer to an element in the darray.
    */
-  using pointer = typename std::allocator_traits<allocator_type>::pointer;
+  using pointer = typename T_alloc_type::pointer;
 
   /**
    * @brief A const pointer to an element in the darray.
    */
   using const_pointer =
-      typename std::allocator_traits<allocator_type>::const_pointer;
+      typename T_alloc_type::const_pointer;
 
   /**
    * @brief An iterator that can be used to access and modify elements in the
@@ -179,18 +192,6 @@ public:
    * std::reverse_iterator.
    */
   using const_reverse_iterator = std::reverse_iterator<const_iterator>;
-
-protected:
-  /**
-   *  These two functions and three data members are all from the
-   *  base class.  They should be pretty self-explanatory.
-   */
-  using darray_type = darray<T, Allocator>;
-  using _Base = Darray_base<T, Allocator>; 
-  using _Base::_m_allocate;
-  using _Base::_m_deallocate;
-  using _Base::_m_get_Tp_allocator;
-  using _Base::_m_impl;
 
 public:
   /**
