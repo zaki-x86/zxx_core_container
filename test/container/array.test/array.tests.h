@@ -19,7 +19,7 @@ TYPED_TEST_P(array_test, DefaultConstructorTest)
 REGISTER_TYPED_TEST_SUITE_P(array_test,
     DefaultConstructorTest
 
-)
+);
 
 using TestTypeParameters = ::testing::Types<
     char, 
@@ -30,7 +30,7 @@ using TestTypeParameters = ::testing::Types<
     std::string*, 
     std::string, 
     std::array<int, 10>
-    > ;
+    >;
 
 INSTANTIATE_TYPED_TEST_SUITE_P(Array_Test, array_test, TestTypeParameters);
 
