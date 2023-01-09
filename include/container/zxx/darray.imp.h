@@ -10,6 +10,7 @@
  */
 #include "config/zxx.config.h"
 //#include "zxx_darray.h" // Useless but it's added to disable error squiggles
+#include <memory>
 
 BEGIN_NS_ZXX_CORE_CONTAINER
 
@@ -17,13 +18,15 @@ template <typename T, typename Allocator>
 struct Darray_base {
 
   /**
-   * @brief The _Tp_alloc_type member type is a type alias that represents the
-   * type of the allocator to use for allocating elements of type T. It is
-   * defined using the rebind template of the Allocator class template, which
-   * allows you to create a new allocator type that is compatible with a
-   * different type.
+   * @brief createS a new allocator type `_Tp_alloc_type` that is parameterized with the same type as `Darray_base`.
+   * 
+   * This can be used to create a new allocator object that is compatible with `Darray_base`, regardless of the original type of the allocator.
+   * 
+   * @note In C++11 and earlier, the `std::allocator` class template defined a nested type called `rebind`, which could be used to create a new allocator type that was parameterized with a different type. For example, you could use `std::allocator<int>::rebind<char>::other` to create an allocator type that could be used to allocate char objects, using an allocator that was originally designed to allocate int objects.
+   * In C++17, the rebind type was deprecated and replaced with a rebind_alloc type trait, which is defined in the <memory> header file. To create a new allocator type that is parameterized with a different type.
    */
-  using _Tp_alloc_type = std::allocator_traits<Allocator>;
+  using _Tp_alloc_type = typename std::allocator_traits<Allocator>::template rebind_alloc<T>;
+  using pointer = typename std::allocator_traits<_Tp_alloc_type>::pointer;
 
   /**
    * @brief Nested struct to store the data for the vector.

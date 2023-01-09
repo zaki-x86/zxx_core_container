@@ -67,14 +67,16 @@ struct Darray_base;
  */
 template <typename T, typename Allocator = std::allocator<T>>
 class darray : protected Darray_base<T, Allocator> {
+private:
+  // These aliases will be useful later on, bc we will no longer use any std::something in the future, therefore, I grouped them here and aliased them, so I can easily change them later when I create my own zxx::something
+  typedef std::ptrdiff_t zxx_ptrdiff_t;
+  typedef std::size_t zxx_size_t ;
+
 protected:
-  /**
-   *  These two functions and three data members are all from the
-   *  base class.  They should be pretty self-explanatory.
-   */
   using darray_type = darray<T, Allocator>;
   using _Base = Darray_base<T, Allocator>; 
-  using T_alloc_type = typename _Base::_Tp_alloc_type;
+  using _Tp_alloc_type = typename _Base::_Tp_alloc_type;
+  using _alloc_traits = std::allocator_traits<_Tp_alloc_type>;
   using _Base::_m_allocate;
   using _Base::_m_deallocate;
   using _Base::_m_get_Tp_allocator;
@@ -94,34 +96,33 @@ public:
   /**
    * @brief An unsigned integer type used to represent the size of the darray.
    */
-  using size_type = std::size_t;
+  using size_type = zxx_size_t;
 
   /**
    * @brief A signed integer type used to represent the difference between two
    * indices in the darray.
    */
-  using difference_type = std::ptrdiff_t;
+  using difference_type = zxx_ptrdiff_t;
 
   /**
    * @brief A reference to an element in the darray.
    */
-  using reference = typename T_alloc_type::reference;
+  using reference = typename _alloc_traits::value_type&;
 
   /**
    * @brief A const reference to an element in the darray.
    */
-  using const_reference = typename T_alloc_type::const_reference;
+  using const_reference = const typename _alloc_traits::value_type&;
 
   /**
    * @brief A pointer to an element in the darray.
    */
-  using pointer = typename T_alloc_type::pointer;
+  using pointer = typename _alloc_traits::pointer;
 
   /**
    * @brief A const pointer to an element in the darray.
    */
-  using const_pointer =
-      typename T_alloc_type::const_pointer;
+  using const_pointer = typename _alloc_traits::const_pointer;
 
   /**
    * @brief An iterator that can be used to access and modify elements in the
