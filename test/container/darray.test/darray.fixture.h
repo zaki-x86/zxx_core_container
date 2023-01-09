@@ -5,7 +5,7 @@
 
 #include "container/darray.h"
 
-namespace zxx { namespace core { namespace container { namespace test {
+BEGIN_NS_ZXX_CORE_CONTAINER_TEST
 
     template<typename T>
     class darray_test : public ::testing::Test
@@ -17,7 +17,7 @@ namespace zxx { namespace core { namespace container { namespace test {
         void assert_correct_instantiation();
     };
 
-}}}}
+END_NS_ZXX_CORE_CONTAINER_TEST
 
 
 #endif // !_DARRAY_TEST_HPP

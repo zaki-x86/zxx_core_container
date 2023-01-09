@@ -28,14 +28,16 @@ BEGIN_NS_ZXX_CORE_CONTAINER
     struct _array_traits
     {
         typedef _T _Type[_N];
-        typedef std::is_swappable<_T> _Is_swappable;
-        typedef std::is_nothrow_swappable<_T> _Is_nothrow_swappable;
+        #if __cplusplus >= 201703L
+            typedef std::is_swappable<_T> _Is_swappable;
+            typedef std::is_nothrow_swappable<_T> _Is_nothrow_swappable;
+        #endif
 
-        static constexpr _T&
+        static ZXX_CONSTEXPR _T&
         _s_ref(const _Type& __t, size_t __n) noexcept
         { return const_cast<_T&>(__t[__n]); }
 
-        static constexpr _T*
+        static ZXX_CONSTEXPR _T*
         _s_ptr(const _Type& __t) noexcept
         { return const_cast<_T*>(__t); }
     };
@@ -44,14 +46,16 @@ BEGIN_NS_ZXX_CORE_CONTAINER
     struct _array_traits<_T, 0>
     {
         struct _Type { };
-        typedef std::true_type _Is_swappable;
-        typedef std::true_type _Is_nothrow_swappable;
+        #if cplusplus >= 201703L
+            typedef std::true_type _Is_swappable;
+            typedef std::true_type _Is_nothrow_swappable;
+        #endif
 
-        static constexpr _T&
+        static ZXX_CONSTEXPR _T&
         _s_ref(const _Type&, size_t) noexcept
         { return *static_cast<_T*>(nullptr); }
 
-        static constexpr _T*
+        static ZXX_CONSTEXPR _T*
         _s_ptr(const _Type&) noexcept
         { return nullptr; }
     };
