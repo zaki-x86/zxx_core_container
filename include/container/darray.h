@@ -13,7 +13,7 @@
 
 #define _DARRAY_H_
 
-#include "zxx/zxx.darray.h"
-#include "zxx/darray.imp.h"
+#include "zxx/darray.api.h"
+#include "zxx/darray.imp.cc"
 
 #endif // !_DARRAY_H_

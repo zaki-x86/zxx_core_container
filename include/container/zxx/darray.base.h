@@ -1,18 +1,32 @@
-/**
- * @file darray.tcc
- * @author M Zaki (mamadov_zicx@gmail.com)
- * @brief Implementation of a dynamic array container
- * @version 0.1
- * @date 2022-12-16
- *
- * @copyright Copyright (c) 2022
- *
- */
+#ifndef _DARRAY_BASE_H_
+
+#define _DARRAY_BASE_H_
+
 #include "config/zxx.config.h"
-//#include "zxx_darray.h" // Useless but it's added to disable error squiggles
 #include <memory>
 
 BEGIN_NS_ZXX_CORE_CONTAINER
+
+/**
+ * @brief A class template that provides some of the implementation details for
+ * a dynamic array-based container.
+ *
+ * The `Darray_base` class template is intended to be used as a base class for a
+ * dynamic array-based container. It provides a nested struct, `_Darray_impl`,
+ * to store the data for the container, as well as member functions to access
+ * and modify the `_Darray_impl` object.
+ *
+ * One of the key benefits of using Darray_base as a base class is that it
+ * allows us to reuse code and reduce the amount of code you need to write and
+ * maintain. For example, you can use `Darray_base` to provide the underlying
+ * dynamic array storage and allocator functionality for your container, and
+ * then focus on implementing the specific interface and functionality that you
+ * want for your container.
+ *
+ * @tparam T The element type of the container.
+ * @tparam Allocator The allocator type to use for allocating memory for the
+ * container.
+ */
 
 template <typename T, typename Allocator>
 struct Darray_base {
@@ -86,9 +100,6 @@ public:
   
 };
 
-
-
-
 END_NS_ZXX_CORE_CONTAINER
 
-/* */
+#endif // !_DARRAY_BASE_H

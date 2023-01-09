@@ -3,6 +3,7 @@
 #define _DARRAY_TESTS_H_
 
 #include "container/darray.test/darray.fixture.h"
+#include <vector>
 
 BEGIN_NS_ZXX_CORE_CONTAINER_TEST
 
