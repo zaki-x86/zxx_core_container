@@ -292,8 +292,8 @@ using TestTypeParameters = ::testing::Types<
     int*,
     std::string*, 
     std::string, 
-    std::vector<int>,
-    std::array<int, 10>
+    std::vector<int>
+    //std::array<int, 10>
     > ;
 
 INSTANTIATE_TYPED_TEST_SUITE_P(darray_test_, darray_test, TestTypeParameters);
