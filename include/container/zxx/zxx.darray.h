@@ -44,70 +44,8 @@ BEGIN_NS_ZXX_CORE_CONTAINER
  * container.
  */
 
-template <typename T, typename Allocator = std::allocator<T>>
-struct Darray_base {
-
-  /**
-   * @brief The _Tp_alloc_type member type is a type alias that represents the
-   * type of the allocator to use for allocating elements of type T. It is
-   * defined using the rebind template of the Allocator class template, which
-   * allows you to create a new allocator type that is compatible with a
-   * different type.
-   */
-  using _T_alloc_type = typename Allocator::template rebind<T>::other;
-
-  /**
-   * @brief Nested struct to store the data for the vector.
-   *
-   */
-  struct _Darray_impl {
-    T *_m_start;
-    T *_m_finish;
-    T *_m_end_of_storage;
-    Allocator _m_allocator;
-
-    _Darray_impl()
-        : _m_start(nullptr), _m_finish(nullptr), _m_end_of_storage(nullptr) {}
-    _Darray_impl(const Allocator &a)
-        : _m_start(nullptr), _m_finish(nullptr), _m_end_of_storage(nullptr),
-          _m_allocator(a) {}
-  };
-
-  // Default constructor creates an empty Darray_impl object with _m_start,
-  // _m_finish, and _m_end_of_storage all set to nullptr.
-  Darray_base() {}
-
-  // Constructor that takes an allocator object creates a Darray_impl object
-  // with _m_start, _m_finish, and _m_end_of_storage all set to nullptr and the
-  // allocator object stored as a member variable.
-  Darray_base(const Allocator &a) : _m_impl(a) {}
-
-  // Destructor calls the allocator's deallocate() function to free the memory
-  // used by the vector's data.
-  ~Darray_base() {
-    _m_deallocate(_m_impl._m_start,
-                  _m_impl._m_end_of_storage - _m_impl._m_start);
-  }
-
-  // Returns a reference to the allocator object.
-  Allocator &_m_get_Tp_allocator() { return _m_impl._m_allocator; }
-  const Allocator &_m_get_Tp_allocator() const { return _m_impl._m_allocator; }
-
-  // Returns a reference to the Darray_impl object.
-  _Darray_impl &_m_get_impl() { return _m_impl; }
-  const _Darray_impl &_m_get_impl() const { return _m_impl; }
-
-private:
-  _Darray_impl _m_impl;
-
-  // Helper function to deallocate memory using
-  // Helper function to deallocate memory using the allocator's deallocate()
-  // function.
-  void _m_deallocate(T *p, std::size_t n) {
-    if (p)
-      _m_impl._m_allocator.deallocate(p, n);
-  }
-};
+template <typename T, typename Allocator>
+struct Darray_base;
 
 /**
  * @brief A dynamic array class template that provides a similar
@@ -187,7 +125,7 @@ public:
    *
    * @note The implementation of the iterator type is implementation-defined.
    */
-  using iterator = generic_iterator<pointer, darray_type>;
+  using iterator = T*;
 
   /**
    * @brief A const iterator that can be used to access elements in the
@@ -204,7 +142,7 @@ public:
    * @note The implementation of the const iterator type is
    * implementation-defined.
    */
-  using const_iterator = generic_iterator<const_pointer, darray_type>;;
+  using const_iterator = const T*;
 
   /**
    * @brief A reverse iterator that can be used to access and modify elements
@@ -248,10 +186,11 @@ protected:
    *  base class.  They should be pretty self-explanatory.
    */
   using darray_type = darray<T, Allocator>;
-  using _Base = Darray_base<T, Allocator> using _Base::_M_allocate;
-  using _Base::_M_deallocate;
-  using _Base::_M_get_Tp_allocator;
-  using _Base::_M_impl;
+  using _Base = Darray_base<T, Allocator>; 
+  using _Base::_m_allocate;
+  using _Base::_m_deallocate;
+  using _Base::_m_get_Tp_allocator;
+  using _Base::_m_impl;
 
 public:
   /**
@@ -269,7 +208,8 @@ public:
    * assert(v.empty());
    * @endcode
    */
-  ZXX_CONSTEXPR darray() noexcept(noexcept(Allocator()));
+  ZXX_CONSTEXPR darray() noexcept(noexcept(Allocator()))
+    : _Base(Allocator()) {}
 
   /**
    * @brief Constructs an empty darray with a copy of the given allocator.
@@ -607,7 +547,7 @@ public:
    * destructor, the destructor of darray is noexcept. Otherwise, it may throw
    * an exception if the allocator's destructor throws an exception.
    */
-  ~darray();
+  ~darray(){}
 
   /**
    * @brief Assigns the elements from another darray to the darray.
@@ -719,21 +659,7 @@ public:
    * assert(v.size() == 3);
    * @endcode
    */
-  size_type size() const;
-
-  /**
-   * @brief Returns the maximum number of elements the darray can hold.
-   *
-   * This function returns the maximum number of elements the darray can hold.
-   *
-   * @return The maximum number of elements the darray can hold.
-   *
-   * @code
-   * darray<int> v;
-   * assert(v.max_size() > 0);
-   * @endcode
-   */
-  size_type max_size() const;
+  size_type size() const { return size_type(end() - begin()); }
 
   /**
    * @brief Returns whether the darray is empty.
@@ -792,68 +718,6 @@ public:
   const_reference operator[](size_type n) const;
 
   /**
-   * @brief Returns a reference to the first element in the darray.
-   *
-   * This function returns a reference to the first element in the darray.
-   * Calling this function on an empty darray results in undefined behavior.
-   *
-   * @return A reference to the first element in the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * assert(v.front() == 1);
-   * @endcode
-   */
-  reference front();
-
-  /**
-   * @brief Returns a const reference to the first element in the darray.
-   *
-   * This function returns a const reference to the first element in the
-   * darray. Calling this function on an empty darray results in undefined
-   * behavior.
-   *
-   * @return A const reference to the first element in the darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * assert(v.front() == 1);
-   * @endcode
-   */
-  const_reference front() const;
-
-  /**
-   * @brief Returns a reference to the last element in the darray.
-   *
-   * This function returns a reference to the last element in the darray.
-   * Calling this function on an empty darray results in undefined behavior.
-   *
-   * @return A reference to the last element in the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * assert(v.back() == 3);
-   * @endcode
-   */
-  reference back();
-
-  /**
-   * @brief Returns a const reference to the last element in the darray.
-   *
-   * This function returns a const reference to the last element in the
-   * darray. Calling this function on an empty darray results in undefined
-   * behavior.
-   *
-   * @return A const reference to the last element in the darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * assert(v.back() == 3);
-   * @endcode
-   */
-  const_reference back() const;
-
-  /**
    * @brief Returns a pointer to the underlying element array.
    *
    * This function returns a pointer to the underlying element array. The
@@ -906,21 +770,6 @@ public:
    * @endcode
    */
   iterator begin();
-
-  /**
-   * @brief Returns a const_iterator to the beginning of the darray.
-   *
-   * This function returns a const_iterator to the beginning of the darray.
-   *
-   * @return A const_iterator to the beginning of the darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * darray<int>::const_iterator it = v.begin();
-   * assert(*it == 1);
-   * @endcode
-   */
-  const_iterator begin() const;
 
   /**
    * @brief Returns a const_iterator to the beginning of the darray.
@@ -1269,33 +1118,6 @@ public:
   iterator erase(const_iterator first, const_iterator last);
 
   /**
-   * @brief Swaps the contents of the darray with another darray.
-   *
-   * This function swaps the contents of the darray with another darray. If
-   * the allocators are not equal, the function will result in undefined
-   * behavior. If the allocators have noexcept swap functions, the function is
-   * noexcept. Otherwise, it may throw an exception if the allocator's swap
-   * function throws an exception.
-   *
-   * @param other The darray to swap with.
-   *
-   * @code
-   * darray<int> v1 = {1, 2, 3};
-   * darray<int> v2 = {4, 5, 6};
-   * v1.swap(v2);
-   * assert(v1.size() == 3);
-   * assert(v1[0] == 4);
-   * assert(v1[1] == 5);
-   * assert(v1[2] == 6);
-   * assert(v2.size() == 3);
-   * assert(v2[0] == 1);
-   * assert(v2[1] == 2);
-   * assert(v2[2] == 3);
-   * @endcode
-   */
-  void swap(darray &other);
-
-  /**
    * @brief Removes all elements from the darray.
    *
    * This function removes all elements from the darray. If the allocator has
@@ -1433,47 +1255,6 @@ public:
   const_reference back() const;
 
   /**
-   * @brief Returns a pointer to the underlying array serving as element
-   * storage.
-   *
-   * This function returns a pointer to the underlying array serving as
-   * element storage. The pointer is such that range [data(); data() + size())
-   * is always a valid range, even if the container is empty (data() is not
-   * dereferenceable in that case).
-   *
-   * @return A pointer to the underlying array serving as element storage.
-   *
-   * @code
-   * darray<int> v =  *
-   * @return A const pointer to the underlying array serving as element
-   * storage.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * const int* data = v.data();
-   * assert(data[0] == 1);
-   * assert(data[1] == 2);
-   * assert(data[2] == 3);
-   * @endcode
-   */
-  const_pointer data() const;
-
-  /**
-   * @brief Returns an iterator to the beginning of the darray.
-   *
-   * This function returns an iterator to the beginning of the darray.
-   *
-   * @return An iterator to the beginning of the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::iterator it = v.begin();
-   * assert(*it == 1);
-   * @endcode
-   */
-  iterator begin();
-
-  /**
    * @brief Returns a const iterator to the beginning of the darray.
    *
    * This function returns a const iterator to the beginning of the darray.
@@ -1487,68 +1268,6 @@ public:
    * @endcode
    */
   const_iterator begin() const;
-
-  /**
-   * @brief Returns a const iterator to the beginning of the darray.
-   *
-   * This function returns a const iterator to the beginning of the darray.
-   *
-   * @return A const iterator to the beginning of the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::const_iterator it = v.cbegin();
-   * assert(*it == 1);
-   * @endcode
-   */
-  const_iterator cbegin() const;
-
-  /**
-   * @brief Returns an iterator to the end of the darray.
-   *
-   * This function returns an iterator to the end of the darray.
-   *
-   * @return An iterator to the end of the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::iterator it = v.end();
-   * --it;
-   * assert(*it == 3);
-   * @endcode
-   */
-  iterator end();
-
-  /**
-   * @brief Returns a const iterator to the end of the darray.
-   *
-   * This function returns a const iterator to the end of the darray.
-   *
-   * @return A const iterator to the end of the darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * darray<int>::const_iterator it = v.end();
-   * --it;
-   * assert(*it == 3);
-   * @endcode
-   */
-  const_iterator end() const;
-
-  /**
-   * @brief Returns a const iterator to the end of the darray.
-   *
-   *
-   * @return A const iterator to the end of the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::const_iterator it = v.cend();
-   * --it;
-   * assert(*it == 3);
-   * @endcode
-   */
-  const_iterator cend() const;
 
   /**
    * @brief Returns a reverse iterator to the beginning of the reversed
@@ -1643,46 +1362,6 @@ public:
    *
    * This function returns a reference to the element at the specified
    * location in the darray. If the index is not within the bounds of the
-   * darray, the function results in undefined behavior.
-   *
-   * @param index The index of the element to return.
-   *
-   * @return A reference to the element at the specified location in the
-   * darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * assert(v[0] == 1);
-   * @endcode
-   */
-  reference operator[](size_type index);
-
-  /**
-   * @brief Returns a const reference to the element at the specified location
-   * in the darray.
-   *
-   * This function returns a const reference to the element at the specified
-   * location in the darray. If the index is not within the bounds of the
-   * darray, the function results in undefined behavior.
-   *
-   * @param index The index of the element to return.
-   *
-   * @return A const reference to the element at the specified location in the
-   * darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * assert(v[0] == 1);
-   * @endcode
-   */
-  const_reference operator[](size_type index) const;
-
-  /**
-   * @brief Returns a reference to the element at the specified location in
-   * the darray.
-   *
-   * This function returns a reference to the element at the specified
-   * location in the darray. If the index is not within the bounds of the
    * darray, the function throws an std::out_of_range exception.
    *
    * @param index The index of the element to return.
@@ -1709,66 +1388,6 @@ public:
    * @endcode
    */
   const_reference at(size_type index) const;
-
-  /**
-   * @brief Returns true if the darray is empty, false otherwise.
-   *
-   * This function returns true if the darray is empty, false otherwise.
-   *
-   * @return true if the darray is empty, false otherwise.
-   *
-   * @code
-   * darray<int> v;
-   * assert(v.empty());
-   * @endcode
-   */
-  bool empty() const;
-
-  /**
-   * @brief Returns the number of elements in the darray.
-   *
-   * This function returns the number of elements in the darray.
-   *
-   * @return The number of elements in the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * assert(v.size() == 3);
-   * @endcode
-   */
-  size_type size() const;
-
-  /**
-   * @brief Returns the maximum number of elements the darray can hold.
-   *
-   * This function returns the maximum number of elements the darray can hold.
-   *
-   * @return The maximum number of elements the darray can hold.
-   *
-   * @code
-   * darray<int> v;
-   * assert(v.capacity() == 0);
-   * @endcode
-   */
-  size_type capacity() const;
-
-  /**
-   * @brief Resizes the darray to the specified size.
-   *
-   * This function resizes the darray to the specified size. If the size is
-   * smaller than the current size, the darray is truncated. If the size is
-   * larger than the current size, the darray is expanded by adding
-   * default-constructed elements to the end
-   *
-   * @param size The new size of the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * v.resize(5);
-   * assert(v.size() == 5);
-   * @endcode
-   */
-  void resize(size_type size);
 
   /**
    * @brief Resizes the darray to the specified size.
@@ -1820,20 +1439,6 @@ public:
    * @endcode
    */
   void reserve(size_type size);
-
-  /**
-   * @brief Removes all elements from the darray.
-   *
-   * This function removes all elements from the darray. The darray is left
-   * with a size
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * v.clear();
-   * assert(v.empty());
-   * @endcode
-   */
-  void clear();
 
   /**
    * @brief Inserts an element into the darray.
@@ -1983,48 +1588,57 @@ public:
    * assert(v1 == darray<int>({4, 5, 6}));
    * @endcode
    */
-  template <class T> friend void swap(darray<T> &lhs, darray<T> &rhs);
-
-  /**
-   * @brief These operators allow you to compare two darray objects for
-   * equality, inequality, and lexicographic ordering. Note that the comparison
-   * operators are implemented as friend functions, rather than member
-   * functions, because they need to compare the elements of two different
-   * darray objects.
-   */
-
-  template <class T>
-  friend bool operator==(const darray<T> &lhs, const darray<T> &rhs) {
-    return lhs.size() == rhs.size() &&
-           std::equal(lhs.begin(), lhs.end(), rhs.begin());
-  }
-
-  template <class T>
-  friend bool operator!=(const darray<T> &lhs, const darray<T> &rhs) {
-    return !(lhs == rhs);
-  }
-
-  template <class T>
-  friend bool operator<(const darray<T> &lhs, const darray<T> &rhs) {
-    return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(),
-                                        rhs.end());
-  }
-
-  template <class T>
-  friend bool operator<=(const darray<T> &lhs, const darray<T> &rhs) {
-    return !(rhs < lhs);
-  }
-
-  template <class T>
-  friend bool operator>(const darray<T> &lhs, const darray<T> &rhs) {
-    return rhs < lhs;
-  }
-
-  template <class T>
-  friend bool operator>=(const darray<T> &lhs, const darray<T> &rhs) {
-    return !(lhs < rhs);
-  }
+  template <class U> friend void swap(darray<U> &lhs, darray<U> &rhs);
 };
+
+/**
+ * @brief These operators allow you to compare two darray objects for
+ * equality, inequality, and lexicographic ordering. Note that the comparison
+ * operators are implemented as friend functions, rather than member
+ * functions, because they need to compare the elements of two different
+ * darray objects.
+ */
+
+template <class U>
+bool operator==(const darray<U> &lhs, const darray<U> &rhs) {
+  return lhs.size() == rhs.size() &&
+          std::equal(lhs.begin(), lhs.end(), rhs.begin());
+}
+
+template <class U>
+bool operator!=(const darray<U> &lhs, const darray<U> &rhs) {
+  return !(lhs == rhs);
+}
+
+template <class U>
+bool operator<(const darray<U> &lhs, const darray<U> &rhs) {
+  return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(),
+                                      rhs.end());
+}
+
+template <class U>
+bool operator<=(const darray<U> &lhs, const darray<U> &rhs) {
+  return !(rhs < lhs);
+}
+
+template <class U>
+bool operator>(const darray<U> &lhs, const darray<U> &rhs) {
+  return rhs < lhs;
+}
+
+template <class U>
+bool operator>=(const darray<U> &lhs, const darray<U> &rhs) {
+  return !(lhs < rhs);
+}
+
+#if __cplusplus >= 202003L
+template <typename U, typename Alloc>
+ZXX_CONSTEXPR bool
+operator>=<(const zxx::core::container::darray<U, Alloc> &x,
+            const zxx::core::container::darray<U, Alloc> &y) {
+  return false;
+}
+#endif 
 
 /**
  * @brief Outputs the elements of a darray to a stream.
@@ -2054,5 +1668,6 @@ std::ostream &operator<<(std::ostream &os, const darray<T> &d) {
 }
 
 END_NS_ZXX_CORE_CONTAINER
+
 
 #endif // !_ZXX_DARRAY_H_

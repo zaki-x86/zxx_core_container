@@ -1,6 +1,6 @@
-#ifndef _DARRAY_TEST_H_
+#ifndef _DARRAY_FIXTURE_H_
 
-#define _DARRAY_TEST_H_
+#define _DARRAY_FIXTURE_H_
 
 
 #include "container/darray.h"

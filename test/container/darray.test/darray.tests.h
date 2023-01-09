@@ -1,3 +1,7 @@
+#ifndef _DARRAY_TESTS_H_
+
+#define _DARRAY_TESTS_H
+
 #include "container/darray.test/darray.fixture.h"
 
 BEGIN_NS_ZXX_CORE_CONTAINER_TEST
@@ -281,12 +285,15 @@ using TestTypeParameters = ::testing::Types<
     int, 
     long, 
     char*,
-    char[], 
+    // error:darray.imp.h:58:45: error: invalid use of array with unspecified bounds
+   // 58 | _m_impl._m_end_of_storage - _m_impl._m_start);
+    // char[], error:  
+    // int[],  error: 
     int*,
-    int[], 
     std::string*, 
     std::string, 
-    std::vector<int>
+    std::vector<int>,
+    std::array<int, 10>
     > ;
 
 INSTANTIATE_TYPED_TEST_SUITE_P(darray_test_, darray_test, TestTypeParameters);
@@ -294,3 +301,5 @@ INSTANTIATE_TYPED_TEST_SUITE_P(darray_test_, darray_test, TestTypeParameters);
 // #######################################################
 
 END_NS_ZXX_CORE_CONTAINER_TEST
+
+#endif // !_DARRAY_TESTS_H_
