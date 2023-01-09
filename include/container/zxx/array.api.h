@@ -325,8 +325,8 @@ ZXX_FORCE_INLINE bool operator>=(const array<_T, _N> &_one, const array<_T, _N> 
   return !(_one < _two);
 }
 
-template <class T>
-std::ostream &operator<<(std::ostream &os, const array<_T> &arr) {
+template <class _T, size_t _N>
+std::ostream &operator<<(std::ostream &os, const array<_T, _N> &arr) {
   os << "[";
   for (const auto &x : arr) {
     os << x << ", ";
