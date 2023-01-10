@@ -7,8 +7,8 @@ name: rootdoc
 hidden:
 ---
 
-container/container_main
-graph/graph_main
+zxx_core_container/container/container_main
+zxx_core_container/graph/graph_main
 
 ```
 
