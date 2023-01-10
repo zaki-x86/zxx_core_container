@@ -8,10 +8,11 @@ set(exe_sources
 )
 
 set(headers
+  include/container/array.h
   include/container/darray.h
+  include/container/deque.h
   # include/container/forward_list.h
   # include/container/list.h
-  include/container/array.h
   # include/container/hash_table.h
   # include/container/map.h
   # include/container/multimap.h
