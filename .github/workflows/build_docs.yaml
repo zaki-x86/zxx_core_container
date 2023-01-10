@@ -17,7 +17,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
-          pip install sphinx sphinx-rtd-theme breathe myst_parser breathe sphinx.ext.graphviz
+          pip install sphinx sphinx-rtd-theme breathe myst_parser breathe
         
       - name: Generate Doxygen documentation
         run: doxygen Doxyfile
