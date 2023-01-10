@@ -1,18 +1,11 @@
 name: Build Documentation
 
-# This configuration will trigger the workflow when a push event 
-# is made on the main branch, and the commit contains a change in 
-# a markdown file and when a pull request event occurs with "updated docs" label.
 on:
   push:
     branches:
       - main
-    paths:
-      - '**.md'
-  pull_request:
-    types: [labeled]
-    labels:
-      - updated docs
+
+needs: cmake_build
 
 jobs:
   build:
