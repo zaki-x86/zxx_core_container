@@ -25,8 +25,8 @@ jobs:
       
       - name: Install dependencies
         id: install-dependencies
-          sudo apt-get update
         run: |
+          sudo apt-get update
           sudo apt-get install -y doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
           pip install sphinx sphinx-rtd-theme breathe myst_parser breathe sphinx_design pydata-sphinx-theme
       
