@@ -1,4 +1,4 @@
-# STL Container Library
+# Library Reference
 
 ```{toctree}
 ---

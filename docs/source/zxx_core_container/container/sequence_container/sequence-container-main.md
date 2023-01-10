@@ -4,6 +4,7 @@
 ---
 caption: Components
 name: sequence-container
+maxdepth: 1
 ---
 
 array
