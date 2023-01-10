@@ -14,6 +14,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Install dependencies
+        id: install-dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
@@ -27,14 +28,15 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-dependencies-  
       
-      - name: Generate Doxygen documentation
-        run: doxygen Doxyfile
-
-      - name: Build Sphinx documentation
-        run: |
+      - name: Build documentation
+        id: build-docs
+        run: | 
+          echo "Generate doxygen xml for breathe to understand the source code"
+          doxygen Doxyfile
+          echo "build the documentation"
           cd docs
           make html
-          
+
       - name: Cache documentation
         uses: actions/cache@v2
         with:
