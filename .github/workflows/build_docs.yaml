@@ -28,7 +28,7 @@ jobs:
         uses: actions/cache@v3
         if: steps.extract-doxygen.outputs.cache-hit != 'true'
         with:
-          path: $GITHUB_WORKSPACE/doxygen
+          path: ${{ github.workspace }}/doxygen
           key: doxygen-v$DOXYGEN_VERSION-${{ hashFiles('$GITHUB_WORKSPACE/doxygen/**') }}
       
       - name: Extract doxygen
@@ -51,7 +51,7 @@ jobs:
       - name: Cache documentation
         uses: actions/cache@v3
         with:
-          path: $GITHUB_WORKSPACE/docs
+          path: ${{ github.workspace }}/docs
           key: build-docs-${{ hashFiles('docs/**/*') }}
           restore-keys: |
             build-docs-
