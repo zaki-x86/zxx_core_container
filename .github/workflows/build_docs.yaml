@@ -30,6 +30,8 @@ jobs:
           tar xzf doxygen.tar.gz
           mv doxygen-1.9.6/bin doxygen
           export PATH=${{ env.HOME }}/doxygen:$PATH
+          ls ${{ env.HOME }}/doxygen # Debugging
+          echo $PATH  # Debugging
         env:
           DOXYGEN_CACHE_DIR: ${{ steps.restore-doxygen.outputs.cache-dir }}
 
