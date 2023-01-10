@@ -28,9 +28,10 @@ jobs:
         run: |
           wget https://www.doxygen.nl/files/doxygen-1.9.6.linux.bin.tar.gz -O doxygen.tar.gz
           tar xzf doxygen.tar.gz
+          ls doxygen-1.9.6/bin # Debugging
           mv doxygen-1.9.6/bin doxygen
           export PATH=$GITHUB_WORKSPACE/doxygen:$PATH
-          echo env.HOME: ${{ env.HOME }} # Debugging
+          echo ls $GITHUB_WORKSPACE/doxygen # Debugging
           echo $PATH  # Debugging
         env:
           DOXYGEN_CACHE_DIR: ${{ steps.restore-doxygen.outputs.cache-dir }}
