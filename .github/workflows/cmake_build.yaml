@@ -1,7 +1,7 @@
 # Source: https://github.com/cristianadam/HelloWorld/blob/master/.github/workflows/build_cmake.yml
 name: CMake Build Matrix
 
-on: [push, pull_request]
+on: [push, pull_request, workflow_dispatch]
 
 env:
   CMAKE_VERSION: 3.24.3
@@ -9,10 +9,35 @@ env:
   BUILD_TYPE: Release
   CCACHE_VERSION: 4.7.3
 
+# trigger build jobs only when changes happen in the directories specified
+# in `filters:`
+  
 jobs:
+  paths-filter:
+    runs-on: ubuntu-latest
+    outputs:
+      output1: ${{ steps.filter.outputs.workflows }}
+    steps:
+    - uses: actions/checkout@v2
+    - uses: dorny/paths-filter@v2
+      id: filter
+      with:
+        filters: |
+          workflows:
+            - '.github/workflows/cmake_build.yaml'
+            - 'examples/**'
+            - 'include/**'
+            - 'src/**'
+            - 'scripts/**'
+            - 'src/**'
+            - 'test/**'
+            - 'CMakeLists.txt'
+            - 'Doxyfile'
+            - '.gitignore'
   build:
     name: ${{ matrix.config.name }}
     runs-on: ${{ matrix.config.os }}
+    needs: paths-filter
     strategy:
       fail-fast: false
       matrix:
@@ -39,7 +64,7 @@ jobs:
             os: macos-latest,
             cc: "clang", cxx: "clang++"
           }
-
+    if: needs.paths-filter.outputs.output1 == 'true'
     steps:
     - uses: actions/checkout@v3
 
