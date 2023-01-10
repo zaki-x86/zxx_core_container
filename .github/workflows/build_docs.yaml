@@ -18,7 +18,15 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
           pip install sphinx sphinx-rtd-theme breathe myst_parser breathe sphinx_design pydata-sphinx-theme
-        
+      
+      - name: Cache dependencies
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.install-dependencies.outputs.path }}
+          key: ${{ runner.os }}-dependencies-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-dependencies-  
+      
       - name: Generate Doxygen documentation
         run: doxygen Doxyfile
 
@@ -26,7 +34,15 @@ jobs:
         run: |
           cd docs
           make html
-        
+          
+      - name: Cache documentation
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.build-docs.outputs.path }}
+          key: ${{ runner.os }}-docs-${{ hashFiles('docs/**/*') }}
+          restore-keys: |
+            ${{ runner.os }}-docs-
+
       - name: Deploy documentation
         uses: peaceiris/actions-gh-pages@v3
         with:
