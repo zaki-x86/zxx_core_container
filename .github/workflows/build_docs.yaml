@@ -36,15 +36,13 @@ jobs:
       - name: Restore sphinx dependencies
         uses: actions/cache@v3
         with:
-          path: ${{ steps.install-dependencies.outputs.path }}
+          path: /usr/local/lib/python3.9/site-packages
           key: install-dependencies-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
             install-dependencies-  
       
       - name: Install dependencies
         id: install-dependencies
-        outputs:
-          path: /usr/local/lib/python3.9/site-packages
         run: |
           sudo apt-get update
           pip install sphinx sphinx-rtd-theme breathe myst_parser breathe sphinx_design pydata-sphinx-theme
@@ -54,15 +52,13 @@ jobs:
       - name: Cache documentation
         uses: actions/cache@v3
         with:
-          path: ${{ steps.build-docs.outputs.path }}
+          path: 'docs'
           key: build-docs-${{ hashFiles('docs/**/*') }}
           restore-keys: |
             build-docs-
 
       - name: Build documentation
         id: build-docs
-        outputs:
-          path: 'docs'
         run: | 
           echo "Generate doxygen xml for breathe to understand the source code"
           doxygen Doxyfile
