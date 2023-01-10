@@ -43,9 +43,13 @@ jobs:
       
       - name: Install dependencies
         id: install-dependencies
+        outputs:
+          path: /usr/local/lib/python3.9/site-packages
         run: |
           sudo apt-get update
           pip install sphinx sphinx-rtd-theme breathe myst_parser breathe sphinx_design pydata-sphinx-theme
+        env:
+          PIP_CACHE_DIR: ${{ steps.restore-dependencies-cache.outputs.cache-dir }}/pip
       
       - name: Cache documentation
         uses: actions/cache@v3
