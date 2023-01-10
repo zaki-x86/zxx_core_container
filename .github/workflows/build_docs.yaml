@@ -6,6 +6,8 @@ on:
     branches: [main]
     types: 
       - completed
+env:
+  DOXYGEN_VERSION: 1.9.6
 
 jobs:
   build:
@@ -26,9 +28,15 @@ jobs:
       - name: Extract doxygen
         id: extract-doxygen
         run: |
-          wget https://www.doxygen.nl/files/doxygen-1.9.6.linux.bin.tar.gz -O doxygen.tar.gz
+          wget https://www.doxygen.nl/files/doxygen-$ENV{DOXYGEN_VERSION}.linux.bin.tar.gz -O doxygen.tar.gz
           tar xzf doxygen.tar.gz
-          echo $GITHUB_WORKSPACE/doxygen/bin >> $GITHUB_PATH
+          mv doxygen-$ENV{DOXYGEN_VERSION}/bin doxygen
+          echo $GITHUB_WORKSPACE/doxygen >> $GITHUB_PATH
+          
+          echo GITHUB_PATH:
+          ls $GITHUB_PATH
+          echo doxygen binary location:
+          ls $GITHUB_WORKSPACE/doxygen
         env:
           DOXYGEN_CACHE_DIR: ${{ steps.restore-doxygen.outputs.cache-dir }}
 
