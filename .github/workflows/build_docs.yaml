@@ -17,7 +17,7 @@ jobs:
         run: |
           sudo apt-get update
           sudo apt-get install -y doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
-          pip install sphinx sphinx-rtd-theme breathe myst_parser breathe
+          pip install sphinx sphinx-rtd-theme breathe myst_parser breathe sphinx_design pydata-sphinx-theme
         
       - name: Generate Doxygen documentation
         run: doxygen Doxyfile
@@ -31,4 +31,4 @@ jobs:
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: docs/_build/html
+          publish_dir: docs/build/html
