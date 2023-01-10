@@ -23,14 +23,14 @@ jobs:
         if: steps.extract-doxygen.outputs.cache-hit != 'true'
         with:
           path: ${{ env.HOME }}/doxygen
-          key: doxygen-v1.9.2-${{ hashFiles('${HOME}/doxygen/**') }}
+          key: doxygen-v$DOXYGEN_VERSION-${{ hashFiles('${HOME}/doxygen/**') }}
       
       - name: Extract doxygen
         id: extract-doxygen
         run: |
-          wget https://www.doxygen.nl/files/doxygen-$ENV{DOXYGEN_VERSION}.linux.bin.tar.gz -O doxygen.tar.gz
+          wget https://www.doxygen.nl/files/doxygen-$DOXYGEN_VERSION.linux.bin.tar.gz -O doxygen.tar.gz
           tar xzf doxygen.tar.gz
-          mv doxygen-$ENV{DOXYGEN_VERSION}/bin doxygen
+          mv doxygen-$DOXYGEN_VERSION/bin doxygen
           echo $GITHUB_WORKSPACE/doxygen >> $GITHUB_PATH
           
           echo GITHUB_PATH:
