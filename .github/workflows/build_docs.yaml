@@ -1,9 +1,14 @@
 name: Build Documentation
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: ["CMake Build Matrix"]
+    branches: [main]
+    types: 
+      - completed
+  # push:
+  #   branches:
+  #     - main
 
 needs: cmake_build
 
