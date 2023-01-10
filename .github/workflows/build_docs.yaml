@@ -16,14 +16,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
+      
+      - name: Setup python and restore pip
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+          cache: 'pip'
 
       - name: Restore doxygen binary
         id: restore-doxygen
         uses: actions/cache@v3
         if: steps.extract-doxygen.outputs.cache-hit != 'true'
         with:
-          path: ${{ env.HOME }}/doxygen
-          key: doxygen-v$DOXYGEN_VERSION-${{ hashFiles('${HOME}/doxygen/**') }}
+          path: $GITHUB_WORKSPACE/doxygen
+          key: doxygen-v$DOXYGEN_VERSION-${{ hashFiles('$GITHUB_WORKSPACE/doxygen/**') }}
       
       - name: Extract doxygen
         id: extract-doxygen
@@ -32,34 +38,20 @@ jobs:
           tar xzf doxygen.tar.gz
           mv doxygen-$DOXYGEN_VERSION/bin doxygen
           echo $GITHUB_WORKSPACE/doxygen >> $GITHUB_PATH
-          
-          echo GITHUB_PATH:
-          ls $GITHUB_PATH
-          echo doxygen binary location:
-          ls $GITHUB_WORKSPACE/doxygen
         env:
           DOXYGEN_CACHE_DIR: ${{ steps.restore-doxygen.outputs.cache-dir }}
-
-      - name: Restore sphinx dependencies
-        uses: actions/cache@v3
-        with:
-          path: /usr/local/lib/python3.9/site-packages
-          key: install-dependencies-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: |
-            install-dependencies-  
       
       - name: Install dependencies
         id: install-dependencies
         run: |
           sudo apt-get update
+          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
           pip install sphinx sphinx-rtd-theme breathe myst_parser breathe sphinx_design pydata-sphinx-theme
-        env:
-          PIP_CACHE_DIR: ${{ steps.restore-dependencies-cache.outputs.cache-dir }}/pip
       
       - name: Cache documentation
         uses: actions/cache@v3
         with:
-          path: 'docs'
+          path: $GITHUB_WORKSPACE/docs
           key: build-docs-${{ hashFiles('docs/**/*') }}
           restore-keys: |
             build-docs-
