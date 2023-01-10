@@ -33,7 +33,6 @@ extensions = [
     'breathe',
     'myst_parser',
     'sphinx_design',
-    'sphinxcontrib.plantuml',
     'sphinx.ext.graphviz'
 ]
 
