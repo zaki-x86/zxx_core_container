@@ -1,0 +1,819 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>array &#8212; &lt;b&gt;zxx::core::container&lt;/b&gt; Library</title>
+  
+  
+  
+  <script data-cfasync="false">
+    document.documentElement.dataset.mode = localStorage.getItem("mode") || "";
+    document.documentElement.dataset.theme = localStorage.getItem("theme") || "light";
+  </script>
+  
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../../../_static/styles/theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/bootstrap.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+<link href="../../../_static/styles/pydata-sphinx-theme.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+
+  
+  <link href="../../../_static/vendor/fontawesome/6.1.2/css/all.min.css?digest=796348d33e8b1d947c94" rel="stylesheet">
+  <link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-solid-900.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-brands-400.woff2">
+<link rel="preload" as="font" type="font/woff2" crossorigin href="../../../_static/vendor/fontawesome/6.1.2/webfonts/fa-regular-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/design-style.4045f2051d55cab465a707391d5b2007.min.css" />
+  
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94">
+<link rel="preload" as="script" href="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94">
+
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <script src="../../../_static/sphinx_highlight.js"></script>
+    <script src="../../../_static/design-tabs.js"></script>
+    <script>DOCUMENTATION_OPTIONS.pagename = 'zxx_core_container/container/sequence_container/array';</script>
+    <link rel="canonical" href="/zxx_core_container/zxx_core_container/container/sequence_container/array.html" />
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="darray" href="darray.html" />
+    <link rel="prev" title="Sequencial Containers" href="sequence-container-main.html" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="docsearch:language" content="en">
+  </head>
+  
+  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="180" data-default-mode="">
+
+  
+  
+  <a class="skip-link" href="#main-content">Skip to main content</a>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__primary" id="__primary">
+  <label class="overlay overlay-primary" for="__primary"></label>
+
+  
+  <input type="checkbox" class="sidebar-toggle" name="__secondary" id="__secondary">
+  <label class="overlay overlay-secondary" for="__secondary"></label>
+
+  
+  <div class="search-button__wrapper">
+    <div class="search-button__overlay"></div>
+    <div class="search-button__search-container">
+      
+<form class="bd-search d-flex align-items-center" action="../../../search.html" method="get">
+  <i class="fa-solid fa-magnifying-glass"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search the docs ..." aria-label="Search the docs ..." autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false">
+  <span class="search-button__kbd-shortcut"><kbd class="kbd-shortcut__modifier">Ctrl</kbd>+<kbd>K</kbd></span>
+</form>
+    </div>
+  </div>
+
+  
+  <nav class="bd-header navbar navbar-expand-lg bd-navbar" id="navbar-main"><div class="bd-header__inner bd-page-width">
+  <label class="sidebar-toggle primary-toggle" for="__primary">
+      <span class="fa-solid fa-bars"></span>
+  </label>
+  <div id="navbar-start">
+    
+    
+  
+
+
+<a class="navbar-brand logo" href="../../index.html">
+
+  
+  
+  
+  
+  
+  
+  
+
+  
+  
+    <p class="title logo__title"><b>zxx::core::container</b> Library</p>
+  
+</a>
+    
+  </div>
+
+  
+  <div class="col-lg-9 navbar-header-items">
+    <div id="navbar-center" class="mr-auto">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../container_main.html">
+                        Library Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../graph/graph_main.html">
+                        Graph Library
+                      </a>
+                    </li>
+                
+
+                <li class="nav-item">
+                  <a class="nav-link nav-external" href="https://github.com/zaki-x86/zxx_core_container">
+                    Source Code
+                  </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+    </div>
+
+    <div id="navbar-end">
+      
+        <div class="navbar-end-item navbar-persistent--container">
+          
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+        </div>
+      
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/zaki-x86" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+  </div>
+
+
+  
+  
+    <div class="navbar-persistent--mobile">
+<button class="btn btn-sm navbar-btn search-button search-button__button" title="Search" aria-label="Search" data-toggle="tooltip">
+  <i class="fa-solid fa-magnifying-glass"></i>
+</button>
+    </div>
+  
+
+  
+  <label class="sidebar-toggle secondary-toggle" for="__secondary">
+      <span class="fa-solid fa-outdent"></span>
+  </label>
+  
+
+</div>
+  </nav>
+  
+
+  <div class="bd-container">
+    <div class="bd-container__inner bd-page-width">
+      
+      <div class="bd-sidebar-primary bd-sidebar">
+        
+  
+  <div class="sidebar-header-items sidebar-primary__section">
+    
+    
+      <div class="sidebar-header-items__center">
+      
+      <div class="navbar-center-item">
+        <nav class="navbar-nav">
+    <p class="sidebar-header-items__title" role="heading" aria-level="1" aria-label="Site Navigation">
+        Site Navigation
+    </p>
+    <ul id="navbar-main-elements" class="navbar-nav">
+        
+                    <li class="nav-item current active">
+                      <a class="nav-link nav-internal" href="../container_main.html">
+                        Library Reference
+                      </a>
+                    </li>
+                
+
+                    <li class="nav-item">
+                      <a class="nav-link nav-internal" href="../../graph/graph_main.html">
+                        Graph Library
+                      </a>
+                    </li>
+                
+
+                <li class="nav-item">
+                  <a class="nav-link nav-external" href="https://github.com/zaki-x86/zxx_core_container">
+                    Source Code
+                  </a>
+                </li>
+                
+    </ul>
+</nav>
+      </div>
+      
+      </div>
+    
+
+    
+    
+    <div class="sidebar-header-items__end">
+      
+      <div class="navbar-end-item">
+        <button class="theme-switch-button btn btn-sm btn-outline-primary navbar-btn rounded-circle" title="light/dark" aria-label="light/dark" data-toggle="tooltip">
+    <span class="theme-switch" data-mode="light"><i class="fa-solid fa-sun"></i></span>
+    <span class="theme-switch" data-mode="dark"><i class="fa-solid fa-moon"></i></span>
+    <span class="theme-switch" data-mode="auto"><i class="fa-solid fa-circle-half-stroke"></i></span>
+</button>
+      </div>
+      
+      <div class="navbar-end-item">
+        <ul id="navbar-icon-links" class="navbar-nav" aria-label="Icon Links">
+        <li class="nav-item">
+          
+          
+          
+          
+          
+          
+          
+          <a href="https://github.com/zaki-x86" title="GitHub" class="nav-link" rel="noopener" target="_blank" data-toggle="tooltip"><span><i class="fa-brands fa-square-github"></i></span>
+            <label class="sr-only">GitHub</label></a>
+        </li>
+      </ul>
+      </div>
+      
+    </div>
+    
+  </div>
+
+  
+  <div class="sidebar-start-items sidebar-primary__section">
+    <div class="sidebar-start-items__item"><nav class="bd-links" id="bd-docs-nav" aria-label="Section navigation">
+  <p class="bd-links__title" role="heading" aria-level="1">
+    Section Navigation
+  </p>
+  <div class="bd-toc-item navbar-nav">
+    <p aria-level="2" class="caption" role="heading"><span class="caption-text">Components</span></p>
+<ul class="current nav bd-sidenav">
+<li class="toctree-l1 current active has-children"><a class="reference internal" href="sequence-container-main.html">Sequencial Containers</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-1"><i class="fa-solid fa-chevron-down"></i></label><ul class="current">
+<li class="toctree-l2 current active"><a class="current reference internal" href="#"><code class="docutils literal notranslate"><span class="pre">array</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="darray.html"><code class="docutils literal notranslate"><span class="pre">darray</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="forward_list.html"><code class="docutils literal notranslate"><span class="pre">forward_list</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="list.html"><code class="docutils literal notranslate"><span class="pre">list</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../associative_container/associative-container-main.html">Associative Containers</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-2"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../associative_container/hash_table.html"><code class="docutils literal notranslate"><span class="pre">hash_table</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../associative_container/set.html"><code class="docutils literal notranslate"><span class="pre">set</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../associative_container/map.html"><code class="docutils literal notranslate"><span class="pre">map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../associative_container/multiset.html"><code class="docutils literal notranslate"><span class="pre">multiset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../associative_container/multimap.html"><code class="docutils literal notranslate"><span class="pre">multimap</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../associative_container/unordered_set.html"><code class="docutils literal notranslate"><span class="pre">unordered_set</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../associative_container/unordered_map.html"><code class="docutils literal notranslate"><span class="pre">unordered_map</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../associative_container/unordered_multiset.html"><code class="docutils literal notranslate"><span class="pre">unordered_multiset</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../associative_container/unordered_multimap.html"><code class="docutils literal notranslate"><span class="pre">unordered_multimap</span></code></a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="../adaptor_container/adaptor-container-main.html">Adaptor Containers</a><input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/><label class="toctree-toggle" for="toctree-checkbox-3"><i class="fa-solid fa-chevron-down"></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="../adaptor_container/stack.html"><code class="docutils literal notranslate"><span class="pre">queue</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="../adaptor_container/queue.html"><code class="docutils literal notranslate"><span class="pre">stack</span></code></a></li>
+</ul>
+</li>
+</ul>
+
+  </div>
+</nav>
+    </div>
+  </div>
+  
+
+  
+  <div class="sidebar-end-items sidebar-primary__section">
+    <div class="sidebar-end-items__item">
+    </div>
+  </div>
+
+  
+  <div id="rtd-footer-container"></div>
+
+      </div>
+      <main id="main-content" class="bd-main">
+        
+        
+        <div class="bd-content">
+          <div class="bd-article-container">
+            
+            <div class="bd-header-article">
+                
+            </div>
+            
+            
+            <article class="bd-article" role="main">
+              
+  <section id="array">
+<h1><code class="docutils literal notranslate"><span class="pre">array</span></code><a class="headerlink" href="#array" title="Permalink to this heading">#</a></h1>
+<dl class="cpp struct">
+<dt class="sig sig-object cpp" id="_CPPv4I0_6size_tE5array">
+<span id="_CPPv3I0_6size_tE5array"></span><span id="_CPPv2I0_6size_tE5array"></span><span class="k"><span class="pre">template</span></span><span class="p"><span class="pre">&lt;</span></span><span class="k"><span class="pre">typename</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">T</span></span></span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">N</span></span></span><span class="p"><span class="pre">&gt;</span></span><br /><span class="target" id="structarray"></span><span class="k"><span class="pre">struct</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">array</span></span></span><a class="headerlink" href="#_CPPv4I0_6size_tE5array" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Represents a fixed-size array with elements of type T and size N. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Template Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>T</strong> – The type of the elements stored in the array. </p></li>
+<li><p><strong>N</strong> – The size of the array. </p></li>
+</ul>
+</dd>
+</dl>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-types">Public Types</p>
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array9referenceE">
+<span id="_CPPv3N5array9referenceE"></span><span id="_CPPv2N5array9referenceE"></span><span id="array::reference"></span><span class="target" id="structarray_1ab33dc9e2ae7af2e55e3e6244195a89dd"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">reference</span></span></span><a class="headerlink" href="#_CPPv4N5array9referenceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A reference to an element in the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array15const_referenceE">
+<span id="_CPPv3N5array15const_referenceE"></span><span id="_CPPv2N5array15const_referenceE"></span><span id="array::const_reference"></span><span class="target" id="structarray_1a53fcc69ac9b8432b1d359c35b5f481dc"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="sig-name descname"><span class="n"><span class="pre">const_reference</span></span></span><a class="headerlink" href="#_CPPv4N5array15const_referenceE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A const reference to an element in the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array8iteratorE">
+<span id="_CPPv3N5array8iteratorE"></span><span id="_CPPv2N5array8iteratorE"></span><span id="array::iterator"></span><span class="target" id="structarray_1a764da151430ad0a48db9043aff3df263"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">iterator</span></span></span><a class="headerlink" href="#_CPPv4N5array8iteratorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>An iterator that can be used to traverse the elements of the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array14const_iteratorE">
+<span id="_CPPv3N5array14const_iteratorE"></span><span id="_CPPv2N5array14const_iteratorE"></span><span id="array::const_iterator"></span><span class="target" id="structarray_1a701a7a437c8104dd82d2b230633d0c05"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">const_iterator</span></span></span><a class="headerlink" href="#_CPPv4N5array14const_iteratorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A const iterator that can be used to traverse the elements of the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array9size_typeE">
+<span id="_CPPv3N5array9size_typeE"></span><span id="_CPPv2N5array9size_typeE"></span><span id="array::size_type"></span><span class="target" id="structarray_1a12005313f904892c0441bb94c71ac1a8"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">size_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size_type</span></span></span><a class="headerlink" href="#_CPPv4N5array9size_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The type used to represent sizes and indices for the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array15difference_typeE">
+<span id="_CPPv3N5array15difference_typeE"></span><span id="_CPPv2N5array15difference_typeE"></span><span id="array::difference_type"></span><span class="target" id="structarray_1a6ea5402d8955dc95f643f91e8f15bac5"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">ptrdiff_t</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">difference_type</span></span></span><a class="headerlink" href="#_CPPv4N5array15difference_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The type used to represent the difference between two iterators for the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array10value_typeE">
+<span id="_CPPv3N5array10value_typeE"></span><span id="_CPPv2N5array10value_typeE"></span><span id="array::value_type"></span><span class="target" id="structarray_1ac505eb0ebfd89a7b382085f8a4590c1a"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">value_type</span></span></span><a class="headerlink" href="#_CPPv4N5array10value_typeE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>The type of the elements stored in the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array7pointerE">
+<span id="_CPPv3N5array7pointerE"></span><span id="_CPPv2N5array7pointerE"></span><span id="array::pointer"></span><span class="target" id="structarray_1a9d275f4fe73f61da9cf7e5224972ea5d"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">pointer</span></span></span><a class="headerlink" href="#_CPPv4N5array7pointerE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A pointer to an element in the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array13const_pointerE">
+<span id="_CPPv3N5array13const_pointerE"></span><span id="_CPPv2N5array13const_pointerE"></span><span id="array::const_pointer"></span><span class="target" id="structarray_1a4c1221d3c3b8d80309f96784f7838a42"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">const_pointer</span></span></span><a class="headerlink" href="#_CPPv4N5array13const_pointerE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A const pointer to an element in the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array16reverse_iteratorE">
+<span id="_CPPv3N5array16reverse_iteratorE"></span><span id="_CPPv2N5array16reverse_iteratorE"></span><span id="array::reverse_iterator"></span><span class="target" id="structarray_1a470cad7a43f95b6a62eb20559f5424f1"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">reverse_iterator</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N5array8iteratorE" title="array::iterator"><span class="n"><span class="pre">iterator</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">reverse_iterator</span></span></span><a class="headerlink" href="#_CPPv4N5array16reverse_iteratorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A reverse iterator for the array. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt class="sig sig-object cpp" id="_CPPv4N5array22const_reverse_iteratorE">
+<span id="_CPPv3N5array22const_reverse_iteratorE"></span><span id="_CPPv2N5array22const_reverse_iteratorE"></span><span id="array::const_reverse_iterator"></span><span class="target" id="structarray_1a2c4859e5f93189276aa074abdf9f8454"></span><span class="k"><span class="pre">typedef</span></span><span class="w"> </span><span class="n"><span class="pre">std</span></span><span class="p"><span class="pre">::</span></span><span class="n"><span class="pre">reverse_iterator</span></span><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4N5array14const_iteratorE" title="array::const_iterator"><span class="n"><span class="pre">const_iterator</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">const_reverse_iterator</span></span></span><a class="headerlink" href="#_CPPv4N5array22const_reverse_iteratorE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>A const reverse iterator for the array. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array4fillERK1T">
+<span id="_CPPv3N5array4fillERK1T"></span><span id="_CPPv2N5array4fillERK1T"></span><span id="array::fill__TCR"></span><span class="target" id="structarray_1a7d1799a97eff5fe770e07b425be2e639"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">fill</span></span></span><span class="sig-paren">(</span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">&amp;</span></span><span class="n sig-param"><span class="pre">u</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array4fillERK1T" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Fills the array with copies of the given value. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>u</strong> – The value to fill the array with. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array4swapER5arrayI1T1NE">
+<span id="_CPPv3N5array4swapER5arrayI1T1NE"></span><span id="_CPPv2N5array4swapER5arrayI1T1NE"></span><span id="array::swap__array:T.N:R"></span><span class="target" id="structarray_1aaa5c1e70688feec32416b4f5078f4da2"></span><span class="kt"><span class="pre">void</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">swap</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array"><span class="n"><span class="pre">array</span></span></a><span class="p"><span class="pre">&lt;</span></span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="p"><span class="pre">,</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::N"><span class="n"><span class="pre">N</span></span></a><span class="p"><span class="pre">&gt;</span></span><span class="p"><span class="pre">&amp;</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array4swapER5arrayI1T1NE" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Swaps the contents of this array with the contents of another array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>other</strong> – The array to swap with. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array5beginEv">
+<span id="_CPPv3N5array5beginEv"></span><span id="_CPPv2N5array5beginEv"></span><span id="array::begin"></span><span class="target" id="structarray_1a9b496a05622d42e8cbb442fa6edad825"></span><a class="reference internal" href="#_CPPv4N5array14const_iteratorE" title="array::const_iterator"><span class="n"><span class="pre">const_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array5beginEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns an iterator pointing to the first element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An iterator pointing to the first element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array5beginEv">
+<span id="_CPPv3NK5array5beginEv"></span><span id="_CPPv2NK5array5beginEv"></span><span id="array::beginC"></span><span class="target" id="structarray_1a594b12bc6b139033ffb252363d86a2a1"></span><a class="reference internal" href="#_CPPv4N5array8iteratorE" title="array::iterator"><span class="n"><span class="pre">iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">begin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array5beginEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a const iterator pointing to the first element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A const iterator pointing to the first element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array3endEv">
+<span id="_CPPv3N5array3endEv"></span><span id="_CPPv2N5array3endEv"></span><span id="array::end"></span><span class="target" id="structarray_1a27e2c04e5a5122d7b760cd823bd8bc8f"></span><a class="reference internal" href="#_CPPv4N5array14const_iteratorE" title="array::const_iterator"><span class="n"><span class="pre">const_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">end</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array3endEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns an iterator pointing to the element following the last element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>An iterator pointing to the element following the last element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array3endEv">
+<span id="_CPPv3NK5array3endEv"></span><span id="_CPPv2NK5array3endEv"></span><span id="array::endC"></span><span class="target" id="structarray_1a2db9945027178be2df5383f2637c1316"></span><a class="reference internal" href="#_CPPv4N5array8iteratorE" title="array::iterator"><span class="n"><span class="pre">iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">end</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array3endEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a const iterator pointing to the element following the last element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A const iterator pointing to the element following the last element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array6rbeginEv">
+<span id="_CPPv3N5array6rbeginEv"></span><span id="_CPPv2N5array6rbeginEv"></span><span id="array::rbegin"></span><span class="target" id="structarray_1aa623229600f8f7cbbb3db507cd09be76"></span><a class="reference internal" href="#_CPPv4N5array22const_reverse_iteratorE" title="array::const_reverse_iterator"><span class="n"><span class="pre">const_reverse_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array6rbeginEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a reverse iterator pointing to the last element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A reverse iterator pointing to the last element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array6rbeginEv">
+<span id="_CPPv3NK5array6rbeginEv"></span><span id="_CPPv2NK5array6rbeginEv"></span><span id="array::rbeginC"></span><span class="target" id="structarray_1a89f2fa338751ba023bb68f7ebc9dd129"></span><a class="reference internal" href="#_CPPv4N5array22const_reverse_iteratorE" title="array::const_reverse_iterator"><span class="n"><span class="pre">const_reverse_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array6rbeginEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a const reverse iterator pointing to the last element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A const reverse iterator pointing to the last element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array4rendEv">
+<span id="_CPPv3N5array4rendEv"></span><span id="_CPPv2N5array4rendEv"></span><span id="array::rend"></span><span class="target" id="structarray_1a2a40a799841b70c8f02b71c59699cf16"></span><a class="reference internal" href="#_CPPv4N5array16reverse_iteratorE" title="array::reverse_iterator"><span class="n"><span class="pre">reverse_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array4rendEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a reverse iterator pointing to the element preceding the first element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A reverse iterator pointing to the element preceding the first element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array4rendEv">
+<span id="_CPPv3NK5array4rendEv"></span><span id="_CPPv2NK5array4rendEv"></span><span id="array::rendC"></span><span class="target" id="structarray_1a59e99e4527e6475f7cc908440f4d4334"></span><a class="reference internal" href="#_CPPv4N5array16reverse_iteratorE" title="array::reverse_iterator"><span class="n"><span class="pre">reverse_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">rend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array4rendEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a const reverse iterator pointing to the element preceding the first element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A const reverse iterator pointing to the element preceding the first element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array6cbeginEv">
+<span id="_CPPv3NK5array6cbeginEv"></span><span id="_CPPv2NK5array6cbeginEv"></span><span id="array::cbeginC"></span><span class="target" id="structarray_1a610a92ae763e5ad864316a3f78bc29b5"></span><a class="reference internal" href="#_CPPv4N5array22const_reverse_iteratorE" title="array::const_reverse_iterator"><span class="n"><span class="pre">const_reverse_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array6cbeginEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a const iterator pointing to the first element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A const iterator pointing to the first element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array4cendEv">
+<span id="_CPPv3NK5array4cendEv"></span><span id="_CPPv2NK5array4cendEv"></span><span id="array::cendC"></span><span class="target" id="structarray_1a8152e18aa3f1ec753976563216d8f876"></span><a class="reference internal" href="#_CPPv4N5array14const_iteratorE" title="array::const_iterator"><span class="n"><span class="pre">const_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">cend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array4cendEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a const iterator pointing to the element following the last element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A const iterator pointing to the element following the last element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array7crbeginEv">
+<span id="_CPPv3NK5array7crbeginEv"></span><span id="_CPPv2NK5array7crbeginEv"></span><span id="array::crbeginC"></span><span class="target" id="structarray_1a198f1ce3afd9c967b1b4f8405d72048e"></span><a class="reference internal" href="#_CPPv4N5array14const_iteratorE" title="array::const_iterator"><span class="n"><span class="pre">const_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">crbegin</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array7crbeginEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a const reverse iterator pointing to the last element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A const reverse iterator pointing to the last element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array5crendEv">
+<span id="_CPPv3NK5array5crendEv"></span><span id="_CPPv2NK5array5crendEv"></span><span id="array::crendC"></span><span class="target" id="structarray_1ad19556e11d1aea2a1659ca4537bb6316"></span><a class="reference internal" href="#_CPPv4N5array22const_reverse_iteratorE" title="array::const_reverse_iterator"><span class="n"><span class="pre">const_reverse_iterator</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">crend</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array5crendEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns a const reverse iterator pointing to the element preceding the first element of the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>A const reverse iterator pointing to the element preceding the first element of the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array4sizeEv">
+<span id="_CPPv3N5array4sizeEv"></span><span id="_CPPv2N5array4sizeEv"></span><span id="array::sizeCE"></span><span class="target" id="structarray_1abb8611910e64df6f8befbadbce195117"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5array9size_typeE" title="array::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array4sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the number of elements in the array. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The number of elements in the array. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array8max_sizeEv">
+<span id="_CPPv3N5array8max_sizeEv"></span><span id="_CPPv2N5array8max_sizeEv"></span><span id="array::max_sizeCE"></span><span class="target" id="structarray_1a9debd3c5ba18402cc718ece39017fb3c"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4N5array9size_typeE" title="array::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">max_size</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array8max_sizeEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><p>Returns the maximum number of elements that the array can hold. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>The maximum number of elements that the array can hold. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array5emptyEv">
+<span id="_CPPv3N5array5emptyEv"></span><span id="_CPPv2N5array5emptyEv"></span><span id="array::emptyCE"></span><span class="target" id="structarray_1a06485f1fe8aa85da51224c2340fed601"></span><span class="k"><span class="pre">constexpr</span></span><span class="w"> </span><span class="kt"><span class="pre">bool</span></span><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">empty</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array5emptyEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5arrayixE9size_type">
+<span id="_CPPv3N5arrayixE9size_type"></span><span id="_CPPv2N5arrayixE9size_type"></span><span id="array::subscript-operator__size_type"></span><span class="target" id="structarray_1ac415750549ca234b046034ca5046af66"></span><a class="reference internal" href="#_CPPv4N5array9referenceE" title="array::reference"><span class="n"><span class="pre">reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5array9size_typeE" title="array::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5arrayixE9size_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5arrayixE9size_type">
+<span id="_CPPv3NK5arrayixE9size_type"></span><span id="_CPPv2NK5arrayixE9size_type"></span><span id="array::subscript-operator__size_typeC"></span><span class="target" id="structarray_1ae8c8507376041a31b6d9f5249b8cf609"></span><a class="reference internal" href="#_CPPv4N5array15const_referenceE" title="array::const_reference"><span class="n"><span class="pre">const_reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="k"><span class="pre">operator</span></span><span class="o"><span class="pre">[]</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5array9size_typeE" title="array::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5arrayixE9size_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array2atE9size_type">
+<span id="_CPPv3NK5array2atE9size_type"></span><span id="_CPPv2NK5array2atE9size_type"></span><span id="array::at__size_typeC"></span><span class="target" id="structarray_1aa482193cc2f03495e5f4dfecd091c5c2"></span><a class="reference internal" href="#_CPPv4N5array15const_referenceE" title="array::const_reference"><span class="n"><span class="pre">const_reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">at</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5array9size_typeE" title="array::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array2atE9size_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array2atE9size_type">
+<span id="_CPPv3N5array2atE9size_type"></span><span id="_CPPv2N5array2atE9size_type"></span><span id="array::at__size_type"></span><span class="target" id="structarray_1a78710189034731f45c12609e2cd5789f"></span><a class="reference internal" href="#_CPPv4N5array9referenceE" title="array::reference"><span class="n"><span class="pre">reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">at</span></span></span><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N5array9size_typeE" title="array::size_type"><span class="n"><span class="pre">size_type</span></span></a><span class="w"> </span><span class="n sig-param"><span class="pre">n</span></span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array2atE9size_type" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>n</strong> – </p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array5frontEv">
+<span id="_CPPv3N5array5frontEv"></span><span id="_CPPv2N5array5frontEv"></span><span id="array::front"></span><span class="target" id="structarray_1ace6379c0afe5c33ad6046002f049335a"></span><a class="reference internal" href="#_CPPv4N5array9referenceE" title="array::reference"><span class="n"><span class="pre">reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">front</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array5frontEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array5frontEv">
+<span id="_CPPv3NK5array5frontEv"></span><span id="_CPPv2NK5array5frontEv"></span><span id="array::frontC"></span><span class="target" id="structarray_1adea67fefa6f47a813b0039c4d9f10a2b"></span><a class="reference internal" href="#_CPPv4N5array15const_referenceE" title="array::const_reference"><span class="n"><span class="pre">const_reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">front</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array5frontEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array4backEv">
+<span id="_CPPv3N5array4backEv"></span><span id="_CPPv2N5array4backEv"></span><span id="array::back"></span><span class="target" id="structarray_1a5f9000f32f5d4731398998d1d2c3d5f8"></span><a class="reference internal" href="#_CPPv4N5array9referenceE" title="array::reference"><span class="n"><span class="pre">reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">back</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array4backEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array4backEv">
+<span id="_CPPv3NK5array4backEv"></span><span id="_CPPv2NK5array4backEv"></span><span id="array::backC"></span><span class="target" id="structarray_1ae79728c8e61fb820f1c8b7f84193c453"></span><a class="reference internal" href="#_CPPv4N5array15const_referenceE" title="array::const_reference"><span class="n"><span class="pre">const_reference</span></span></a><span class="w"> </span><span class="sig-name descname"><span class="n"><span class="pre">back</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array4backEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4N5array4dataEv">
+<span id="_CPPv3N5array4dataEv"></span><span id="_CPPv2N5array4dataEv"></span><span id="array::data"></span><span class="target" id="structarray_1af48936d99d87529275ae715c238d4959"></span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N5array4dataEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt class="sig sig-object cpp" id="_CPPv4NK5array4dataEv">
+<span id="_CPPv3NK5array4dataEv"></span><span id="_CPPv2NK5array4dataEv"></span><span id="array::dataC"></span><span class="target" id="structarray_1adb8d538c38edc4ff616f141e34eda407"></span><span class="k"><span class="pre">const</span></span><span class="w"> </span><a class="reference internal" href="#_CPPv4I0_6size_tE5array" title="array::T"><span class="n"><span class="pre">T</span></span></a><span class="w"> </span><span class="p"><span class="pre">*</span></span><span class="sig-name descname"><span class="n"><span class="pre">data</span></span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><span class="w"> </span><span class="k"><span class="pre">const</span></span><a class="headerlink" href="#_CPPv4NK5array4dataEv" title="Permalink to this definition">#</a><br /></dt>
+<dd><dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p></p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</section>
+
+
+            </article>
+            
+            
+            
+            <footer class="bd-footer-article">
+                <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+  <a class='left-prev' id="prev-link" href="sequence-container-main.html" title="previous page">
+      <i class="fa-solid fa-angle-left"></i>
+      <div class="prev-next-info">
+          <p class="prev-next-subtitle">previous</p>
+          <p class="prev-next-title">Sequencial Containers</p>
+      </div>
+  </a>
+  <a class='right-next' id="next-link" href="darray.html" title="next page">
+  <div class="prev-next-info">
+      <p class="prev-next-subtitle">next</p>
+      <p class="prev-next-title"><code class="docutils literal notranslate"><span class="pre">darray</span></code></p>
+  </div>
+  <i class="fa-solid fa-angle-right"></i>
+  </a>
+</div>
+            </footer>
+            
+          </div>
+          
+          
+          
+            <div class="bd-sidebar-secondary bd-toc">
+              
+<div class="toc-item">
+  
+<div id="searchbox"></div>
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+<div class="toc-item">
+  
+</div>
+
+            </div>
+          
+          
+        </div>
+        <footer class="bd-footer-content">
+          <div class="bd-footer-content__inner">
+            
+          </div>
+        </footer>
+        
+      </main>
+    </div>
+  </div>
+
+  
+    
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../../../_static/scripts/bootstrap.js?digest=796348d33e8b1d947c94"></script>
+<script src="../../../_static/scripts/pydata-sphinx-theme.js?digest=796348d33e8b1d947c94"></script>
+
+  <footer class="bd-footer"><div class="bd-footer__inner container">
+  
+  <div class="footer-item">
+    
+<p class="copyright">
+
+    &copy; Copyright 2022, M Zaki.<br>
+
+</p>
+
+  </div>
+  
+  <div class="footer-item">
+    <p class="last-updated">
+Last updated on None.<br>
+</p>
+  </div>
+  
+</div>
+  </footer>
+  </body>
+</html>
