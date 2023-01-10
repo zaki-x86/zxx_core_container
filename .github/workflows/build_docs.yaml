@@ -16,13 +16,13 @@ jobs:
       - name: Cache dependencies
         uses: actions/cache@v2
         with:
-          path: ${{ steps.${{ runner.os }}-install-dependencies.outputs.path }}
-          key: ${{ runner.os }}-install-dependencies-${{ hashFiles('**/requirements.txt') }}
+          path: ${{ steps.install-dependencies.outputs.path }}
+          key: install-dependencies-${{ hashFiles('**/requirements.txt') }}
           restore-keys: |
-            ${{ runner.os }}-install-dependencies-  
+            install-dependencies-  
       
       - name: Install dependencies
-        id: ${{ runner.os }}-install-dependencies
+        id: install-dependencies
           sudo apt-get update
         run: |
           sudo apt-get install -y doxygen doxygen-doc doxygen-latex doxygen-gui graphviz
@@ -32,12 +32,12 @@ jobs:
         uses: actions/cache@v2
         with:
           path: ${{ steps.build-docs.outputs.path }}
-          key: ${{ runner.os }}-build-docs-${{ hashFiles('docs/**/*') }}
+          key: build-docs-${{ hashFiles('docs/**/*') }}
           restore-keys: |
-            ${{ runner.os }}-build-docs-
+            build-docs-
 
       - name: Build documentation
-        id: ${{ runner.os }}-build-docs
+        id: build-docs
         run: | 
           echo "Generate doxygen xml for breathe to understand the source code"
           doxygen Doxyfile
