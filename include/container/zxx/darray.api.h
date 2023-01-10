@@ -69,6 +69,10 @@ protected:
 
 public:
   /**
+   * @name Public Type Aliases
+   */
+  ///@{
+    /**
    * @brief The type of the elements stored in the darray.
    */
   using value_type = T;
@@ -177,8 +181,13 @@ public:
    * std::reverse_iterator.
    */
   using const_reverse_iterator = std::reverse_iterator<const_iterator>;
+  ///@}
 
 public:
+  /**
+   * @name Constructors and Destructors
+   */
+  ///@{
   /**
    * @brief Constructs an empty darray with the default allocator.
    *
@@ -534,8 +543,14 @@ public:
    * an exception if the allocator's destructor throws an exception.
    */
   ~darray(){}
+  ///@}
 
   /**
+   * @name Assignment
+   * Copy, move, initializer_list assignments.
+   */
+  ///@{
+    /**
    * @brief Assigns the elements from another darray to the darray.
    *
    * This operator assigns the elements from another darray to the darray. If
@@ -605,34 +620,213 @@ public:
    * @endcode
    */
   darray &operator=(std::initializer_list<T> list);
+  ///@}
 
   /**
-   * @brief Swaps the elements and the allocator object of two darrays.
+   * @name iterators
+   */
+  ///@{
+    /**
+   * @brief Returns an iterator to the beginning of the darray.
    *
-   * This function swaps the elements and the allocator object
-   * of two darrays. If the allocator has a noexcept swap function, the
-   * function is noexcept. Otherwise, it may throw an exception if the
-   * allocator's swap function throws an exception.
+   * This function returns an iterator to the beginning of the darray.
    *
-   * @param other The darray to swap with.
+   * @return An iterator to the beginning of the darray.
    *
    * @code
-   * darray<int> v1 = {1, 2, 3};
-   * darray<int> v2 = {4, 5, 6};
-   * v1.swap(v2);
-   * assert(v1.size() == 3);
-   * assert(v1[0] == 4);
-   * assert(v1[1] == 5);
-   * assert(v1[2] == 6);
-   * assert(v2.size() == 3);
-   * assert(v2[0] == 1);
-   * assert(v2[1] == 2);
-   * assert(v2[2] == 3);
+   * darray<int> v = {1, 2, 3};
+   * darray<int>::iterator it = v.begin();
+   * assert(*it == 1);
    * @endcode
    */
-  void swap(darray &other) noexcept(
-      noexcept(Allocator(std::declval<Allocator &&>())));
+  iterator begin();
 
+  /**
+   * @brief Returns an iterator to the end of the darray.
+   *
+   * This function returns an iterator to the end of the darray.
+   *
+   * @return An iterator to the end of the darray.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * darray<int>::iterator it = v.end();
+   * --it;
+   * assert(*it == 3);
+   * @endcode
+   */
+  iterator end();
+
+  /**
+   * @brief Returns a const_iterator to the beginning of the darray.
+   *
+   * This function returns a const_iterator to the beginning of the darray.
+   *
+   * @return A const_iterator to the beginning of the darray.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * darray<int>::const_iterator it = v.cbegin();
+   * assert(*it == 1);
+   * @endcode
+   */
+  const_iterator cbegin() const;
+
+  /**
+   * @brief Returns a const_iterator to the end of the darray.
+   *
+   * This function returns a const_iterator to the end of the darray.
+   *
+   * @return A const_iterator to the end of the darray.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * darray<int>::const_iterator it = v.cend();
+   * --it;
+   * assert(*it == 3);
+   * @endcode
+   */
+  const_iterator cend() const;
+
+  /**
+   * @brief Returns a const iterator to the beginning of the darray.
+   *
+   * This function returns a const iterator to the beginning of the darray.
+   *
+   * @return A const iterator to the beginning of the darray.
+   *
+   * @code
+   * const darray<int> v = {1, 2, 3};
+   * darray<int>::const_iterator it = v.begin();
+   * assert(*it == 1);
+   * @endcode
+   */
+  const_iterator begin() const;
+
+  /**
+   * @brief Returns a const_iterator to the end of the darray.
+   *
+   * This function returns a const_iterator to the end of the darray.
+   *
+   * @return A const_iterator to the end of the darray.
+   *
+   * @code
+   * const darray<int> v = {1, 2, 3};
+   * darray<int>::const_iterator it = v.end();
+   * --it;
+   * assert(*it == 3);
+   * @endcode
+   */
+  const_iterator end() const;
+
+  /**
+   * @brief Returns a reverse iterator to the beginning of the reversed
+   * darray.
+   *
+   * This function returns a reverse iterator to the beginning of the reversed
+   * darray.
+   *
+   * @return A reverse iterator to the beginning of the reversed darray.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * darray<int>::reverse_iterator it = v.rbegin();
+   * assert(*it == 3);
+   * @endcode
+   */
+  reverse_iterator rbegin();
+
+  /**
+   * @brief Returns a reverse iterator to the end of the reversed darray.
+   *
+   * This function returns a reverse iterator to the end of the reversed
+   * darray.
+   *
+   * @return A reverse iterator to the end of the reversed darray.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * darray<int>::reverse_iterator it = v.rend();
+   * --it;
+   * assert(*it == 1);
+   * @endcode
+   */
+  reverse_iterator rend();
+
+  /**
+   * @brief Returns a const reverse iterator to the beginning of the reversed
+   * darray.
+   *
+   * This function returns a const reverse iterator to the beginning of the
+   * reversed darray.
+   *
+   * @return A const reverse iterator to the beginning of the reversed darray.
+   *
+   * @code
+   * const darray<int> v = {1, 2, 3};
+   * darray<int>::const_reverse_iterator it = v.rbegin();
+   * assert(*it == 3);
+   * @endcode
+   */
+  const_reverse_iterator rbegin() const;
+  
+  /**
+   * @brief Returns a reverse iterator to the end of the reversed darray.
+   *
+   * This function returns a reverse iterator to the end of the reversed
+   * darray.
+   *
+   * @return A reverse iterator to the end of the reversed darray.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * darray<int>::reverse_iterator it = v.rend();
+   * --it;
+   * assert(*it == 1);
+   * @endcode
+   */
+  const_reverse_iterator rend() const;
+
+  /**
+   * @brief Returns a const reverse iterator to the beginning of the reversed
+   * darray.
+   *
+   * This function returns a const reverse iterator to the beginning of the
+   * reversed darray.
+   *
+   * @return A const reverse iterator to the beginning of the reversed darray.
+   *
+   * @code
+   * const darray<int> v = {1, 2, 3};
+   * darray<int>::const_reverse_iterator it = v.rbegin();
+   * assert(*it == 3);
+   * @endcode
+   */
+  const_reverse_iterator crbegin() const;
+
+  /**
+   * @brief Returns a const reverse iterator to the end of the reversed
+   * darray.
+   *
+   * This function returns a const reverse iterator to the end of the reversed
+   * darray.
+   *
+   * @return A const reverse iterator to the end of the reversed darray.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * darray<int>::const_reverse_iterator it = v.crend();
+   * --it;
+   * assert(*it == 1);
+   * @endcode
+   */
+  const_reverse_iterator crend() const;
+  ///@}
+
+  /**
+   * @name Storage and memory
+   */
+  ///@{
   /**
    * @brief Returns the number of elements in the darray.
    *
@@ -661,6 +855,112 @@ public:
    * @endcode
    */
   bool empty() const;
+
+  /**
+   * @brief Returns the capacity of the array.
+   */
+  size_type capacity() const;
+
+  /**
+   * @brief Resizes the darray.
+   *
+   * This function resizes the darray. If the new size is smaller than the
+   * current size, the darray is truncated. If the new size is larger than the
+   * current size, the darray is expanded and the new elements are value
+   * initialized. If the allocator has a noexcept move constructor, the
+   * function is noexcept. Otherwise, it may throw an exception if the
+   * allocator's move constructor throws an exception.
+   *
+   * @param new_size The new size of the darray.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * v.resize(5);
+   * assert(v.size() == 5);
+   * assert(v[3] == 0);
+   * assert(v[4] == 0);
+   * @endcode
+   */
+  void resize(size_type new_size);
+
+  /**
+   * @brief Resizes the darray to the specified size.
+   *
+   * This function resizes the darray to the specified size. If the size is
+   * smaller than the current size, the darray is truncated. If the size is
+   * larger than the current size, the darray is expanded by adding copies of
+   * the specified value to the end.
+   *
+   * @param size The new size of the darray.
+   * @param value The value to initialize new elements with.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * v.resize(5, 0);
+   * assert(v.size() == 5);
+   * @endcode
+   */
+  void resize(size_type size, const_reference value);
+
+  /**
+   * @brief Returns the maximum number of elements the darray can hold.
+   *
+   * This function returns the maximum number of elements the darray can hold.
+   *
+   * @return The maximum number of elements the darray can hold.
+   *
+   * @code
+   * darray<int> v;
+   * assert(v.max_size() > 0);
+   * @endcode
+   */
+  size_type max_size() const;
+
+  /**
+   * @brief Reserves storage for the darray.
+   *
+   * This function reserves storage for the darray. If the requested size is
+   * larger than the current capacity, the darray is expanded to the new size.
+   * If the requested size is smaller than the current size, the function has
+   * no effect.
+   *
+   * @param size The new size of the darray.
+   *
+   * @code
+   * darray<int> v;
+   * v.reserve(100);
+   * assert(v.capacity() >= 100);
+   * @endcode
+   */
+  void reserve(size_type size);
+  ///@}
+
+  /**
+   * @name Accessors
+   */
+  ///@{
+
+  /**
+   * @brief Returns a reference to the element at the specified location in
+   * the darray.
+   *
+   * This function returns a reference to the element at the specified
+   * location in the darray. If the index is not within the bounds of the
+   * darray, the function throws an std::out_of_range exception.
+   *
+   * @param index The index of the element to return.
+   * @return A const reference to the element at the specified location in the
+   * darray.
+   *
+   * @throws std::out_of_range if the index is not within the bounds of the
+   * darray.
+   *
+   * @code
+   * const darray<int> v = {1, 2, 3};
+   * assert(v.at(0) == 1);
+   * @endcode
+   */
+  const_reference at(size_type index) const;
 
   /**
    * @brief Returns a reference to the element at the given
@@ -704,122 +1004,74 @@ public:
   const_reference operator[](size_type n) const;
 
   /**
-   * @brief Returns a pointer to the underlying element array.
+   * @brief Returns a reference to the front element in the darray.
    *
-   * This function returns a pointer to the underlying element array. The
-   * pointer is such that the range
-   * `[data(); data() + size()]` is always a valid range, even if the
-   * container is empty.
+   * This function returns a const reference to the front element in the
+   * darray. If the darray is empty, the function results in undefined
+   * behavior.
    *
-   * @return A pointer to the underlying element array.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * int* p = v.data();
-   * assert(p[0] == 1);
-   * assert(p[1] == 2);
-   * assert(p[2] == 3);
-   * @endcode
-   */
-  T *data();
-
-  /**
-   * @brief Returns a const pointer to the underlying element array.
-   *
-   * This function returns a const pointer to the underlying element array.
-   * The pointer is such that the range `[data(); data() + size()]` is always
-   * a valid range, even if the container is empty.
-   *
-   * @return A const pointer to the underlying element array.
+   * @return A const reference to the front element in the darray.
    *
    * @code
    * const darray<int> v = {1, 2, 3};
-   * const int* p = v.data();
-   * assert(p[0] == 1);
-   * assert(p[1] == 2);
-   * assert(p[2] == 3);
+   * assert(v.front() == 1);
    * @endcode
    */
-  const T *data() const;
+  reference front();
 
   /**
-   * @brief Returns an iterator to the beginning of the darray.
+   * @brief Returns a const reference to the front element in the darray.
    *
-   * This function returns an iterator to the beginning of the darray.
+   * This function returns a const reference to the front element in the
+   * darray. If the darray is empty, the function results in undefined
+   * behavior.
    *
-   * @return An iterator to the beginning of the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::iterator it = v.begin();
-   * assert(*it == 1);
-   * @endcode
-   */
-  iterator begin();
-
-  /**
-   * @brief Returns a const_iterator to the beginning of the darray.
-   *
-   * This function returns a const_iterator to the beginning of the darray.
-   *
-   * @return A const_iterator to the beginning of the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::const_iterator it = v.cbegin();
-   * assert(*it == 1);
-   * @endcode
-   */
-  const_iterator cbegin() const;
-
-  /**
-   * @brief Returns an iterator to the end of the darray.
-   *
-   * This function returns an iterator to the end of the darray.
-   *
-   * @return An iterator to the end of the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::iterator it = v.end();
-   * --it;
-   * assert(*it == 3);
-   * @endcode
-   */
-  iterator end();
-
-  /**
-   * @brief Returns a const_iterator to the end of the darray.
-   *
-   * This function returns a const_iterator to the end of the darray.
-   *
-   * @return A const_iterator to the end of the darray.
+   * @return A const reference to the front element in the darray.
    *
    * @code
    * const darray<int> v = {1, 2, 3};
-   * darray<int>::const_iterator it = v.end();
-   * --it;
-   * assert(*it == 3);
+   * assert(v.front() == 1);
    * @endcode
    */
-  const_iterator end() const;
+  const_reference front() const;
 
   /**
-   * @brief Returns a const_iterator to the end of the darray.
+   * @brief Returns a reference to the back element in the darray.
    *
-   * This function returns a const_iterator to the end of the darray.
+   * This function returns a reference to the back element in the darray. If
+   * the darray is empty, the function results in undefined behavior.
    *
-   * @return A const_iterator to the end of the darray.
+   * @return A reference to the back element in the darray.
    *
    * @code
    * darray<int> v = {1, 2, 3};
-   * darray<int>::const_iterator it = v.cend();
-   * --it;
-   * assert(*it == 3);
+   * assert(v.back() == 3);
    * @endcode
    */
-  const_iterator cend() const;
+  reference back();
 
+  /**
+   * @brief Returns a const reference to the back element in the darray.
+   *
+   * This function returns a const reference to the back element in the
+   * darray. If the darray is empty, the function results in undefined
+   * behavior.
+   *
+   * @return A const reference to the back element in the darray.
+   *
+   * @code
+   * const darray<int> v = {1, 2, 3};
+   * assert(v.back() == 3);
+   * @endcode
+   */
+  const_reference back() const;
+  ///@}
+  
+  /**
+   * @name Modifiers
+   */
+  ///@{
+  
   /**
    * @brief Inserts an element at the end of the darray.
    *
@@ -898,21 +1150,6 @@ public:
    * @param value The value to insert.
    *
    * @code
-   * darray<int> v;
-   * v.push_front(1);
-   * v.push_front(2);
-   * v.push_front(3);
-   * assert(v *
-   * This function inserts an element at the beginning of the darray using
-   * move semantics. If the new size of the darray is larger than the capacity
-   * of the darray, the function will reallocate the darray to a larger size.
-   * If the allocator has a noexcept move constructor, the function is
-   * noexcept. Otherwise, it may throw an exception if the allocator's move
-   * constructor throws an exception.
-   *
-   * @param value The value to insert.
-   *
-   * @code
    * darray<std::string> v;
    * v.push_front("hello");
    * v.push_front("world");
@@ -948,25 +1185,6 @@ public:
    * has a noexcept move constructor, the function is noexcept. Otherwise, it
    * may throw an exception if the allocator's move constructor throws an
    * exception.
-   *
-   * @param pos The position to insert the element at.
-   * @param value The value to insert.
-   * @return An iterator to the inserted element.
-   *
-   * @code
-   * darray<int> v = {1, 2, 4};
-   * darray<int>::iterator it = v.insert(v.begin() + 2, 3);
-   * assert(v.size() == 4);
-   * assert(*it == 3);
-   * assert(v[0] == 1);
-   * assert
-   *
-   * This function inserts an element at the given position in the darray
-   * using move semantics. If the new size of the darray is larger than the
-   * capacity of the darray, the function will reallocate the darray to a
-   * larger size. If the allocator has a noexcept move constructor, the
-   * function is noexcept. Otherwise, it may throw an exception if the
-   * allocator's move constructor throws an exception.
    *
    * @param pos The position to insert the element at.
    * @param value The value to insert.
@@ -1077,17 +1295,6 @@ public:
    * This function erases an element from the darray. If the iterator is at
    * the end of the darray, the function results in undefined behavior.
    *
-   * @param pos The position of the element to erase.
-   * @return An iterator to the element after the erased element.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3, 4};
-   * darray<int>::iterator it = v.er
-   *
-   * This function erases a range of elements from the darray. If the
-   * iterators are invalid or do not form a valid range, the function results
-   * in undefined behavior.
-   *
    * @param first The start of the range to erase.
    * @param last The end of the range to erase.
    * @return An iterator to the element after the erased range.
@@ -1119,379 +1326,6 @@ public:
   void clear();
 
   /**
-   * @brief Reserves capacity for the darray.
-   *
-   * This function reserves capacity for the darray. If the new capacity is
-   * smaller than the current size of the darray, the function results in
-   * undefined behavior. If the allocator has a noexcept move constructor, the
-   * function is noexcept. Otherwise, it may throw an exception if the
-   * allocator's move constructor throws an exception.
-   *
-   * @param new_capacity The new capacity of the darray.
-   *
-   * @code
-   * darray<int>
-   *
-   * @return The capacity of the darray.
-   *
-   * @code
-   * darray<int> v;
-   * v.reserve(10);
-   * assert(v.capacity() == 10);
-   * @endcode
-   */
-  size_type capacity() const;
-
-  /**
-   * @brief Resizes the darray.
-   *
-   * This function resizes the darray. If the new size is smaller than the
-   * current size, the darray is truncated. If the new size is larger than the
-   * current size, the darray is expanded and the new elements are value
-   * initialized. If the allocator has a noexcept move constructor, the
-   * function is noexcept. Otherwise, it may throw an exception if the
-   * allocator's move constructor throws an exception.
-   *
-   * @param new_size The new size of the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * v.resize(5);
-   * assert(v.size() == 5);
-   * assert(v[3] == 0);
-   * assert(v[4] == 0);
-   * @endcode
-   */
-  void resize(size_type new_size);
-
-  /**
-   * @brief Resizes the darray.
-   *
-   * This function resizes the darray. If the new size is smaller than the
-   * current size, the darray is truncated. If the new size is larger than the
-   * current size, the darray is expanded and the new elements are initialized
-   * with the given value. If the allocator has a noexcept move constructor,
-   * the function is noexcept. Otherwise, it may throw an exception if the
-   * allocator's move constructor throws an exception.
-   *
-   * @param new_size The new size of the darray.
-   * @param value The value to initialize the new elements with.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * v.resize(5, 4);
-   * assert(v.size() == 5);
-   * assert(v[3] == 4);
-   * assert(v[4] == 4
-   *
-   * @return A reference to the front element in the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * assert(v.front() == 1);
-   * @endcode
-   */
-  reference front();
-
-  /**
-   * @brief Returns a const reference to the front element in the darray.
-   *
-   * This function returns a const reference to the front element in the
-   * darray. If the darray is empty, the function results in undefined
-   * behavior.
-   *
-   * @return A const reference to the front element in the darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * assert(v.front() == 1);
-   * @endcode
-   */
-  const_reference front() const;
-
-  /**
-   * @brief Returns a reference to the back element in the darray.
-   *
-   * This function returns a reference to the back element in the darray. If
-   * the darray is empty, the function results in undefined behavior.
-   *
-   * @return A reference to the back element in the darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * assert(v.back() == 3);
-   * @endcode
-   */
-  reference back();
-
-  /**
-   * @brief Returns a const reference to the back element in the darray.
-   *
-   * This function returns a const reference to the back element in the
-   * darray. If the darray is empty, the function results in undefined
-   * behavior.
-   *
-   * @return A const reference to the back element in the darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * assert(v.back() == 3);
-   * @endcode
-   */
-  const_reference back() const;
-
-  /**
-   * @brief Returns a const iterator to the beginning of the darray.
-   *
-   * This function returns a const iterator to the beginning of the darray.
-   *
-   * @return A const iterator to the beginning of the darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * darray<int>::const_iterator it = v.begin();
-   * assert(*it == 1);
-   * @endcode
-   */
-  const_iterator begin() const;
-
-  /**
-   * @brief Returns a reverse iterator to the beginning of the reversed
-   * darray.
-   *
-   * This function returns a reverse iterator to the beginning of the reversed
-   * darray.
-   *
-   * @return A reverse iterator to the beginning of the reversed darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::reverse_iterator it = v.rbegin();
-   * assert(*it == 3);
-   * @endcode
-   */
-  reverse_iterator rbegin();
-
-  /**
-   * @brief Returns a const reverse iterator to the beginning of the reversed
-   * darray.
-   *
-   * This function returns a const reverse iterator to the beginning of the
-   * reversed darray.
-   *
-   * @return A const reverse iterator to the beginning of the reversed darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * darray<int>::const_reverse_iterator it = v.rbegin();
-   * assert(*it == 3);
-   * @endcode
-   */
-  const_reverse_iterator rbegin() const;
-
-  /**
-   * @brief Returns a const reverse iterator to the beginning of the reversed
-   * darray.
-   *
-   * This function returns a const reverse iterator to the beginning of the
-   * reversed darray.
-   *
-   * @return A const reverse iterator to the beginning of the reversed darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * darray<int>::const_reverse_iterator it = v.rbegin();
-   * assert(*it == 3);
-   * @endcode
-   */
-  const_reverse_iterator crbegin() const;
-
-  /**
-   * @brief Returns a reverse iterator to the end of the reversed darray.
-   *
-   * This function returns a reverse iterator to the end of the reversed
-   * darray.
-   *
-   * @return A reverse iterator to the end of the reversed darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::reverse_iterator it = v.rend();
-   * --it;
-   * assert(*it == 1);
-   * @endcode
-   */
-  reverse_iterator rend();
-
-  /**
-   * @brief Returns a const reverse iterator to the end of the reversed
-   * darray.
-   *
-   * This function returns a const reverse iterator to the end of the reversed
-   * darray.
-   *
-   * @return A const reverse iterator to the end of the reversed darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::const_reverse_iterator it = v.crend();
-   * --it;
-   * assert(*it == 1);
-   * @endcode
-   */
-
-  const_reverse_iterator crend() const;
-
-  /**
-   * @brief Returns a reference to the element at the specified location in
-   * the darray.
-   *
-   * This function returns a reference to the element at the specified
-   * location in the darray. If the index is not within the bounds of the
-   * darray, the function throws an std::out_of_range exception.
-   *
-   * @param index The index of the element to return.
-   *
-   * @return A reference to the element at the specified location in the
-   * darray.
-   *
-   * @throws std::out_of_range if the index is not within the bounds of the
-   * darray.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * assert(v.at
-   *
-   * @return A const reference to the element at the specified location in the
-   * darray.
-   *
-   * @throws std::out_of_range if the index is not within the bounds of the
-   * darray.
-   *
-   * @code
-   * const darray<int> v = {1, 2, 3};
-   * assert(v.at(0) == 1);
-   * @endcode
-   */
-  const_reference at(size_type index) const;
-
-  /**
-   * @brief Resizes the darray to the specified size.
-   *
-   * This function resizes the darray to the specified size. If the size is
-   * smaller than the current size, the darray is truncated. If the size is
-   * larger than the current size, the darray is expanded by adding copies of
-   * the specified value to the end.
-   *
-   * @param size The new size of the darray.
-   * @param value The value to initialize new elements with.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * v.resize(5, 0);
-   * assert(v.size() == 5);
-   * @endcode
-   */
-  void resize(size_type size, const_reference value);
-
-  /**
-   * @brief Returns the maximum number of elements the darray can hold.
-   *
-   * This function returns the maximum number of elements the darray can hold.
-   *
-   * @return The maximum number of elements the darray can hold.
-   *
-   * @code
-   * darray<int> v;
-   * assert(v.max_size() > 0);
-   * @endcode
-   */
-  size_type max_size() const;
-
-  /**
-   * @brief Reserves storage for the darray.
-   *
-   * This function reserves storage for the darray. If the requested size is
-   * larger than the current capacity, the darray is expanded to the new size.
-   * If the requested size is smaller than the current size, the function has
-   * no effect.
-   *
-   * @param size The new size of the darray.
-   *
-   * @code
-   * darray<int> v;
-   * v.reserve(100);
-   * assert(v.capacity() >= 100);
-   * @endcode
-   */
-  void reserve(size_type size);
-
-  /**
-   * @brief Inserts an element into the darray.
-   *
-   * This function inserts an element into the darray. The element is inserted
-   * before the element at the specified position. If the position is not
-   * within the bounds of the darray, the function results in undefined
-   * behavior.
-   *
-   * @param position The position at which to insert the element.
-   * @param value The value of the element to insert.
-   *
-   * @return An iterator pointing to the inserted element.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::iterator it = v.insert(v.begin() + 1, 0);
-   * assert(*it == 0);
-   * @endcode
-   */
-  iterator insert(iterator position, const_reference value);
-
-  /**
-   * @brief Inserts an element into the darray.
-   *
-   * This function inserts an element into the darray. The element is inserted
-   * before the element at the specified position. If the position is not
-   * within the bounds of the darray, the function results in undefined
-   * behavior.
-   *
-   * @param position The position at which to insert the element.
-   * @param value The value of the element to insert.
-   *
-   * @return An iterator pointing to the inserted element.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::iterator it = v.insert(v.begin() + 1, {0, 0});
-   * assert(*it == 0);
-   * @endcode
-   */
-  iterator insert(iterator position, size_type count, const_reference value);
-
-  /**
-   * @brief Inserts elements into the darray.
-   *
-   * This function inserts elements into the darray. The elements are inserted
-   * before the element at the specified position. If the position is not
-   * within the bounds of the darray, the function results in undefined
-   * behavior.
-   *
-   * @param position The position at which to insert the elements.
-   * @param first The first element to insert.
-   * @param last The last element to insert.
-   *
-   * @return An iterator pointing to the first inserted element.
-   *
-   * @code
-   * darray<int> v = {1, 2, 3};
-   * darray<int>::iterator it = v.insert(v.begin() + 1, {0, 0});
-   * assert(*it == 0);
-   * @endcode
-   */
-  template <class InputIt>
-  iterator insert(iterator position, InputIt first, InputIt last);
-
-  /**
    * @brief Inserts elements into the darray.
    *
    * This function inserts elements into the darray. The elements are inserted
@@ -1511,6 +1345,33 @@ public:
    * @endcode
    */
   template <class... Args> iterator emplace(iterator position, Args &&... args);
+
+  /**
+   * @brief Constructs an element in-place at the end of the darray.
+   *
+   * @tparam Args The types of the arguments to be forwarded to the constructor of the element.
+   * @param args The arguments to be forwarded to the constructor of the element.
+   *
+   * @note This function avoids the need to construct a temporary object of the element type, and then move the temporary object to the darray. 
+   * Instead, the element is constructed directly in the darray's memory. This can be more efficient in some cases.
+   *
+   * @code
+   * #include <zxx/core/container/darray.h>
+   * #include <string>
+   *
+   * int main()
+   * {
+   *     zxx::core::darray<std::string> v;
+   *
+   *     // Add an element to the end of the darray using emplace_back
+   *     v.emplace_back("hello");
+   *
+   *     return 0;
+   * }
+   * @endcode
+   */
+  template<class... Args>
+  void emplace_back(Args&&... args);
 
   /**
    * @brief Erases an element from the darray.
@@ -1553,6 +1414,109 @@ public:
    */
   iterator erase(iterator first, iterator last);
 
+    /**
+   * @brief Swaps the elements and the allocator object of two darrays.
+   *
+   * This function swaps the elements and the allocator object
+   * of two darrays. If the allocator has a noexcept swap function, the
+   * function is noexcept. Otherwise, it may throw an exception if the
+   * allocator's swap function throws an exception.
+   *
+   * @param other The darray to swap with.
+   *
+   * @code
+   * darray<int> v1 = {1, 2, 3};
+   * darray<int> v2 = {4, 5, 6};
+   * v1.swap(v2);
+   * assert(v1.size() == 3);
+   * assert(v1[0] == 4);
+   * assert(v1[1] == 5);
+   * assert(v1[2] == 6);
+   * assert(v2.size() == 3);
+   * assert(v2[0] == 1);
+   * assert(v2[1] == 2);
+   * assert(v2[2] == 3);
+   * @endcode
+   */
+  void swap(darray &other) noexcept(
+      noexcept(Allocator(std::declval<Allocator &&>())));
+  ///@}
+
+  /**
+   * @name Observers
+   */
+  ///@{
+
+  /**
+   * @brief Returns a pointer to the underlying element array.
+   *
+   * This function returns a pointer to the underlying element array. The
+   * pointer is such that the range
+   * `[data(); data() + size()]` is always a valid range, even if the
+   * container is empty.
+   *
+   * @return A pointer to the underlying element array.
+   *
+   * @code
+   * darray<int> v = {1, 2, 3};
+   * int* p = v.data();
+   * assert(p[0] == 1);
+   * assert(p[1] == 2);
+   * assert(p[2] == 3);
+   * @endcode
+   */
+  T *data();
+
+  /**
+   * @brief Returns a const pointer to the underlying element array.
+   *
+   * This function returns a const pointer to the underlying element array.
+   * The pointer is such that the range `[data(); data() + size()]` is always
+   * a valid range, even if the container is empty.
+   *
+   * @return A const pointer to the underlying element array.
+   *
+   * @code
+   * const darray<int> v = {1, 2, 3};
+   * const int* p = v.data();
+   * assert(p[0] == 1);
+   * assert(p[1] == 2);
+   * assert(p[2] == 3);
+   * @endcode
+   */
+  const T *data() const;
+  /**
+   * @brief Retrieves the allocator used by the darray.
+   *
+   * @return The allocator used by the darray.
+   *
+   * @note The allocator is used to allocate and deallocate memory for the darray's elements.
+   *
+   * @code
+   * #include <zxx/core/container/darray.h>
+   * #include <iostream>
+   *
+   * int main()
+   * {
+   *     zxx::core::darray<int> v;
+   *
+   *     // Print the type of the allocator used by the darray
+   *     std::cout << typeid(v.get_allocator()).name() << std::endl;
+   *
+   *     return 0;
+   * }
+   * @endcode
+   */
+  allocator_type get_allocator() const noexcept;
+  ///@}
+
+
+};
+
+/**
+ * @defgroup darray-specialized-algorithms Specialized Algorithms 
+ */
+///@{
   /**
    * @brief Swaps the contents of the darray with those of another darray.
    *
@@ -1564,68 +1528,69 @@ public:
    * @code
    * darray<int> v1 = {1, 2, 3};
    * darray<int> v2 = {4, 5, 6};
-   * v1.swap(v2);
-   * assert(v1 == darray
-   *
-   * @code
-   * darray<int> v1 = {1, 2, 3};
-   * darray<int> v2 = {4, 5, 6};
    * swap(v1, v2);
    * assert(v1 == darray<int>({4, 5, 6}));
    * @endcode
    */
-  template <class U> friend void swap(darray<U> &lhs, darray<U> &rhs);
-};
+  template <class U> void swap(darray<U> &lhs, darray<U> &rhs);
+///@}
 
 /**
- * @brief These operators allow you to compare two darray objects for
- * equality, inequality, and lexicographic ordering. Note that the comparison
- * operators are implemented as friend functions, rather than member
- * functions, because they need to compare the elements of two different
- * darray objects.
+  * @defgroup darray-comparisons Comparison Operators
+  * 
+  * operators allow you to compare two darray objects for
+  * equality, inequality, and lexicographic ordering. Note that the comparison
+  * operators are implemented as friend functions, rather than member
+  * functions, because they need to compare the elements of two different
+  * darray objects.
+  */
+  ///@{   
+  template <class U>
+  bool operator==(const darray<U> &lhs, const darray<U> &rhs) {
+    return lhs.size() == rhs.size() &&
+            std::equal(lhs.begin(), lhs.end(), rhs.begin());
+  }
+
+  template <class U>
+  bool operator!=(const darray<U> &lhs, const darray<U> &rhs) {
+    return !(lhs == rhs);
+  }
+
+  template <class U>
+  bool operator<(const darray<U> &lhs, const darray<U> &rhs) {
+    return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(),
+                                        rhs.end());
+  }
+
+  template <class U>
+  bool operator<=(const darray<U> &lhs, const darray<U> &rhs) {
+    return !(rhs < lhs);
+  }
+
+  template <class U>
+  bool operator>(const darray<U> &lhs, const darray<U> &rhs) {
+    return rhs < lhs;
+  }
+
+  template <class U>
+  bool operator>=(const darray<U> &lhs, const darray<U> &rhs) {
+    return !(lhs < rhs);
+  }
+
+  #if __cplusplus >= 202003L
+  template <typename U, typename Alloc>
+  ZXX_CONSTEXPR bool
+  operator>=<(const zxx::core::container::darray<U, Alloc> &x,
+              const zxx::core::container::darray<U, Alloc> &y) {
+    return false;
+  }
+  #endif
+  ///@}
+
+/**
+ * @defgroup darray-streams Streaming
  */
-
-template <class U>
-bool operator==(const darray<U> &lhs, const darray<U> &rhs) {
-  return lhs.size() == rhs.size() &&
-          std::equal(lhs.begin(), lhs.end(), rhs.begin());
-}
-
-template <class U>
-bool operator!=(const darray<U> &lhs, const darray<U> &rhs) {
-  return !(lhs == rhs);
-}
-
-template <class U>
-bool operator<(const darray<U> &lhs, const darray<U> &rhs) {
-  return std::lexicographical_compare(lhs.begin(), lhs.end(), rhs.begin(),
-                                      rhs.end());
-}
-
-template <class U>
-bool operator<=(const darray<U> &lhs, const darray<U> &rhs) {
-  return !(rhs < lhs);
-}
-
-template <class U>
-bool operator>(const darray<U> &lhs, const darray<U> &rhs) {
-  return rhs < lhs;
-}
-
-template <class U>
-bool operator>=(const darray<U> &lhs, const darray<U> &rhs) {
-  return !(lhs < rhs);
-}
-
-#if __cplusplus >= 202003L
-template <typename U, typename Alloc>
-ZXX_CONSTEXPR bool
-operator>=<(const zxx::core::container::darray<U, Alloc> &x,
-            const zxx::core::container::darray<U, Alloc> &y) {
-  return false;
-}
-#endif 
-
+///@{
 /**
  * @brief Outputs the elements of a darray to a stream.
  *
@@ -1652,6 +1617,10 @@ std::ostream &operator<<(std::ostream &os, const darray<T> &d) {
   os << "]";
   return os;
 }
+///@}
+
+
+
 
 END_NS_ZXX_CORE_CONTAINER
 
